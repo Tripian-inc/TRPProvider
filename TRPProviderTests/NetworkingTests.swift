@@ -7,27 +7,42 @@
 //
 
 import XCTest
+@testable import TRPProvider
+class MockSession: NetworkSession {
+    
+    var data: Data?
+    var error: Error?
+    
+    func load(from urlRequest: URLRequest, completionHandler: @escaping (Data?, Error?) -> Void) {
+        completionHandler(self.data, self.error)
+    }
+    
+}
+
 
 class NetworkingTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    var mockSession = MockSession()
 
     func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        let url = URL(string: "https://api.yelp.com/v3/businesses/gR9DTbKCvezQlqvD7_FzPw")
+        let urlRequest = URLRequest(url: url!)
+        
+        let network = Networking(session: mockSession)
+        
+        mockSession.data = "FakeJson".data(using: .utf8)
+        
+        network.load(url: urlRequest) { result in
+            print("Mazinga")
+            
+            switch result {
+            case .success(let resultData):
+                XCTAssertEqual(resultData, self.mockSession.data)
+            default:
+                ()
+            }
         }
+        
     }
 
 }

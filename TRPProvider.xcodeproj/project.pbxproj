@@ -7,9 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B256DB4824ADF4C600925A0B /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4724ADF4C600925A0B /* NetworkingTests.swift */; };
+		B256DB4B24ADFBBE00925A0B /* TRPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4A24ADFBBE00925A0B /* TRPProvider.swift */; };
+		B256DB4D24ADFBD300925A0B /* YelpApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4C24ADFBD300925A0B /* YelpApi.swift */; };
+		B256DB5024ADFD7E00925A0B /* YelpApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4F24ADFD7E00925A0B /* YelpApiTest.swift */; };
+		B256DB5324AE087C00925A0B /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB5224AE087C00925A0B /* BusinessModel.swift */; };
 		B2BDAE8924ADECCF0056D5E0 /* TRPProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2BDAE7F24ADECCF0056D5E0 /* TRPProvider.framework */; };
 		B2BDAE8E24ADECCF0056D5E0 /* TRPProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE8D24ADECCF0056D5E0 /* TRPProviderTests.swift */; };
 		B2BDAE9024ADECCF0056D5E0 /* TRPProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B2BDAE8224ADECCF0056D5E0 /* TRPProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B2BDAE9B24ADECF40056D5E0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE9A24ADECF40056D5E0 /* Networking.swift */; };
+		B2BDAE9C24ADED3B0056D5E0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE9A24ADECF40056D5E0 /* Networking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +30,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B256DB4724ADF4C600925A0B /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
+		B256DB4A24ADFBBE00925A0B /* TRPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRPProvider.swift; sourceTree = "<group>"; };
+		B256DB4C24ADFBD300925A0B /* YelpApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApi.swift; sourceTree = "<group>"; };
+		B256DB4F24ADFD7E00925A0B /* YelpApiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiTest.swift; sourceTree = "<group>"; };
+		B256DB5224AE087C00925A0B /* BusinessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessModel.swift; sourceTree = "<group>"; };
 		B2BDAE7F24ADECCF0056D5E0 /* TRPProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TRPProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2BDAE8224ADECCF0056D5E0 /* TRPProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TRPProvider.h; sourceTree = "<group>"; };
 		B2BDAE8324ADECCF0056D5E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2BDAE8824ADECCF0056D5E0 /* TRPProviderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TRPProviderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2BDAE8D24ADECCF0056D5E0 /* TRPProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRPProviderTests.swift; sourceTree = "<group>"; };
 		B2BDAE8F24ADECCF0056D5E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2BDAE9A24ADECF40056D5E0 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +63,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B256DB4924ADFBB400925A0B /* Yelp */ = {
+			isa = PBXGroup;
+			children = (
+				B256DB5124AE085E00925A0B /* Models */,
+				B256DB4C24ADFBD300925A0B /* YelpApi.swift */,
+			);
+			path = Yelp;
+			sourceTree = "<group>";
+		};
+		B256DB4E24ADFCF000925A0B /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				B256DB4A24ADFBBE00925A0B /* TRPProvider.swift */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		B256DB5124AE085E00925A0B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B256DB5224AE087C00925A0B /* BusinessModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B2BDAE7524ADECCF0056D5E0 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +109,9 @@
 		B2BDAE8124ADECCF0056D5E0 /* TRPProvider */ = {
 			isa = PBXGroup;
 			children = (
+				B256DB4E24ADFCF000925A0B /* Provider */,
+				B256DB4924ADFBB400925A0B /* Yelp */,
+				B2BDAE9924ADECE20056D5E0 /* Network */,
 				B2BDAE8224ADECCF0056D5E0 /* TRPProvider.h */,
 				B2BDAE8324ADECCF0056D5E0 /* Info.plist */,
 			);
@@ -82,8 +123,18 @@
 			children = (
 				B2BDAE8D24ADECCF0056D5E0 /* TRPProviderTests.swift */,
 				B2BDAE8F24ADECCF0056D5E0 /* Info.plist */,
+				B256DB4724ADF4C600925A0B /* NetworkingTests.swift */,
+				B256DB4F24ADFD7E00925A0B /* YelpApiTest.swift */,
 			);
 			path = TRPProviderTests;
+			sourceTree = "<group>";
+		};
+		B2BDAE9924ADECE20056D5E0 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B2BDAE9A24ADECF40056D5E0 /* Networking.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +199,7 @@
 				TargetAttributes = {
 					B2BDAE7E24ADECCF0056D5E0 = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1150;
 					};
 					B2BDAE8724ADECCF0056D5E0 = {
 						CreatedOnToolsVersion = 11.5;
@@ -195,6 +247,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2BDAE9B24ADECF40056D5E0 /* Networking.swift in Sources */,
+				B256DB4D24ADFBD300925A0B /* YelpApi.swift in Sources */,
+				B256DB4B24ADFBBE00925A0B /* TRPProvider.swift in Sources */,
+				B256DB5324AE087C00925A0B /* BusinessModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +258,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B256DB5024ADFD7E00925A0B /* YelpApiTest.swift in Sources */,
 				B2BDAE8E24ADECCF0056D5E0 /* TRPProviderTests.swift in Sources */,
+				B256DB4824ADF4C600925A0B /* NetworkingTests.swift in Sources */,
+				B2BDAE9C24ADED3B0056D5E0 /* Networking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +399,7 @@
 		B2BDAE9424ADECCF0056D5E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = LKU8459YDL;
@@ -356,6 +416,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tripian.TRPProvider;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -364,6 +425,7 @@
 		B2BDAE9524ADECCF0056D5E0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = LKU8459YDL;
@@ -388,6 +450,7 @@
 		B2BDAE9724ADECCF0056D5E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LKU8459YDL;
 				INFOPLIST_FILE = TRPProviderTests/Info.plist;
@@ -406,6 +469,7 @@
 		B2BDAE9824ADECCF0056D5E0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LKU8459YDL;
 				INFOPLIST_FILE = TRPProviderTests/Info.plist;
