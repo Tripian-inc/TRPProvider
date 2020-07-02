@@ -22,9 +22,35 @@ public class YelpApi {
     init(network: Networking = Networking()) {
         self.network = network
     }
+    
+    
+  public func tester(completion: @escaping () -> Void) {
+    let request = createUrlRequest(url: "https://api.yelp.com/v3/businesses/gR9DTbKCvezQlqvD7_FzPw/openings")
+      network?.load(url: request, completion: { result in
+          print("YELP SONUC GELDİ \(result)")
+          
+          switch result {
+          case .success(let data):
+              do {
+                  let decodedData = try JSONDecoder().decode(YelpBusiness.self, from: data!)
+                  print("harika \(decodedData)")
+                  completion()
+              }
+              catch {
+                  print("Off fena parser error")
+              }
+          case .failure(let error):
+              print("Off fena error \(error.localizedDescription)")
+          }
+      })
+  }
+}
+
+//MARK: - Business
+extension YelpApi {
     // businesses/${businessId}
     public func business(completion: @escaping () -> Void) {
-        let request = createUrlRequest()
+        let request = createUrlRequest(url: "https://api.yelp.com/v3/businesses/gR9DTbKCvezQlqvD7_FzPw")
         network?.load(url: request, completion: { result in
             print("YELP SONUC GELDİ \(result)")
             
@@ -43,11 +69,44 @@ public class YelpApi {
             }
         })
     }
+}
+
+//MARK: - Openings
+extension YelpApi {
+    // /bookings/${businessId}/openings
+    // https://api.yelp.com/v3/businesses/gR9DTbKCvezQlqvD7_FzPw/openings
     
-    private func createUrlRequest(token: String = sandboxToken) -> URLRequest {
-        let url = URL(string: "https://api.yelp.com/v3/businesses/gR9DTbKCvezQlqvD7_FzPw")
-        var urlRequest = URLRequest(url: url!)
-        urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        return urlRequest
-    }
+    
+}
+
+
+//MARK: - Hold
+extension YelpApi {
+    // /bookings/${businessId}/holds
+}
+
+//MARK: - Reservation
+extension YelpApi {
+    
+}
+
+
+//MARK: - ReservationStatus
+extension YelpApi {
+    
+}
+
+//MARK: - ReservationCancel
+extension YelpApi {
+    
+}
+
+//MARK: - HELPER
+extension YelpApi {
+    private func createUrlRequest(token: String = sandboxToken, url: String) -> URLRequest {
+          let url = URL(string: url)
+          var urlRequest = URLRequest(url: url!)
+          urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+          return urlRequest
+      }
 }
