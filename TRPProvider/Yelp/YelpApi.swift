@@ -19,8 +19,11 @@ public class YelpApi {
     "SyqU9E_sGpBMUoViM6DBQkpLpRu5sCEvlqxs0-xAuTREuDoiIjf1TsPC-0PoWeK6O2_TSaDOdCoLMeoj5khI16DDMLqhvHSsFeTi9UHWwtTsu5kZBNOiHkBGxnVmXXYx"
     private var networkController: NetworkController?
     
-    init(network: Networking = Networking()) {
+    private var token = ""
+    
+    init(network: Networking = Networking(), isProduct: Bool = true) {
         self.network = network
+        token = isProduct ? prodToken : sandboxToken
         networkController = createNetworkController(network: network)
     }
     
@@ -30,7 +33,7 @@ public class YelpApi {
         urlComponent.host = "api.yelp.com"
         return NetworkController(network: network)
                                 .urlComponent(urlComponent)
-                                .addValue("Authorization", value: "Bearer \(prodToken)")
+                                .addValue("Authorization", value: "Bearer \(token)")
     }
     
 }
@@ -60,8 +63,12 @@ extension YelpApi {
     // https://api.yelp.com/v3/bookings/rC5mIHMNF5C1Jtpb2obSkA/openings?covers=1&date=2020-09-09&time=06:30
     
     public func openings(id: String, covers: Int = 1, date:String, time: String) {
-        let path = "/v3/businesses/\(id)/openings?covers=\(covers)&date=\(date)&time=\(time)"
-        networkController?.urlComponentPath(path).responseDecodable(type: YelpOpen.self) { (result) in
+        let path = "/v3/businesses/\(id)/openings"
+        let params = ["covers": "\(covers)", "date":date, "time": time]
+        networkController?
+            .urlComponentPath(path)
+            .parameters(params)
+            .responseDecodable(type: YelpOpen.self) { (result) in
             switch result {
             case .success(_):
                 print("SUCCESS")
@@ -77,6 +84,18 @@ extension YelpApi {
 //MARK: - Hold
 extension YelpApi {
     // /bookings/${businessId}/holds
+    public func hold(id: String, covers: Int = 1, date:String, time: String, uniqueId: String) {
+        let path = "/v3/businesses/\(id)/holds?covers=\(covers)&date=\(date)&time=\(time)"
+        let bodyParams = ["covers": "\(covers)", "date":date, "time": time, "unique_Id" : uniqueId]
+        networkController?.urlComponentPath(path).httpMethod(.post).bodyParameters(bodyParams).responseDecodable(type: YelpOpen.self) { (result) in
+            switch result {
+            case .success(_):
+                print("SUCCESS")
+            case .failure(let error):
+                print("ERROR \(error)")
+            }
+        }
+    }
 }
 
 //MARK: - Reservation

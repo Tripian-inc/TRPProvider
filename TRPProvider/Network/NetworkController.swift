@@ -21,10 +21,18 @@ class NetworkController {
     private(set) var url: URL?
     public var urlComponent: URLComponents?
     private(set) var allHTTPHeaderFields = [String:String]()
+    private(set) var httpMethod: HttpMethod = .get
+    private(set) var httpBody = [String: String]()
+    
+    
     private var request: URLRequest? {
         if let component = urlComponent, let componentUrl = component.url {
             var request = URLRequest(url: componentUrl)
             request.allHTTPHeaderFields = allHTTPHeaderFields
+            request.httpMethod = httpMethod.rawValue
+            if httpBody.count != 0 {
+                request.httpBody = try? JSONSerialization.data(withJSONObject: httpBody)
+            }
             return request
         }
         return URLRequest(url: url!)
@@ -85,6 +93,26 @@ extension NetworkController {
     @discardableResult
     func urlComponentPath(_ path: String) -> Self {
         urlComponent?.path = path
+        return self
+    }
+    
+    @discardableResult
+    func parameters(_ parameters: [String: String]) -> Self {
+        urlComponent?.queryItems = parameters.map { (key, value) in
+            URLQueryItem(name: key, value: value)
+        }
+        return self
+    }
+    
+    @discardableResult
+    func bodyParameters(_ parameters: [String: String]) -> Self {
+        httpBody = parameters
+        return self
+    }
+    
+    @discardableResult
+    func httpMethod(_ type: HttpMethod) -> Self {
+        httpMethod = type
         return self
     }
     
