@@ -30,28 +30,9 @@ public class YelpApi {
 //MARK: - Business
 extension YelpApi {
     // businesses/${businessId}
-    public func business(completion: @escaping () -> Void) {
+    public func business(id: String, completion: @escaping () -> Void) {
         
-        let request = createUrlRequest(url: "https://api.yelp.com/v3/businesses/gR9DTbKCvezQlqvD7_FzPw")
-        network?.load(url: request, completion: { result in
-            switch result {
-            case .success(let data):
-                GenericParser<YelpBusiness>().parse(data: data) { parserResult in
-                    switch parserResult {
-                    case .success(let yelpModel):
-                        print("YelpModel: \(yelpModel)")
-                        completion()
-                        return
-                    case .failure(let error):
-                        print("Error \(error.localizedDescription)")
-                        return
-                    }
-                }
-                
-            case .failure(let error):
-                print("Off fena error \(error.localizedDescription)")
-            }
-        })
+        
     }
 }
 
@@ -108,7 +89,7 @@ extension YelpApi {
         let url = URL(string: url)
         var urlRequest = URLRequest(url: url!)
         
-        urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        urlRequest.addValue("", forHTTPHeaderField: "Authorization")
         return urlRequest
     }
 }

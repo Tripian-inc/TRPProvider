@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B2145EF924B348D9002F112A /* NetworkControllerWithComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */; };
 		B256DB4824ADF4C600925A0B /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4724ADF4C600925A0B /* NetworkingTests.swift */; };
 		B256DB4B24ADFBBE00925A0B /* TRPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4A24ADFBBE00925A0B /* TRPProvider.swift */; };
 		B256DB4D24ADFBD300925A0B /* YelpApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4C24ADFBD300925A0B /* YelpApi.swift */; };
@@ -20,6 +21,7 @@
 		B2BDAE9024ADECCF0056D5E0 /* TRPProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B2BDAE8224ADECCF0056D5E0 /* TRPProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2BDAE9B24ADECF40056D5E0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE9A24ADECF40056D5E0 /* Networking.swift */; };
 		B2BDAE9C24ADED3B0056D5E0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE9A24ADECF40056D5E0 /* Networking.swift */; };
+		B2CD2E1224B31E2E00AFB8E2 /* NetworkControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CD2E1124B31E2E00AFB8E2 /* NetworkControllerTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkControllerWithComponentTest.swift; sourceTree = "<group>"; };
 		B256DB4724ADF4C600925A0B /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
 		B256DB4A24ADFBBE00925A0B /* TRPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRPProvider.swift; sourceTree = "<group>"; };
 		B256DB4C24ADFBD300925A0B /* YelpApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApi.swift; sourceTree = "<group>"; };
@@ -48,6 +51,7 @@
 		B2BDAE8D24ADECCF0056D5E0 /* TRPProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRPProviderTests.swift; sourceTree = "<group>"; };
 		B2BDAE8F24ADECCF0056D5E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2BDAE9A24ADECF40056D5E0 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		B2CD2E1124B31E2E00AFB8E2 /* NetworkControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkControllerTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,8 @@
 				B2BDAE8F24ADECCF0056D5E0 /* Info.plist */,
 				B256DB4724ADF4C600925A0B /* NetworkingTests.swift */,
 				B256DB4F24ADFD7E00925A0B /* YelpApiTest.swift */,
+				B2CD2E1124B31E2E00AFB8E2 /* NetworkControllerTest.swift */,
+				B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */,
 			);
 			path = TRPProviderTests;
 			sourceTree = "<group>";
@@ -272,7 +278,9 @@
 			files = (
 				B256DB5024ADFD7E00925A0B /* YelpApiTest.swift in Sources */,
 				B2BDAE8E24ADECCF0056D5E0 /* TRPProviderTests.swift in Sources */,
+				B2145EF924B348D9002F112A /* NetworkControllerWithComponentTest.swift in Sources */,
 				B256DB4824ADF4C600925A0B /* NetworkingTests.swift in Sources */,
+				B2CD2E1224B31E2E00AFB8E2 /* NetworkControllerTest.swift in Sources */,
 				B2BDAE9C24ADED3B0056D5E0 /* Networking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
