@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct YelpBusiness: Codable {
+struct YelpBusiness: Decodable {
     let id: String
     let alias: String
     let name: String
