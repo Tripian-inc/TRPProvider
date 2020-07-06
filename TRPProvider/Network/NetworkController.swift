@@ -83,7 +83,7 @@ extension NetworkController {
     }
     
     @discardableResult
-    func urlComponentHost(_ path: String) -> Self {
+    func urlComponentPath(_ path: String) -> Self {
         urlComponent?.path = path
         return self
     }
