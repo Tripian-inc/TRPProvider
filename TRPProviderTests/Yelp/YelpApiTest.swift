@@ -10,6 +10,7 @@ import XCTest
 @testable import TRPProvider
 class YelpApiTest: XCTestCase {
     
+    private var placeId = "rC5mIHMNF5C1Jtpb2obSkA"
     
     //Product Token
     func testProductToken() {
@@ -84,16 +85,50 @@ extension YelpApiTest {
     func testBusinessCall() {
         let expectation = XCTestExpectation()
         let yelpApi = YelpApi( isProduct: false)
-        yelpApi.business(id: "rC5mIHMNF5C1Jtpb2obSkA") { (result) in
+        yelpApi.business(id: placeId) { (result) in
             switch result {
             case .failure(let error):
                 XCTFail(error.localizedDescription)
-            case .success(_):
+            case .success(let model):
+                print("Model \(model)")
                 XCTAssert(true)
             }
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 2)
+    }
+    
+    func testOpeningCall() {
+        let expectation = XCTestExpectation()
+        let yelpApi = YelpApi( isProduct: false)
+        
+        yelpApi.openings(id: placeId, date: "2020-09-09", time: "06:30") { (result) in
+            switch result {
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+            case .success(let model):
+                print("Model \(model)")
+                XCTAssert(true)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 3)
+    }
+    
+    func testHoldCall() {
+        let expectation = XCTestExpectation()
+        let yelpApi = YelpApi( isProduct: false)
+        yelpApi.hold(id: placeId, date: "2020-09-09", time: "19:00", uniqueId: "123123123") { (result) in
+            switch result {
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+            case .success(let model):
+                print("Model \(model)")
+                XCTAssert(true)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 3)
     }
     
 }
@@ -117,6 +152,30 @@ extension YelpApiTest {
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             case .success(_):
+                XCTAssert(true)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 2)
+    }
+    
+    func testOpeningWithMockData() {
+        guard let jsonData = FileReader().json("test_opening") else {
+            XCTFail("model is nil")
+            return
+        }
+        
+        let expectation = XCTestExpectation()
+        let mockSession = MockSession()
+        mockSession.data = jsonData
+        let mockNetwork = Networking(session: mockSession)
+        let yelpApi = YelpApi(network: mockNetwork)
+        yelpApi.openings(id: "1", date: "", time: "") { (result) in
+            switch result {
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+            case .success(let model):
+                print("Openings Model \(model)")
                 XCTAssert(true)
             }
             expectation.fulfill()

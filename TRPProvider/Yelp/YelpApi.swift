@@ -62,18 +62,18 @@ extension YelpApi {
     // /bookings/${businessId}/openings
     // https://api.yelp.com/v3/bookings/rC5mIHMNF5C1Jtpb2obSkA/openings?covers=1&date=2020-09-09&time=06:30
     
-    public func openings(id: String, covers: Int = 1, date:String, time: String) {
-        let path = "/v3/businesses/\(id)/openings"
+    public func openings(id: String, covers: Int = 1, date:String, time: String, completion: @escaping (Result<YelpOpenings, Error>)-> Void ) {
+        let path = "/v3/bookings/\(id)/openings"
         let params = ["covers": "\(covers)", "date":date, "time": time]
         networkController?
             .urlComponentPath(path)
             .parameters(params)
-            .responseDecodable(type: YelpOpen.self) { (result) in
+            .responseDecodable(type: YelpOpenings.self) { (result) in
             switch result {
-            case .success(_):
-                print("SUCCESS")
+            case .success(let model):
+                completion(.success(model))
             case .failure(let error):
-                print("ERROR \(error)")
+                completion(.failure(error))
             }
         }
     }
@@ -84,19 +84,20 @@ extension YelpApi {
 //MARK: - Hold
 extension YelpApi {
     // /bookings/${businessId}/holds
-    public func hold(id: String, covers: Int = 1, date:String, time: String, uniqueId: String) {
-        let path = "/v3/businesses/\(id)/holds?covers=\(covers)&date=\(date)&time=\(time)"
-        let bodyParams = ["covers": "\(covers)", "date":date, "time": time, "unique_Id" : uniqueId]
+    public func hold(id: String, covers: Int = 1, date:String, time: String, uniqueId: String, completion: @escaping (Result<YelpHolds, Error>)-> Void ) {
+        let path = "/v3/bookings/\(id)/holds"
+        let bodyParams = ["covers": "2", "date":date, "time": time, "unique_id" : uniqueId]
         networkController?
             .urlComponentPath(path)
             .httpMethod(.post)
+            .addValue("Content-Type", value: "application/x-www-form-urlencoded")
             .bodyParameters(bodyParams)
-            .responseDecodable(type: YelpOpen.self) { (result) in
+            .responseDecodable(type: YelpHolds.self) { (result) in
             switch result {
-            case .success(_):
-                print("SUCCESS")
+            case .success(let model):
+                completion(.success(model))
             case .failure(let error):
-                print("ERROR \(error)")
+                completion(.failure(error))
             }
         }
     }

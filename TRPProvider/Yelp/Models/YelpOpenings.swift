@@ -7,8 +7,8 @@
 //
 
 import Foundation
-struct YelpOpenings: Codable {
-    let reservationTimes: [YelpReservationTime]
+public struct YelpOpenings: Codable {
+    public let reservationTimes: [YelpReservationTime?]
 
     enum CodingKeys: String, CodingKey {
         case reservationTimes = "reservation_times"
@@ -16,15 +16,15 @@ struct YelpOpenings: Codable {
 }
 
 // MARK: - ReservationTime
-struct YelpReservationTime: Codable {
-    let date: String
-    let times: [YelpTime]
+public struct YelpReservationTime: Codable {
+    public let date: String
+    public let times: [YelpTime]
 }
 
 // MARK: - Time
-struct YelpTime: Codable {
-    let creditCardRequired: Bool
-    let time: String
+public struct YelpTime: Codable {
+    public let creditCardRequired: Bool
+    public let time: String
 
     enum CodingKeys: String, CodingKey {
         case creditCardRequired = "credit_card_required"

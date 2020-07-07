@@ -1,0 +1,32 @@
+{
+    "reservation_times": [
+        {
+            "date": "2020-09-09",
+            "times": [
+                
+                {
+                    "credit_card_required": false,
+                    "time": "23:30"
+                },
+                {
+                    "credit_card_required": false,
+                    "time": "23:45"
+                }
+            ]
+        },
+        {
+            "date": "2020-09-08",
+            "times": [
+                {
+                    "credit_card_required": false,
+                    "time": "00:00"
+                },
+                {
+                    "credit_card_required": false,
+                    "time": "00:15"
+                }
+            ]
+        }
+        
+    ]
+}

@@ -31,8 +31,11 @@ class NetworkController {
             request.allHTTPHeaderFields = allHTTPHeaderFields
             request.httpMethod = httpMethod.rawValue
             if httpBody.count != 0 {
-                request.httpBody = try? JSONSerialization.data(withJSONObject: httpBody)
+                request.httpBody = dictionaryToHttpBody(httpBody)
             }
+            print(" ")
+            print("!!!!!!!--------************************")
+            print(request)
             return request
         }
         return URLRequest(url: url!)
@@ -51,15 +54,14 @@ class NetworkController {
             case .success(let data):
                 do {
                     let converted = try JSONDecoder().decode(T.self, from: data!)
-                    print("JSON RESULT \(converted)")
                     completion(.success(converted))
                 }catch(let error){
-                    print("JSON ERROR PARSER \(error)")
+                    print("[Error] ERROR PARSER \(error)")
                     completion(.failure(error))
                 }
                 return
             case .failure(let error):
-                print("NETWORK ERROR \(error)")
+                print("[Error] NETWORK \(error)")
                 completion(.failure(error))
                 return
             }
@@ -123,5 +125,15 @@ extension NetworkController {
         return self
     }
     
+    
+}
+
+extension NetworkController {
+    
+    func dictionaryToHttpBody(_ dictionary: [String: String]) -> Data? {
+        var components = URLComponents()
+        components.queryItems = httpBody.map{ URLQueryItem(name: $0.key, value: $0.value)}
+        return components.query?.data(using: .utf8)
+    }
     
 }

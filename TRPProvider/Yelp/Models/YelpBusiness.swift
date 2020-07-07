@@ -62,9 +62,9 @@ public struct YelpHour: Codable {
 
 // MARK: - Open
 public struct YelpOpen: Codable {
-    public let isOvernight: Bool
-    public let start, end: String
-    public let day: Int
+    public let isOvernight: Bool?
+    public let start, end: String?
+    public let day: Int?
 
     enum CodingKeys: String, CodingKey {
         case isOvernight = "is_overnight"
