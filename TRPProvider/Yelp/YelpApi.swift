@@ -21,7 +21,7 @@ public class YelpApi {
     
     internal var token = ""
     
-    init(network: Networking = Networking(), isProduct: Bool = true) {
+    public init(network: Networking = Networking(), isProduct: Bool = true) {
         self.network = network
         token = isProduct ? productToken : sandboxToken
         networkController = createNetworkController(network: network)
