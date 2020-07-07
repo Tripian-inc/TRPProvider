@@ -11,19 +11,19 @@ public class YelpApi {
     //rC5mIHMNF5C1Jtpb2obSkA
     var network: Networking?
     //TODO: TAŞINACAK
-    private let sandboxToken =
+    internal let sandboxToken =
     "lKSyNooZ4m6EnK7530z9Enx2GAuym6UJxCwLVv82pjhB67LU_l89iQtfj-5pMasL7kt4AnjF_oW_gHAXiz84IQXcMLJVNFhc2aMRyd9YUAb3zv0K63voptIgbItlXXYx"
     
     //TODO: TAŞINACAK
-    private let prodToken =
+    internal let productToken =
     "SyqU9E_sGpBMUoViM6DBQkpLpRu5sCEvlqxs0-xAuTREuDoiIjf1TsPC-0PoWeK6O2_TSaDOdCoLMeoj5khI16DDMLqhvHSsFeTi9UHWwtTsu5kZBNOiHkBGxnVmXXYx"
     private var networkController: NetworkController?
     
-    private var token = ""
+    internal var token = ""
     
     init(network: Networking = Networking(), isProduct: Bool = true) {
         self.network = network
-        token = isProduct ? prodToken : sandboxToken
+        token = isProduct ? productToken : sandboxToken
         networkController = createNetworkController(network: network)
     }
     
@@ -41,14 +41,14 @@ public class YelpApi {
 //MARK: - Business
 extension YelpApi {
     // businesses/${businessId}
-    public func business(id: String, completion: @escaping () -> Void) {
+    public func business(id: String, completion: @escaping (Result<YelpBusiness, Error>) -> Void) {
         let path = "/v3/businesses/\(id)"
         networkController?.urlComponentPath(path).responseDecodable(type: YelpBusiness.self) { (result) in
             switch result {
-            case .success(_):
-                print("SUCCESS")
+            case .success(let model):
+                completion(.success(model))
             case .failure(let error):
-                print("ERROR \(error)")
+                completion(.failure(error))
             }
         }
     }
@@ -87,7 +87,11 @@ extension YelpApi {
     public func hold(id: String, covers: Int = 1, date:String, time: String, uniqueId: String) {
         let path = "/v3/businesses/\(id)/holds?covers=\(covers)&date=\(date)&time=\(time)"
         let bodyParams = ["covers": "\(covers)", "date":date, "time": time, "unique_Id" : uniqueId]
-        networkController?.urlComponentPath(path).httpMethod(.post).bodyParameters(bodyParams).responseDecodable(type: YelpOpen.self) { (result) in
+        networkController?
+            .urlComponentPath(path)
+            .httpMethod(.post)
+            .bodyParameters(bodyParams)
+            .responseDecodable(type: YelpOpen.self) { (result) in
             switch result {
             case .success(_):
                 print("SUCCESS")

@@ -31,6 +31,7 @@ public class Networking {
     private(set) var session: NetworkSession
     
     public init(session: NetworkSession = URLSession.shared) {
+        
         self.session = session
     }
     

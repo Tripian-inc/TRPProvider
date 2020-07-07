@@ -3,4 +3,102 @@
    uuid = "A8C314E4-6D49-4747-BF64-32C10B420B37"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FEB33E64-9443-443E-87C4-18F3F4925CEE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TRPProvider/Network/NetworkController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "request(queue:type:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FEB33E64-9443-443E-87C4-18F3F4925CEE - ae6e971d4a1bd517"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Swift.Error&gt;) -&gt; () in TRPProviderTests.NetworkController.(request in _371ED9B11DB3904B3C7E3D34A555ED95)&lt;A where A: Swift.Decodable&gt;(queue: __C.OS_dispatch_queue, type: A.Type, completion: (Swift.Result&lt;A, Swift.Error&gt;) -&gt; ()) -&gt; Self"
+                  moduleName = "TRPProviderTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evrenyasar/Xcode/TRPProvider/TRPProvider/Network/NetworkController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "2813">
+               </Location>
+               <Location
+                  uuid = "FEB33E64-9443-443E-87C4-18F3F4925CEE - 47fbea168cbd6f94"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Swift.Error&gt;) -&gt; () in TRPProvider.NetworkController.(request in _2673E8286DB48012259B572881D7E949)&lt;A where A: Swift.Decodable&gt;(queue: __C.OS_dispatch_queue, type: A.Type, completion: (Swift.Result&lt;A, Swift.Error&gt;) -&gt; ()) -&gt; Self"
+                  moduleName = "TRPProvider"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evrenyasar/Xcode/TRPProvider/TRPProvider/Network/NetworkController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "2813">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "054B7517-5BD1-482E-9D3E-FDD616BDDEE9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TRPProvider/Network/NetworkController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "request"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "054B7517-5BD1-482E-9D3E-FDD616BDDEE9 - b7f48eb45d08aa85"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TRPProviderTests.NetworkController.(request in _371ED9B11DB3904B3C7E3D34A555ED95).getter : Swift.Optional&lt;Foundation.URLRequest&gt;"
+                  moduleName = "TRPProviderTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evrenyasar/Xcode/TRPProvider/TRPProvider/Network/NetworkController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "1819">
+               </Location>
+               <Location
+                  uuid = "054B7517-5BD1-482E-9D3E-FDD616BDDEE9 - 975319f7bba2f04"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TRPProvider.NetworkController.(request in _2673E8286DB48012259B572881D7E949).getter : Swift.Optional&lt;Foundation.URLRequest&gt;"
+                  moduleName = "TRPProvider"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evrenyasar/Xcode/TRPProvider/TRPProvider/Network/NetworkController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "1819">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

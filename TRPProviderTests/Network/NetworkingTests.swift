@@ -8,23 +8,11 @@
 
 import XCTest
 @testable import TRPProvider
-class MockSession: NetworkSession {
-    
-    var data: Data?
-    var error: Error?
-    
-    func load(from urlRequest: URLRequest, completionHandler: @escaping (Data?, Error?) -> Void) {
-        completionHandler(self.data, self.error)
-    }
-    
-}
-
-
 class NetworkingTests: XCTestCase {
 
     var mockSession = MockSession()
 
-    func testExample() throws {
+    func testWithMockSession() throws {
         let url = URL(string: "https://api.yelp.com/v3/businesses/gR9DTbKCvezQlqvD7_FzPw")
         let urlRequest = URLRequest(url: url!)
         

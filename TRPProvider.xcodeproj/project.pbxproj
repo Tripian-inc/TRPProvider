@@ -14,10 +14,15 @@
 		B256DB5024ADFD7E00925A0B /* YelpApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4F24ADFD7E00925A0B /* YelpApiTest.swift */; };
 		B256DB5324AE087C00925A0B /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB5224AE087C00925A0B /* BusinessModel.swift */; };
 		B256DB5624AE220E00925A0B /* YelpOpenings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB5524AE220E00925A0B /* YelpOpenings.swift */; };
+		B2580E8024B4521300A704FB /* MockSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580E7F24B4521300A704FB /* MockSession.swift */; };
+		B2580E8124B452DE00A704FB /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BD24AFA0E300A3117F /* NetworkController.swift */; };
+		B2580E8224B452E800A704FB /* YelpApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4C24ADFBD300925A0B /* YelpApi.swift */; };
+		B2580E8324B4543500A704FB /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB5224AE087C00925A0B /* BusinessModel.swift */; };
+		B2580E8924B457C100A704FB /* FileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580E8824B457C100A704FB /* FileReader.swift */; };
+		B2580E8B24B458F700A704FB /* test_business.json in Resources */ = {isa = PBXBuildFile; fileRef = B2580E8A24B458F700A704FB /* test_business.json */; };
 		B27CC4BC24AF7CA000A3117F /* GenericParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BB24AF7CA000A3117F /* GenericParser.swift */; };
 		B27CC4BE24AFA0E300A3117F /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BD24AFA0E300A3117F /* NetworkController.swift */; };
 		B2BDAE8924ADECCF0056D5E0 /* TRPProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2BDAE7F24ADECCF0056D5E0 /* TRPProvider.framework */; };
-		B2BDAE8E24ADECCF0056D5E0 /* TRPProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE8D24ADECCF0056D5E0 /* TRPProviderTests.swift */; };
 		B2BDAE9024ADECCF0056D5E0 /* TRPProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B2BDAE8224ADECCF0056D5E0 /* TRPProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2BDAE9B24ADECF40056D5E0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE9A24ADECF40056D5E0 /* Networking.swift */; };
 		B2BDAE9C24ADED3B0056D5E0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE9A24ADECF40056D5E0 /* Networking.swift */; };
@@ -42,13 +47,15 @@
 		B256DB4F24ADFD7E00925A0B /* YelpApiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiTest.swift; sourceTree = "<group>"; };
 		B256DB5224AE087C00925A0B /* BusinessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessModel.swift; sourceTree = "<group>"; };
 		B256DB5524AE220E00925A0B /* YelpOpenings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpOpenings.swift; sourceTree = "<group>"; };
+		B2580E7F24B4521300A704FB /* MockSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSession.swift; sourceTree = "<group>"; };
+		B2580E8824B457C100A704FB /* FileReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileReader.swift; sourceTree = "<group>"; };
+		B2580E8A24B458F700A704FB /* test_business.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_business.json; sourceTree = "<group>"; };
 		B27CC4BB24AF7CA000A3117F /* GenericParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericParser.swift; sourceTree = "<group>"; };
 		B27CC4BD24AFA0E300A3117F /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		B2BDAE7F24ADECCF0056D5E0 /* TRPProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TRPProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2BDAE8224ADECCF0056D5E0 /* TRPProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TRPProvider.h; sourceTree = "<group>"; };
 		B2BDAE8324ADECCF0056D5E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2BDAE8824ADECCF0056D5E0 /* TRPProviderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TRPProviderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2BDAE8D24ADECCF0056D5E0 /* TRPProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRPProviderTests.swift; sourceTree = "<group>"; };
 		B2BDAE8F24ADECCF0056D5E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2BDAE9A24ADECF40056D5E0 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		B2CD2E1124B31E2E00AFB8E2 /* NetworkControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkControllerTest.swift; sourceTree = "<group>"; };
@@ -99,6 +106,40 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		B2580E7E24B4520200A704FB /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				B2580E7F24B4521300A704FB /* MockSession.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		B2580E8424B4545F00A704FB /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B256DB4724ADF4C600925A0B /* NetworkingTests.swift */,
+				B2CD2E1124B31E2E00AFB8E2 /* NetworkControllerTest.swift */,
+				B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		B2580E8524B4546700A704FB /* Yelp */ = {
+			isa = PBXGroup;
+			children = (
+				B256DB4F24ADFD7E00925A0B /* YelpApiTest.swift */,
+			);
+			path = Yelp;
+			sourceTree = "<group>";
+		};
+		B2580E8724B457AD00A704FB /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				B2580E8824B457C100A704FB /* FileReader.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		B2BDAE7524ADECCF0056D5E0 = {
 			isa = PBXGroup;
 			children = (
@@ -132,12 +173,12 @@
 		B2BDAE8C24ADECCF0056D5E0 /* TRPProviderTests */ = {
 			isa = PBXGroup;
 			children = (
-				B2BDAE8D24ADECCF0056D5E0 /* TRPProviderTests.swift */,
+				B2580E8A24B458F700A704FB /* test_business.json */,
+				B2580E8724B457AD00A704FB /* Helper */,
+				B2580E8524B4546700A704FB /* Yelp */,
+				B2580E8424B4545F00A704FB /* Network */,
+				B2580E7E24B4520200A704FB /* Mock */,
 				B2BDAE8F24ADECCF0056D5E0 /* Info.plist */,
-				B256DB4724ADF4C600925A0B /* NetworkingTests.swift */,
-				B256DB4F24ADFD7E00925A0B /* YelpApiTest.swift */,
-				B2CD2E1124B31E2E00AFB8E2 /* NetworkControllerTest.swift */,
-				B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */,
 			);
 			path = TRPProviderTests;
 			sourceTree = "<group>";
@@ -252,6 +293,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2580E8B24B458F700A704FB /* test_business.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,11 +318,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2580E8024B4521300A704FB /* MockSession.swift in Sources */,
 				B256DB5024ADFD7E00925A0B /* YelpApiTest.swift in Sources */,
-				B2BDAE8E24ADECCF0056D5E0 /* TRPProviderTests.swift in Sources */,
 				B2145EF924B348D9002F112A /* NetworkControllerWithComponentTest.swift in Sources */,
 				B256DB4824ADF4C600925A0B /* NetworkingTests.swift in Sources */,
+				B2580E8224B452E800A704FB /* YelpApi.swift in Sources */,
+				B2580E8324B4543500A704FB /* BusinessModel.swift in Sources */,
+				B2580E8924B457C100A704FB /* FileReader.swift in Sources */,
 				B2CD2E1224B31E2E00AFB8E2 /* NetworkControllerTest.swift in Sources */,
+				B2580E8124B452DE00A704FB /* NetworkController.swift in Sources */,
 				B2BDAE9C24ADED3B0056D5E0 /* Networking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
