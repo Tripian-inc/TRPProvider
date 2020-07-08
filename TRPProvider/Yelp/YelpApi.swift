@@ -41,6 +41,7 @@ public class YelpApi {
 //MARK: - Business
 extension YelpApi {
     // businesses/${businessId}
+    //TODO: - TİME VE DATE EKLENECEK
     public func business(id: String, completion: @escaping (Result<YelpBusiness, Error>) -> Void) {
         let path = "/v3/businesses/\(id)"
         networkController?.urlComponentPath(path).responseDecodable(type: YelpBusiness.self) { (result) in

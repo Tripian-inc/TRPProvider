@@ -72,11 +72,7 @@ class YelpApiTest: XCTestCase {
         }
         wait(for: [expectation], timeout: 2)
     }
-    
-    
-    
-    
-    
+
 }
 
 //REAL CALL
@@ -84,7 +80,7 @@ extension YelpApiTest {
     
     func testBusinessCall() {
         let expectation = XCTestExpectation()
-        let yelpApi = YelpApi( isProduct: false)
+        let yelpApi = YelpApi( isProduct: true)
         yelpApi.business(id: placeId) { (result) in
             switch result {
             case .failure(let error):

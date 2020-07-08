@@ -9,7 +9,7 @@
 import UIKit
 class ReservationBaseCell: UITableViewCell {
     
-    private lazy var horizontalStackView: UIStackView = {
+    private(set) lazy var horizontalStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = NSLayoutConstraint.Axis.vertical

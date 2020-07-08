@@ -30,6 +30,8 @@
 		B2580EC324B49F0800A704FB /* ReservationDatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580EC224B49F0800A704FB /* ReservationDatePickerCell.swift */; };
 		B2580EC524B4A73F00A704FB /* ReservationPeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580EC424B4A73F00A704FB /* ReservationPeopleCell.swift */; };
 		B2580EC724B4A82900A704FB /* ReservationAlternativeHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580EC624B4A82900A704FB /* ReservationAlternativeHour.swift */; };
+		B26AA00B24B5DCE8007A0755 /* ReservationExplainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26AA00A24B5DCE8007A0755 /* ReservationExplainCell.swift */; };
+		B26AA00D24B5E3ED007A0755 /* ReservationAlternatviceHourCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26AA00C24B5E3ED007A0755 /* ReservationAlternatviceHourCollectionCell.swift */; };
 		B27CC4BC24AF7CA000A3117F /* GenericParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BB24AF7CA000A3117F /* GenericParser.swift */; };
 		B27CC4BE24AFA0E300A3117F /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BD24AFA0E300A3117F /* NetworkController.swift */; };
 		B2BDAE8924ADECCF0056D5E0 /* TRPProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2BDAE7F24ADECCF0056D5E0 /* TRPProvider.framework */; };
@@ -68,6 +70,8 @@
 		B2580EC224B49F0800A704FB /* ReservationDatePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDatePickerCell.swift; sourceTree = "<group>"; };
 		B2580EC424B4A73F00A704FB /* ReservationPeopleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPeopleCell.swift; sourceTree = "<group>"; };
 		B2580EC624B4A82900A704FB /* ReservationAlternativeHour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationAlternativeHour.swift; sourceTree = "<group>"; };
+		B26AA00A24B5DCE8007A0755 /* ReservationExplainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationExplainCell.swift; sourceTree = "<group>"; };
+		B26AA00C24B5E3ED007A0755 /* ReservationAlternatviceHourCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationAlternatviceHourCollectionCell.swift; sourceTree = "<group>"; };
 		B27CC4BB24AF7CA000A3117F /* GenericParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericParser.swift; sourceTree = "<group>"; };
 		B27CC4BD24AFA0E300A3117F /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		B2BDAE7F24ADECCF0056D5E0 /* TRPProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TRPProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -185,6 +189,8 @@
 				B2580EC224B49F0800A704FB /* ReservationDatePickerCell.swift */,
 				B2580EC424B4A73F00A704FB /* ReservationPeopleCell.swift */,
 				B2580EC624B4A82900A704FB /* ReservationAlternativeHour.swift */,
+				B26AA00A24B5DCE8007A0755 /* ReservationExplainCell.swift */,
+				B26AA00C24B5E3ED007A0755 /* ReservationAlternatviceHourCollectionCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -363,12 +369,14 @@
 				B27CC4BC24AF7CA000A3117F /* GenericParser.swift in Sources */,
 				B2580EC524B4A73F00A704FB /* ReservationPeopleCell.swift in Sources */,
 				B256DB4B24ADFBBE00925A0B /* TRPProvider.swift in Sources */,
+				B26AA00D24B5E3ED007A0755 /* ReservationAlternatviceHourCollectionCell.swift in Sources */,
 				B256DB5324AE087C00925A0B /* YelpBusiness.swift in Sources */,
 				B27CC4BE24AFA0E300A3117F /* NetworkController.swift in Sources */,
 				B2580E9224B4712200A704FB /* YelpHolds.swift in Sources */,
 				B2580EC124B49EA300A704FB /* ReservationBaseCell.swift in Sources */,
 				B2580EC724B4A82900A704FB /* ReservationAlternativeHour.swift in Sources */,
 				B256DB5624AE220E00925A0B /* YelpOpenings.swift in Sources */,
+				B26AA00B24B5DCE8007A0755 /* ReservationExplainCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

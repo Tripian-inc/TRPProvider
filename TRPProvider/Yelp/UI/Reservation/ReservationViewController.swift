@@ -44,6 +44,7 @@ extension ReservationViewController: UITableViewDataSource, UITableViewDelegate 
         tableView.register(ReservationDatePickerCell.self, forCellReuseIdentifier: "datePicker")
         tableView.register(ReservationPeople.self, forCellReuseIdentifier: "people")
         tableView.register(ReservationAlternativeHour.self, forCellReuseIdentifier: "alternativeHour")
+        tableView.register(ReservationExplainCell.self, forCellReuseIdentifier: "explainText")
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -70,6 +71,9 @@ extension ReservationViewController: UITableViewDataSource, UITableViewDelegate 
         }else if model.contentType == .alternativeTime {
             let dateCell = makeAlternaviteHourCell(tableView: tableView, cellForRowAt: indexPath, model: model)
             return dateCell
+        }else if model.contentType == .explain {
+            let dateCell = makeExplainCell(tableView: tableView, cellForRowAt: indexPath, model: model)
+            return dateCell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
@@ -86,9 +90,9 @@ extension ReservationViewController {
         cell.titleLabel.text = model.title
         cell.selectionStyle = .none
         if model.contentType == .date {
-            cell.inputText.text = "2020-07-07"
+            cell.inputText.text = viewModel.date
         }else {
-            cell.inputText.text = "07:00 pm"
+            cell.inputText.text = viewModel.time
         }
         return cell
     }
@@ -96,17 +100,40 @@ extension ReservationViewController {
     private func makePeopleCell(tableView: UITableView, cellForRowAt indexPath: IndexPath, model: ReservationCellModel) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "people", for: indexPath) as! ReservationPeople
         cell.titleLabel.text = model.title
+        cell.inputText.text = "\(viewModel.people)"
         cell.selectionStyle = .none
-        cell.inputText.text = "2"
         return cell
     }
     
     private func makeAlternaviteHourCell(tableView: UITableView, cellForRowAt indexPath: IndexPath, model: ReservationCellModel) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "alternativeHour", for: indexPath) as! ReservationAlternativeHour
         cell.titleLabel.text = model.title
-        cell.selectionStyle = .none
         
+        cell.updateHours(viewModel.hours)
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    
+    private func makeExplainCell(tableView: UITableView, cellForRowAt indexPath: IndexPath, model: ReservationCellModel) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "explainText", for: indexPath) as! ReservationExplainCell
+        cell.titleLabel.text = model.title
+        cell.explainLabel.text = viewModel.explainText
+        cell.selectionStyle = .none
         return cell
     }
 }
 
+extension ReservationViewController: ReservationViewModelDelegate {
+    public func reservationVM(dataLoaded: Bool) {
+        tableView.reloadData()
+    }
+    
+    public func reservationVM(showLoader: Bool) {
+        
+    }
+    
+    public func reservationVM(error: Error) {
+        
+    }
+}

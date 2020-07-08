@@ -40,7 +40,6 @@ public class Networking {
             if let error = error {
                 completion(.failure(error))
             }else {
-                print("[Info] Data \(String(data: data!, encoding: .utf8))")
                 completion(.success(data))
             }
         }

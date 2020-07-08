@@ -8,21 +8,31 @@
 
 import UIKit
 class ReservationAlternativeHour: ReservationBaseCell {
-    
+
     var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        flowLayout.itemSize = CGSize(width: 150, height: 180)
-        flowLayout.minimumLineSpacing = 2.0
+        flowLayout.itemSize = CGSize(width: 70, height: 30)
+        flowLayout.minimumLineSpacing = 10.0
         flowLayout.minimumInteritemSpacing = 5.0
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collection.backgroundColor = UIColor.white
         return collection
     }()
     
+    private(set) var hours = [String]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     override func setupCustom(stack: UIStackView) {
         stack.addArrangedSubview(collectionView)
         setupCollectionView()
+    }
+    
+    public func updateHours(_ hours: [String]) {
+        self.hours = hours
     }
     
 }
@@ -32,22 +42,24 @@ extension ReservationAlternativeHour: UICollectionViewDataSource, UICollectionVi
     
     private func setupCollectionView() {
         self.collectionView.showsHorizontalScrollIndicator = false
-        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "collectionCell")
+        self.collectionView.register(ReservationAlternatviceHourCollectionCell.self, forCellWithReuseIdentifier: "collectionCell")
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        self.collectionView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        self.collectionView.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        self.collectionView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        self.collectionView.widthAnchor.constraint(equalTo: horizontalStackView.widthAnchor ).isActive = true
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return hours.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as UICollectionViewCell
-        cell.contentView.backgroundColor = UIColor.red
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! ReservationAlternatviceHourCollectionCell
+        cell.timeLabel.text = hours[indexPath.row]
         return cell
-        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("DidSelect \(indexPath.row)")
     }
 }
-
