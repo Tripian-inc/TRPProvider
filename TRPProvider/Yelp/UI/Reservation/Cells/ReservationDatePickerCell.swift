@@ -54,7 +54,7 @@ class ReservationDatePickerCell: ReservationBaseCell {
     override func setupCustom(stack: UIStackView) {
         stack.addArrangedSubview(inputText)
         inputText.inputView = datePicker
-        inputText.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        inputText.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
         setupToolBar()
     }
     

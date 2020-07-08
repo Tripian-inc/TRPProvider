@@ -1,13 +1,13 @@
 //
-//  ReservationPeople.swift
+//  ReservationUserInfoCell.swift
 //  TRPProvider
 //
-//  Created by Evren Yaşar on 7.07.2020.
+//  Created by Evren Yaşar on 8.07.2020.
 //  Copyright © 2020 Tripian Inc. All rights reserved.
 //
 
 import UIKit
-class ReservationPeople: ReservationBaseCell {
+class ReservationUserInfoCell: ReservationBaseCell {
 
     public var inputText: UITextField = {
         let input = UITextField()
@@ -21,9 +21,9 @@ class ReservationPeople: ReservationBaseCell {
     override func setupCustom(stack: UIStackView) {
         stack.addArrangedSubview(inputText)
         inputText.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+        
     }
     
   
 }
-
 
