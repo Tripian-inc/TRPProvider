@@ -98,7 +98,7 @@ extension YelpApiTest {
         let expectation = XCTestExpectation()
         let yelpApi = YelpApi( isProduct: false)
         
-        yelpApi.openings(id: placeId, date: "2020-09-09", time: "06:30") { (result) in
+        yelpApi.openings(id: placeId, date: "2020-09-10", time: "01:30") { (result) in
             switch result {
             case .failure(let error):
                 XCTFail(error.localizedDescription)

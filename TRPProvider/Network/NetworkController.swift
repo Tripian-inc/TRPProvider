@@ -54,15 +54,22 @@ class NetworkController {
             case .success(let data):
                 do {
                     let converted = try JSONDecoder().decode(T.self, from: data!)
-                    completion(.success(converted))
+                    queue.async {
+                        completion(.success(converted))
+                    }
+                    
                 }catch(let error){
-                    print("[Error] ERROR PARSER \(error)")
-                    completion(.failure(error))
+                    queue.async {
+                        print("[Error] ERROR PARSER \(error)")
+                        completion(.failure(error))
+                    }
                 }
                 return
             case .failure(let error):
-                print("[Error] NETWORK \(error)")
-                completion(.failure(error))
+                queue.async {
+                    print("[Error] NETWORK \(error)")
+                    completion(.failure(error))
+                }
                 return
             }
         }

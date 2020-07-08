@@ -27,6 +27,8 @@ public class ReservationViewController: UIViewController {
         view.backgroundColor = UIColor.white
         viewModel.start()
         setupTableView()
+        //Todo: -  Coordinater'a taşınacak
+        viewModel.delegate = self
     }
     
 }

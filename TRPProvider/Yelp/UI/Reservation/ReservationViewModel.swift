@@ -21,13 +21,15 @@ public protocol ReservationViewModelDelegate: class {
 
 
 public class ReservationViewModel {
+    
     private var placeId = "rC5mIHMNF5C1Jtpb2obSkA"
+    
     enum CellContentType {
         case date, time, people, alternativeTime, explain
     }
     
     public weak var delegate: ReservationViewModelDelegate?
-    
+    private(set) var model: YelpBusiness?
     var numberOfCells: Int { return cellViewModels.count }
     var cellViewModels: [ReservationCellModel] = []
     var date: String = "2020-09-09"
@@ -67,11 +69,10 @@ public class ReservationViewModel {
 //TODO: - DOMAIN MODELE TASINACAK
 extension ReservationViewModel {
     private func fetchBusinessInfo(withId id: String) {
-        YelpApi( isProduct: true).business(id: id) { (result) in
+        YelpApi( isProduct: true).business(id: id) {[weak self] (result) in
             switch result {
             case .success(let model):
-                ()
-                //print("[Info] Business Model \(model)")
+                self?.model = model
             case .failure(let error):
                 print("[ERROR] VM \(error.localizedDescription)")
             }
@@ -90,6 +91,11 @@ extension ReservationViewModel {
         }
     }
     
+}
+
+//MARK: - MODEL TO UI
+extension ReservationViewModel{
+    
     
     
     private func openingHoursTimeParser(times: [YelpReservationTime]) {
@@ -100,6 +106,5 @@ extension ReservationViewModel {
     private func matchDateWithReservationsTime(date: String, times: [YelpReservationTime]) -> YelpReservationTime? {
         return times.first(where: {$0.date == date})
     }
-    
 }
 
