@@ -52,16 +52,17 @@ class NetworkController {
         network.load(url: request!) { (result) in
             switch result {
             case .success(let data):
-                do {
-                    let converted = try JSONDecoder().decode(T.self, from: data!)
-                    queue.async {
-                        completion(.success(converted))
-                    }
-                    
-                }catch(let error){
-                    queue.async {
-                        print("[Error] ERROR PARSER \(error)")
-                        completion(.failure(error))
+                GenericParser<T>().parse(data: data) { result in
+                    switch result {
+                    case .success(let decoded):
+                        queue.async {
+                            completion(.success(decoded!))
+                        }
+                    case .failure(let error):
+                        queue.async {
+                            print("[Error] ERROR PARSER \(error)")
+                            completion(.failure(error))
+                        }
                     }
                 }
                 return

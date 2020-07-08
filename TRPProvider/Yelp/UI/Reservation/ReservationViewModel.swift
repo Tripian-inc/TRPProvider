@@ -17,6 +17,7 @@ public protocol ReservationViewModelDelegate: class {
     func reservationVM(dataLoaded: Bool)
     func reservationVM(showLoader: Bool)
     func reservationVM(error: Error)
+    func reservationVMChangeButtonStatus()
 }
 
 
@@ -26,6 +27,11 @@ public class ReservationViewModel {
     
     enum CellContentType {
         case date, time, people, alternativeTime, explain
+    }
+    
+    enum ButtonStatus: String {
+        case findATable = "Find a Table"
+        case apply = "Apply"
     }
     
     public weak var delegate: ReservationViewModelDelegate?
@@ -40,6 +46,12 @@ public class ReservationViewModel {
         didSet {
             print("Data geldin \(hours)")
             delegate?.reservationVM(dataLoaded: true)
+        }
+    }
+    var fetchNewHour = false
+    var buttonStatus: ButtonStatus = .findATable {
+        didSet {
+            delegate?.reservationVMChangeButtonStatus()
         }
     }
     
@@ -64,6 +76,21 @@ public class ReservationViewModel {
     func getCellViewModel(at indexPath: IndexPath) -> ReservationCellModel {
         return cellViewModels[indexPath.row]
     }
+    
+    public func updateDate(_ date: String ){
+        fetchNewHour = true
+        self.date = date
+    }
+    
+    public func findATable() {
+        hours = []
+        fetchOpeningsHour(id: placeId, covers: people, date: date, time: time)
+    }
+    
+    public func clearATable() {
+        hours = []
+        buttonStatus = .findATable
+    }
 }
 
 //TODO: - DOMAIN MODELE TASINACAK
@@ -85,6 +112,8 @@ extension ReservationViewModel {
             case .success(let model):
                 let converted = model.reservationTimes.compactMap({$0})
                 self?.openingHoursTimeParser(times: converted)
+                self?.fetchNewHour = false
+                self?.buttonStatus = .apply
             case .failure(let error):
                 print("[ERROR] VM \(error.localizedDescription)")
             }
@@ -95,8 +124,6 @@ extension ReservationViewModel {
 
 //MARK: - MODEL TO UI
 extension ReservationViewModel{
-    
-    
     
     private func openingHoursTimeParser(times: [YelpReservationTime]) {
         guard let reservationTime = matchDateWithReservationsTime(date: date, times: times) else {return}

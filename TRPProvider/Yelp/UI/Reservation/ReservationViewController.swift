@@ -11,7 +11,16 @@ public class ReservationViewController: UIViewController {
     
     private(set) var viewModel: ReservationViewModel
     private(set) var tableView = UITableView()
-    
+    private var continueButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Apply", for: .normal)
+        btn.backgroundColor = UIColor.blue
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.addTarget(self, action: #selector(applyPressed), for: UIControl.Event.touchUpInside)
+        btn.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        btn.layer.cornerRadius = 6
+        return btn
+    }()
     
     public init(viewModel: ReservationViewModel = ReservationViewModel()) {
         self.viewModel = viewModel
@@ -25,12 +34,31 @@ public class ReservationViewController: UIViewController {
     
     public override func viewDidLoad() {
         view.backgroundColor = UIColor.white
+        setupButtonUI()
         viewModel.start()
         setupTableView()
         //Todo: -  Coordinater'a taşınacak
         viewModel.delegate = self
     }
     
+    private func setupButtonUI() {
+        view.addSubview(continueButton)
+        continueButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        continueButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        if #available(iOS 11.0, *) {
+            continueButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+        }else {
+            continueButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
+        }
+    }
+    
+    @objc func applyPressed() {
+        if viewModel.fetchNewHour {
+            viewModel.findATable()
+        }else {
+            
+        }
+    }
 }
 
 extension ReservationViewController: UITableViewDataSource, UITableViewDelegate {
@@ -41,7 +69,7 @@ extension ReservationViewController: UITableViewDataSource, UITableViewDelegate 
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: continueButton.topAnchor).isActive = true
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(ReservationDatePickerCell.self, forCellReuseIdentifier: "datePicker")
         tableView.register(ReservationPeople.self, forCellReuseIdentifier: "people")
@@ -93,6 +121,17 @@ extension ReservationViewController {
         cell.selectionStyle = .none
         if model.contentType == .date {
             cell.inputText.text = viewModel.date
+            cell.dateChangeHandler = { [weak self] date in
+                cell.inputText.text = date
+                self?.viewModel.updateDate(date)
+            }
+            
+            cell.findATableHandler = { [weak self] date in
+                cell.inputText.text = date
+                self?.viewModel.findATable()
+            }
+            
+            cell.inputText.addTarget(self, action: #selector(dateEditingEndingEnd), for: .editingDidEnd)
         }else {
             cell.inputText.text = viewModel.time
         }
@@ -124,9 +163,21 @@ extension ReservationViewController {
         cell.selectionStyle = .none
         return cell
     }
+    
+    
+    @objc fileprivate func dateEditingEndingEnd() {
+        print("boook")
+        if viewModel.fetchNewHour {
+            viewModel.clearATable()
+        }
+    }
 }
 
 extension ReservationViewController: ReservationViewModelDelegate {
+    public func reservationVMChangeButtonStatus() {
+        continueButton.setTitle(viewModel.buttonStatus.rawValue, for: .normal)
+    }
+    
     public func reservationVM(dataLoaded: Bool) {
         tableView.reloadData()
     }
