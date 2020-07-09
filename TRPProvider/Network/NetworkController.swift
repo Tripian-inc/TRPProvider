@@ -52,6 +52,7 @@ class NetworkController {
         network.load(url: request!) { (result) in
             switch result {
             case .success(let data):
+                
                 GenericParser<T>().parse(data: data) { result in
                     switch result {
                     case .success(let decoded):

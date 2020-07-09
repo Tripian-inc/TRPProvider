@@ -18,6 +18,7 @@ public protocol ReservationViewModelDelegate: class {
     func reservationVM(showLoader: Bool)
     func reservationVM(error: Error)
     func reservationVMChangeButtonStatus()
+    func reservationVMAlternativeHoursLoaded()
 }
 
 
@@ -39,7 +40,11 @@ public class ReservationViewModel {
     var numberOfCells: Int { return cellViewModels.count }
     var cellViewModels: [ReservationCellModel] = []
     var date: String = "2020-09-09"
-    var time: String = "16:00"
+    var time: String = "16:00" {
+        didSet {
+            delegate?.reservationVM(dataLoaded: true)
+        }
+    }
     var people: Int = 2
     var explainText = "Mock Explain"
     var hours: [String] = ["10:00", "11:00", "12:00"] {
@@ -65,11 +70,12 @@ public class ReservationViewModel {
     
     private func createData() {
         var cells = [ReservationCellModel]()
+        cells.append(.init(title: "Notes from the Business", contentType: .explain))
+        cells.append(.init(title: "Party Size", contentType: .people))
         cells.append(.init(title: "Date", contentType: .date))
         cells.append(.init(title: "Time", contentType: .time))
-        cells.append(.init(title: "Party Size", contentType: .people))
-        cells.append(.init(title: "Notes from the Business", contentType: .explain))
         cells.append(.init(title: "Alternative Time", contentType: .alternativeTime))
+        
         cellViewModels = cells
     }
     
@@ -114,6 +120,7 @@ extension ReservationViewModel {
                 self?.openingHoursTimeParser(times: converted)
                 self?.fetchNewHour = false
                 self?.buttonStatus = .apply
+                self?.delegate?.reservationVMAlternativeHoursLoaded()
             case .failure(let error):
                 print("[ERROR] VM \(error.localizedDescription)")
             }

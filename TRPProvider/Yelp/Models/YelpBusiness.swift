@@ -24,6 +24,7 @@ public struct YelpBusiness: Decodable {
     public let price: String?
     public let hours: [YelpHour?]
     public let transactions: [String?]
+    let messaging: YelpMessaging?
     
     enum CodingKeys: String, CodingKey {
         case id, alias, name
@@ -33,7 +34,7 @@ public struct YelpBusiness: Decodable {
         case url, phone
         case displayPhone = "display_phone"
         case reviewCount = "review_count"
-        case categories, rating, location, coordinates, photos, price, hours, transactions
+        case categories, rating, location, coordinates, photos, price, hours, transactions, messaging
     }
 }
 
@@ -85,6 +86,17 @@ public struct YelpLocation: Codable {
         case country, state
         case displayAddress = "display_address"
         case crossStreets = "cross_streets"
+    }
+}
+
+
+public struct YelpMessaging: Codable {
+    public let url: String?
+    public let useCaseText: String?
+
+    enum CodingKeys: String, CodingKey {
+        case url
+        case useCaseText = "use_case_text"
     }
 }
 

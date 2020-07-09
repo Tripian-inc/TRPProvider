@@ -41,6 +41,10 @@ public class ReservationViewController: UIViewController {
         viewModel.delegate = self
     }
     
+    public override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    
     private func setupButtonUI() {
         view.addSubview(continueButton)
         continueButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
@@ -56,8 +60,20 @@ public class ReservationViewController: UIViewController {
         if viewModel.fetchNewHour {
             viewModel.findATable()
         }else {
-            
+            let userInfo = ReservationUserInfoViewController()
+            present(userInfo, animated: true, completion: nil)
         }
+    }
+    
+    
+    private func changeSelectedTimePositionInAlternativeTime() {
+        for row in 0..<viewModel.numberOfCells {
+            let index = IndexPath(row: row, section: 0)
+            if let alternativeCell = tableView.cellForRow(at: index) as? ReservationAlternativeHour {
+                alternativeCell.setSelectedCellCenter()
+            }
+        }
+        
     }
 }
 
@@ -149,8 +165,12 @@ extension ReservationViewController {
     private func makeAlternaviteHourCell(tableView: UITableView, cellForRowAt indexPath: IndexPath, model: ReservationCellModel) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "alternativeHour", for: indexPath) as! ReservationAlternativeHour
         cell.titleLabel.text = model.title
-        
         cell.updateHours(viewModel.hours)
+        cell.setSelectedHour(viewModel.time)
+        cell.alternativeSelectedHandler = { [weak self] selected in
+            self?.viewModel.time = selected
+        }
+        cell.setSelectedCellCenter()
         cell.selectionStyle = .none
         return cell
     }
@@ -169,11 +189,20 @@ extension ReservationViewController {
         print("boook")
         if viewModel.fetchNewHour {
             viewModel.clearATable()
+        }else {
+            
         }
     }
 }
 
 extension ReservationViewController: ReservationViewModelDelegate {
+    public func reservationVMAlternativeHoursLoaded() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.changeSelectedTimePositionInAlternativeTime()
+            print("UPDATE ALTERNATIVE HOUR")
+        }
+    }
+    
     public func reservationVMChangeButtonStatus() {
         continueButton.setTitle(viewModel.buttonStatus.rawValue, for: .normal)
     }

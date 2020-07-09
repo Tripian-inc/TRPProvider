@@ -7,15 +7,15 @@
 //
 
 import Foundation
-class GenericParser<T: Decodable> {
+internal class GenericParser<T: Decodable> {
     
     let decoder: JSONDecoder
     
-    public init(decoder: JSONDecoder = JSONDecoder()) {
+    internal init(decoder: JSONDecoder = JSONDecoder()) {
         self.decoder = decoder
     }
     
-    func parse(data: Data?, completion: @escaping (Result<T?, Error>) -> Void) {
+    internal func parse(data: Data?, completion: @escaping (Result<T?, Error>) -> Void) {
         guard let data = data else {return }
         do {
             let result = try decoder.decode(T.self, from: data)

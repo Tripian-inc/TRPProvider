@@ -8,7 +8,11 @@
 
 import UIKit
 class ReservationAlternativeHour: ReservationBaseCell {
-
+    
+    
+    var alternativeSelectedHandler: ((_ hour: String) -> Void)?
+    var selectedHour: String?
+    var selectedCellIndex: IndexPath?
     var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -35,10 +39,28 @@ class ReservationAlternativeHour: ReservationBaseCell {
         self.hours = hours
     }
     
+    public func setSelectedHour(_ hour: String) {
+        self.selectedHour = hour
+    }
+    
+    
+    func setSelectedCellCenter() {
+        for (row, chid) in hours.enumerated() {
+            let time = hours[row]
+            if let selectedHour = selectedHour, time == selectedHour {
+                let indexPath = IndexPath(row: row, section: 0)
+                let cell = collectionView.cellForItem(at: indexPath)
+                //cell.isSelected = true
+                collectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
+            }
+        }
+    }
+    
+    
+    
 }
 
 extension ReservationAlternativeHour: UICollectionViewDataSource, UICollectionViewDelegate {
-    
     
     private func setupCollectionView() {
         self.collectionView.showsHorizontalScrollIndicator = false
@@ -55,11 +77,23 @@ extension ReservationAlternativeHour: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! ReservationAlternatviceHourCollectionCell
-        cell.timeLabel.text = hours[indexPath.row]
+        let time = hours[indexPath.row]
+        
+        if let selectedHour = selectedHour, time == selectedHour {
+            cell.backView.backgroundColor = UIColor.darkGray
+            cell.timeLabel.textColor = UIColor.black
+            selectedCellIndex = indexPath
+        }else {
+            cell.backView.backgroundColor = UIColor.blue
+            cell.timeLabel.textColor = UIColor.white
+        }
+        cell.timeLabel.text = time
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("DidSelect \(indexPath.row)")
+        let selectedHour = hours[indexPath.row]
+        alternativeSelectedHandler?(selectedHour)
     }
 }
