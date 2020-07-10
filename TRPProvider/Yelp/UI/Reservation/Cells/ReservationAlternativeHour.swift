@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 class ReservationAlternativeHour: ReservationBaseCell {
     
     
@@ -80,12 +81,12 @@ extension ReservationAlternativeHour: UICollectionViewDataSource, UICollectionVi
         let time = hours[indexPath.row]
         
         if let selectedHour = selectedHour, time == selectedHour {
-            cell.backView.backgroundColor = UIColor.darkGray
-            cell.timeLabel.textColor = UIColor.black
-            selectedCellIndex = indexPath
+            //cell.backView.backgroundColor = UIColor.darkGray
+            //cell.timeLabel.textColor = UIColor.black
+            //selectedCellIndex = indexPath
         }else {
-            cell.backView.backgroundColor = UIColor.blue
-            cell.timeLabel.textColor = UIColor.white
+            //cell.backView.backgroundColor = UIColor.blue
+            //cell.timeLabel.textColor = UIColor.white
         }
         cell.timeLabel.text = time
         

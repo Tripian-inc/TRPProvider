@@ -7,14 +7,14 @@
 //
 
 import UIKit
-
+import TRPUIKit
 class ReservationAlternatviceHourCollectionCell: UICollectionViewCell {
     
     var backView: UIView = {
         var view = UIView()
         view.layer.cornerRadius = 4
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.blue
+        view.backgroundColor = TRPColor.pink
         return view
     }()
     

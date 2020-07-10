@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import TRPUIKit
 public class ReservationViewController: UIViewController {
     
     private(set) var viewModel: ReservationViewModel
+    private var loader: TRPLoaderView?
     private(set) var tableView = UITableView()
+    
     private var continueButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Apply", for: .normal)
-        btn.backgroundColor = UIColor.blue
+        btn.setTitle("Make a Reservation", for: .normal)
+        btn.backgroundColor = TRPColor.pink
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.addTarget(self, action: #selector(applyPressed), for: UIControl.Event.touchUpInside)
         btn.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -31,9 +34,9 @@ public class ReservationViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     public override func viewDidLoad() {
         view.backgroundColor = UIColor.white
+        loader = TRPLoaderView(superView: self.view)
         setupButtonUI()
         viewModel.start()
         setupTableView()
@@ -73,8 +76,8 @@ public class ReservationViewController: UIViewController {
                 alternativeCell.setSelectedCellCenter()
             }
         }
-        
     }
+    
 }
 
 extension ReservationViewController: UITableViewDataSource, UITableViewDelegate {
@@ -212,7 +215,11 @@ extension ReservationViewController: ReservationViewModelDelegate {
     }
     
     public func reservationVM(showLoader: Bool) {
-        
+        if showLoader {
+            loader?.show()
+        }else {
+            loader?.remove()
+        }
     }
     
     public func reservationVM(error: Error) {

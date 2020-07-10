@@ -32,11 +32,12 @@ public class ReservationViewModel {
     
     enum ButtonStatus: String {
         case findATable = "Find a Table"
-        case apply = "Apply"
+        case makeAreservation = "Make A Reservation"
     }
     
     public weak var delegate: ReservationViewModelDelegate?
     private(set) var model: YelpBusiness?
+    //Data of UI
     var numberOfCells: Int { return cellViewModels.count }
     var cellViewModels: [ReservationCellModel] = []
     var date: String = "2020-09-09"
@@ -47,9 +48,8 @@ public class ReservationViewModel {
     }
     var people: Int = 2
     var explainText = "Mock Explain"
-    var hours: [String] = ["10:00", "11:00", "12:00"] {
+    var hours: [String] = [] {
         didSet {
-            print("Data geldin \(hours)")
             delegate?.reservationVM(dataLoaded: true)
         }
     }
@@ -102,27 +102,32 @@ public class ReservationViewModel {
 //TODO: - DOMAIN MODELE TASINACAK
 extension ReservationViewModel {
     private func fetchBusinessInfo(withId id: String) {
-        YelpApi( isProduct: true).business(id: id) {[weak self] (result) in
+        delegate?.reservationVM(showLoader: true)
+        YelpApi(isProduct: true).business(id: id) {[weak self] (result) in
+            self?.delegate?.reservationVM(showLoader: false)
             switch result {
             case .success(let model):
                 self?.model = model
+                self?.updateUiWithBusinessMode(model)
             case .failure(let error):
-                print("[ERROR] VM \(error.localizedDescription)")
+                self?.delegate?.reservationVM(error: error)
             }
         }
     }
     
     private func fetchOpeningsHour(id: String, covers: Int, date: String, time: String) {
+        delegate?.reservationVM(showLoader: true)
         YelpApi(isProduct: false).openings(id: id, covers: covers, date: date, time: time) { [weak self] result in
+            self?.delegate?.reservationVM(showLoader: false)
             switch result {
             case .success(let model):
                 let converted = model.reservationTimes.compactMap({$0})
                 self?.openingHoursTimeParser(times: converted)
                 self?.fetchNewHour = false
-                self?.buttonStatus = .apply
+                self?.buttonStatus = .makeAreservation
                 self?.delegate?.reservationVMAlternativeHoursLoaded()
             case .failure(let error):
-                print("[ERROR] VM \(error.localizedDescription)")
+                self?.delegate?.reservationVM(error: error)
             }
         }
     }
@@ -139,6 +144,13 @@ extension ReservationViewModel{
     
     private func matchDateWithReservationsTime(date: String, times: [YelpReservationTime]) -> YelpReservationTime? {
         return times.first(where: {$0.date == date})
+    }
+    
+    private func updateUiWithBusinessMode(_ model: YelpBusiness) {
+        if let message = model.messaging, let useCaseText = message.useCaseText {
+            explainText = useCaseText
+        }
+        delegate?.reservationVM(dataLoaded: true)
     }
 }
 

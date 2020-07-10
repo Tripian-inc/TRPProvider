@@ -19,8 +19,14 @@ public class ReservationUserInfoViewModel {
         case userName, lastName, email, phone
     }
     
+    //Data of UI
     var numberOfCells: Int { return cellViewModels.count }
     var cellViewModels: [ReservationUserInfoCellModel] = []
+    var userName: String?
+    var lastName: String?
+    var email: String?
+    var phone: String?
+    
     
     public init() {}
     
@@ -41,4 +47,6 @@ public class ReservationUserInfoViewModel {
     func getCellViewModel(at indexPath: IndexPath) -> ReservationUserInfoCellModel {
         return cellViewModels[indexPath.row]
     }
+    
+    
 }

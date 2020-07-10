@@ -7,14 +7,16 @@
 //
 
 import UIKit
+import TRPUIKit
 public class ReservationUserInfoViewController: UIViewController {
     
     private(set) var viewModel: ReservationUserInfoViewModel
     private(set) var tableView = UITableView()
+    
     private var continueButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("Apply", for: .normal)
-        btn.backgroundColor = UIColor.blue
+        btn.backgroundColor = TRPColor.pink
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.addTarget(self, action: #selector(applyPressed), for: UIControl.Event.touchUpInside)
         btn.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -30,7 +32,6 @@ public class ReservationUserInfoViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     public override func viewDidLoad() {
         view.backgroundColor = UIColor.white
@@ -84,7 +85,20 @@ extension ReservationUserInfoViewController: UITableViewDataSource, UITableViewD
         let model = viewModel.getCellViewModel(at: indexPath)
         
         cell.titleLabel.text = model.title
-        cell.inputText.text = "a"
+        if model.contentType == .userName {
+            cell.inputText.placeholder = "User Name"
+            cell.inputText.text = viewModel.userName
+        }else if model.contentType == .lastName {
+            cell.inputText.placeholder = "Last Name"
+            cell.inputText.text = viewModel.lastName
+        }else if model.contentType == .phone {
+            cell.inputText.placeholder = "Phone Number"
+            cell.inputText.text = viewModel.phone
+        }else if model.contentType == .email {
+            cell.inputText.placeholder = "E-Mail"
+            cell.inputText.text = viewModel.email
+        }
+        
         cell.selectionStyle = .none
         return cell
     }
