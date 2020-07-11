@@ -13,11 +13,17 @@ struct ReservationUserInfoCellModel {
     var contentType: ReservationUserInfoViewModel.CellContentType
 }
 
+public protocol ReservationUserInfoViewModelDelegate:class {
+    func reservationUserInfoViewModel(showLoader: Bool)
+}
+
 public class ReservationUserInfoViewModel {
     
     enum CellContentType {
         case userName, lastName, email, phone
     }
+    
+    weak var delegate: ReservationUserInfoViewModelDelegate?
     
     //Data of UI
     var numberOfCells: Int { return cellViewModels.count }
@@ -42,7 +48,6 @@ public class ReservationUserInfoViewModel {
         cells.append(.init(title: "Phone", contentType: .phone))
         cellViewModels = cells
     }
-    
     
     func getCellViewModel(at indexPath: IndexPath) -> ReservationUserInfoCellModel {
         return cellViewModels[indexPath.row]

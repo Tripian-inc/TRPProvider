@@ -117,7 +117,8 @@ extension ReservationViewModel {
     
     private func fetchOpeningsHour(id: String, covers: Int, date: String, time: String) {
         delegate?.reservationVM(showLoader: true)
-        YelpApi(isProduct: false).openings(id: id, covers: covers, date: date, time: time) { [weak self] result in
+        
+        YelpApi(isProduct: false).openings(businessId: id, covers: covers, date: date, time: time) { [weak self] result in
             self?.delegate?.reservationVM(showLoader: false)
             switch result {
             case .success(let model):

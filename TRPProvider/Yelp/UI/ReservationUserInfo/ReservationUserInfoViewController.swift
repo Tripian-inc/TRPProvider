@@ -12,6 +12,7 @@ public class ReservationUserInfoViewController: UIViewController {
     
     private(set) var viewModel: ReservationUserInfoViewModel
     private(set) var tableView = UITableView()
+    private var loader: TRPLoaderView?
     
     private var continueButton: UIButton = {
         let btn = UIButton()
@@ -35,7 +36,9 @@ public class ReservationUserInfoViewController: UIViewController {
     
     public override func viewDidLoad() {
         view.backgroundColor = UIColor.white
+        loader = TRPLoaderView(superView: self.view)
         //Todo: -  Coordinater'a taşınacak
+        viewModel.delegate = self
         viewModel.start()
         setupButtonUI()
         setupTableView()
@@ -52,7 +55,9 @@ public class ReservationUserInfoViewController: UIViewController {
         }
     }
     
-    @objc func applyPressed() {}
+    @objc func applyPressed() {
+        
+    }
     
 }
 
@@ -101,6 +106,18 @@ extension ReservationUserInfoViewController: UITableViewDataSource, UITableViewD
         
         cell.selectionStyle = .none
         return cell
+    }
+    
+}
+
+extension ReservationUserInfoViewController: ReservationUserInfoViewModelDelegate {
+    
+    public func reservationUserInfoViewModel(showLoader: Bool) {
+        if showLoader {
+            loader?.show()
+        }else {
+            loader?.remove()
+        }
     }
     
 }
