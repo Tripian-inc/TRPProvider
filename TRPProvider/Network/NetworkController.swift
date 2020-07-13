@@ -20,7 +20,7 @@ class NetworkController {
     private(set) var allHTTPHeaderFields = [String:String]()
     private(set) var httpMethod: HttpMethod = .get
     private(set) var httpBody = [String: String]()
-    
+    private(set) var errorDecoable: Decodable?
     
     private var request: URLRequest? {
         if let component = urlComponent, let componentUrl = component.url {
@@ -49,7 +49,6 @@ class NetworkController {
         network.load(url: request!) { (result) in
             switch result {
             case .success(let data):
-                
                 GenericParser<T>().parse(data: data) { result in
                     switch result {
                     case .success(let decoded):
@@ -58,6 +57,7 @@ class NetworkController {
                         }
                     case .failure(let error):
                         queue.async {
+                            //TODO: ERROR YAPISI INJECT EDILECEK
                             print("[Error] ERROR PARSER \(error)")
                             completion(.failure(error))
                         }
@@ -75,7 +75,21 @@ class NetworkController {
         return self
     }
     
-    
+    private func errorParser<E: Decodable>(queue: DispatchQueue = .main, data:Data, completion: @escaping (NetworkControllerResult<E>) -> Void) {
+        GenericParser<E>().parse(data: data) { result in
+            switch result {
+            case .success(let decoded):
+                queue.async {
+                    
+                    completion(.failure(decoded as! Error))
+                }
+            case .failure(let error):
+                queue.async {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
     
     @discardableResult
     func responseDecodable<T: Decodable> (type: T.Type, completion: @escaping (NetworkControllerResult<T>) -> Void) -> Self {
@@ -130,7 +144,11 @@ extension NetworkController {
         allHTTPHeaderFields[key] = value
         return self
     }
-    
+    @discardableResult
+    func errorDecoable(_ parser: Decodable) -> Self {
+        errorDecoable = parser
+        return self
+    }
     
 }
 

@@ -189,7 +189,6 @@ extension ReservationViewController {
     
     
     @objc fileprivate func dateEditingEndingEnd() {
-        print("boook")
         if viewModel.fetchNewHour {
             viewModel.clearATable()
         }else {

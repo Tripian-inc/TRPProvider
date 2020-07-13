@@ -13,8 +13,8 @@ class MockSession: NetworkSession {
     var data: Data?
     var error: Error?
     
-    func load(from urlRequest: URLRequest, completionHandler: @escaping (Data?, Error?) -> Void) {
-        completionHandler(self.data, self.error)
+    func load(from urlRequest: URLRequest, completionHandler: @escaping (Data?, NetworkResponse?, Error?) -> Void) {
+         completionHandler(self.data, nil, self.error)
     }
     
 }

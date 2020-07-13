@@ -85,17 +85,13 @@ extension YelpApi {
     
     public func hold(reservation: Reservation,
                      completion: @escaping (Result<YelpHolds, Error>)-> Void) {
-        
-        if !reservation.isHoldsInfoValid {
-            print("Hold info is not valid")
-            return
-        }
+       
         
         hold(businessId: reservation.businessId,
              covers: reservation.covers,
-             date: reservation.date!,
-             time: reservation.time!,
-             uniqueId: reservation.uniqueId!, completion: completion)
+             date: reservation.date,
+             time: reservation.time,
+             uniqueId: reservation.uniqueId, completion: completion)
     }
     
     public func hold(businessId id: String,
@@ -127,10 +123,6 @@ extension YelpApi {
     
     public func reservations(reservation: Reservation,
                              completion: @escaping (Result<YelpHolds, Error>)-> Void) {
-        if !reservation.isHoldsInfoValid {
-            print("Hold info is not valid")
-            return
-        }
         
         if !reservation.isUserInfoValid {
             print("UserInfo info is not valid")
@@ -138,9 +130,9 @@ extension YelpApi {
         }
         
         reservations(businessId: reservation.businessId,
-                     date: reservation.date!,
-                     time: reservation.time!,
-                     uniqueId: reservation.uniqueId!,
+                     date: reservation.date,
+                     time: reservation.time,
+                     uniqueId: reservation.uniqueId,
                      holdId: reservation.holdId!,
                      firstName: reservation.firstName!,
                      lastName: reservation.lastName!,

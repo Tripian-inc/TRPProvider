@@ -9,12 +9,13 @@
 import Foundation
 
 public protocol NetworkSession {
-    //func load(from urlRequest: NSURLRequest, completionHandler: @escaping (Data?, Error?))
     func load(from urlRequest: URLRequest, completionHandler: @escaping (Data?, NetworkResponse?, Error?) -> Void)
 }
 
 
 extension URLSession: NetworkSession {
+    
+    
     public func load(from urlRequest: URLRequest, completionHandler: @escaping (Data?, NetworkResponse?, Error?) -> Void) {
         let task = dataTask(with: urlRequest) { [weak self] (data, response, error) in
             
