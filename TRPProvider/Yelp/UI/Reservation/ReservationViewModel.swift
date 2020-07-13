@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct ReservationCellModel {
-    var title: String
-    var contentType: ReservationViewModel.CellContentType
+public struct ReservationCellModel {
+    public var title: String
+    public var contentType: ReservationViewModel.CellContentType
 }
 
 public protocol ReservationViewModelDelegate: class {
@@ -26,7 +26,7 @@ public class ReservationViewModel {
     
     private var placeId = "rC5mIHMNF5C1Jtpb2obSkA"
     
-    enum CellContentType {
+    public enum CellContentType {
         case date, time, people, alternativeTime, explain
     }
     
@@ -38,17 +38,17 @@ public class ReservationViewModel {
     public weak var delegate: ReservationViewModelDelegate?
     private(set) var model: YelpBusiness?
     //Data of UI
-    var numberOfCells: Int { return cellViewModels.count }
-    var cellViewModels: [ReservationCellModel] = []
-    var date: String = "2020-09-09"
-    var time: String = "16:00" {
+    public var numberOfCells: Int { return cellViewModels.count }
+    public var cellViewModels: [ReservationCellModel] = []
+    public var date: String
+    public var time: String = "16:00" {
         didSet {
             delegate?.reservationVM(dataLoaded: true)
         }
     }
-    var people: Int = 2
-    var explainText = "Mock Explain"
-    var hours: [String] = [] {
+    public var people: Int = 2
+    public var explainText = "Mock Explain"
+    public var hours: [String] = [] {
         didSet {
             delegate?.reservationVM(dataLoaded: true)
         }
@@ -60,7 +60,11 @@ public class ReservationViewModel {
         }
     }
     
-    public init() {}
+    public init(date: String, time: String, covers: Int) {
+        self.date = date
+        self.time = time
+        self.people = covers
+    }
     
     func start() {
         createData()
@@ -75,7 +79,6 @@ public class ReservationViewModel {
         cells.append(.init(title: "Date", contentType: .date))
         cells.append(.init(title: "Time", contentType: .time))
         cells.append(.init(title: "Alternative Time", contentType: .alternativeTime))
-        
         cellViewModels = cells
     }
     
@@ -117,7 +120,6 @@ extension ReservationViewModel {
     
     private func fetchOpeningsHour(id: String, covers: Int, date: String, time: String) {
         delegate?.reservationVM(showLoader: true)
-        
         YelpApi(isProduct: false).openings(businessId: id, covers: covers, date: date, time: time) { [weak self] result in
             self?.delegate?.reservationVM(showLoader: false)
             switch result {

@@ -7,10 +7,7 @@
 //
 
 import Foundation
-enum HttpMethod: String {
-    case get = "GET"
-    case post = "POST"
-}
+
 public typealias NetworkControllerResult<Success> = Result<Success, Error>
 
 class NetworkController {

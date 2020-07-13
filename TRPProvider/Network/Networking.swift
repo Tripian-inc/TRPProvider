@@ -10,16 +10,39 @@ import Foundation
 
 public protocol NetworkSession {
     //func load(from urlRequest: NSURLRequest, completionHandler: @escaping (Data?, Error?))
-    func load(from urlRequest: URLRequest, completionHandler: @escaping (Data?, Error?) -> Void)
+    func load(from urlRequest: URLRequest, completionHandler: @escaping (Data?, NetworkResponse?, Error?) -> Void)
 }
 
 
 extension URLSession: NetworkSession {
-    public func load(from urlRequest: URLRequest, completionHandler: @escaping (Data?, Error?) -> Void) {
-        let task = dataTask(with: urlRequest) { (data, _, error) in
-            completionHandler(data, error)
+    public func load(from urlRequest: URLRequest, completionHandler: @escaping (Data?, NetworkResponse?, Error?) -> Void) {
+        let task = dataTask(with: urlRequest) { [weak self] (data, response, error) in
+            
+            var networkResponse: NetworkResponse?
+            
+            if let response = response, let httpResponse = response as? HTTPURLResponse {
+                networkResponse = self?.handleNetworkResponse(httpResponse)
+            }
+            
+            completionHandler(data, networkResponse, error)
+            
         }
         task.resume()
+    }
+    
+    
+    /// HTTPResponse yanıtlarını readble hale getirir
+    /// - Parameter response: HTTPResponse
+    /// - Returns: NetworkReponse
+    private func handleNetworkResponse(_ response: HTTPURLResponse) -> NetworkResponse {
+        switch response.statusCode {
+        case 200...299: return .success
+        case 401...500: return .authenticationError
+        case 500...599: return .badRequest
+        case 600: return .outDated
+        default: ()
+        }
+        return .failed
     }
 }
 
@@ -36,7 +59,7 @@ public class Networking {
     }
     
     public func load(url: URLRequest, completion: @escaping (Result<Data?, Error>) -> Void) {
-        session.load(from: url) { (data, error) in
+        session.load(from: url) { (data, response, error) in
             if let error = error {
                 completion(.failure(error))
             }else {
@@ -44,5 +67,6 @@ public class Networking {
             }
         }
     }
+    
     
 }

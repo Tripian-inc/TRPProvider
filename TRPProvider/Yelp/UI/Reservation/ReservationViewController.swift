@@ -25,7 +25,7 @@ public class ReservationViewController: UIViewController {
         return btn
     }()
     
-    public init(viewModel: ReservationViewModel = ReservationViewModel()) {
+    public init(viewModel: ReservationViewModel = ReservationViewModel(date: "2020-09-09", time: "19:00", covers: 2)) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
