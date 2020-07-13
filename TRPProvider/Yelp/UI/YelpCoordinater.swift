@@ -13,35 +13,44 @@ public class YelpCoordinater {
     
     private(set) var reservation: Reservation
     private(set) var navigationController: UINavigationController
+    private var reservationViewController: ReservationViewController?
     
-    
-    init(navigationController: UINavigationController,  reservation: Reservation) {
+    public init(navigationController: UINavigationController,  reservation: Reservation) {
         self.navigationController = navigationController
         self.reservation = reservation
     }
     
-    
+    public func start() {
+        openReservationVC()
+    }
 }
 
 //MARK: - RESERVATİON
-extension YelpCoordinater {
+extension YelpCoordinater: ReservationViewControllerDelegate {
     
     private func openReservationVC() {
         let viewModel = ReservationViewModel(date: reservation.date,
                                              time: reservation.time,
                                              covers: reservation.covers)
-        let vc = ReservationViewController(viewModel: viewModel)
-        navigationController.pushViewController(vc, animated: true)
+        reservationViewController = ReservationViewController(viewModel: viewModel)
+        reservationViewController!.delegate = self
+        viewModel.delegate = reservationViewController!
+        viewModel.start()
+        navigationController.pushViewController(reservationViewController!, animated: true)
     }
     
+    public func reservationViewControllerContinues() {
+        openUserInfoVC()
+    }
     
 }
 
 //MARK: - USERINFO
 extension YelpCoordinater {
     private func openUserInfoVC() {
-        //let viewModel = ReservationUserInfoViewModel()
-        
+        let viewModel = ReservationUserInfoViewModel(userName: reservation.firstName, lastName: reservation.lastName, email: reservation.email, phone: reservation.phone)
+        let viewController = ReservationUserInfoViewController(viewModel: viewModel)
+        navigationController.pushViewController(viewController, animated: true)
     }
 }
 

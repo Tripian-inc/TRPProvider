@@ -45,6 +45,16 @@
 		B2BDAE9B24ADECF40056D5E0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE9A24ADECF40056D5E0 /* Networking.swift */; };
 		B2BDAE9C24ADED3B0056D5E0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE9A24ADECF40056D5E0 /* Networking.swift */; };
 		B2CD2E1224B31E2E00AFB8E2 /* NetworkControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CD2E1124B31E2E00AFB8E2 /* NetworkControllerTest.swift */; };
+		B2D10DAB24BC32DF005394C3 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D10DAA24BC32DF005394C3 /* HttpMethod.swift */; };
+		B2D10DAD24BC4128005394C3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D10DAC24BC4128005394C3 /* NetworkError.swift */; };
+		B2D10DAF24BC4295005394C3 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D10DAE24BC4295005394C3 /* NetworkResponse.swift */; };
+		B2D10DB024BC4790005394C3 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D10DAE24BC4295005394C3 /* NetworkResponse.swift */; };
+		B2D10DB124BC479F005394C3 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25C832624B8AC89006167E4 /* Reservation.swift */; };
+		B2D10DB224BC47AE005394C3 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D10DAA24BC32DF005394C3 /* HttpMethod.swift */; };
+		B2D10DB424BC494F005394C3 /* YelpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D10DB324BC494F005394C3 /* YelpError.swift */; };
+		B2D10DB524BC4975005394C3 /* YelpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D10DB324BC494F005394C3 /* YelpError.swift */; };
+		B2D10DBC24BC4AFE005394C3 /* YelpCoordinater.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D10DBB24BC4AFE005394C3 /* YelpCoordinater.swift */; };
+		B2D10DBD24BC4CFE005394C3 /* YelpCoordinater.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D10DBB24BC4AFE005394C3 /* YelpCoordinater.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +102,11 @@
 		B2BDAE8F24ADECCF0056D5E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2BDAE9A24ADECF40056D5E0 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		B2CD2E1124B31E2E00AFB8E2 /* NetworkControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkControllerTest.swift; sourceTree = "<group>"; };
+		B2D10DAA24BC32DF005394C3 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
+		B2D10DAC24BC4128005394C3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		B2D10DAE24BC4295005394C3 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
+		B2D10DB324BC494F005394C3 /* YelpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpError.swift; sourceTree = "<group>"; };
+		B2D10DBB24BC4AFE005394C3 /* YelpCoordinater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpCoordinater.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +162,7 @@
 				B256DB5524AE220E00925A0B /* YelpOpenings.swift */,
 				B2580E9124B4712200A704FB /* YelpHolds.swift */,
 				B25C832624B8AC89006167E4 /* Reservation.swift */,
+				B2D10DB324BC494F005394C3 /* YelpError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -188,6 +204,7 @@
 		B2580EAF24B493C200A704FB /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B2D10DBB24BC4AFE005394C3 /* YelpCoordinater.swift */,
 				B2580EC024B49EA300A704FB /* ReservationBaseCell.swift */,
 				B26AA00F24B61390007A0755 /* ReservationUserInfo */,
 				B2580EB924B49B5900A704FB /* Reservation */,
@@ -286,6 +303,9 @@
 				B2BDAE9A24ADECF40056D5E0 /* Networking.swift */,
 				B27CC4BB24AF7CA000A3117F /* GenericParser.swift */,
 				B27CC4BD24AFA0E300A3117F /* NetworkController.swift */,
+				B2D10DAA24BC32DF005394C3 /* HttpMethod.swift */,
+				B2D10DAC24BC4128005394C3 /* NetworkError.swift */,
+				B2D10DAE24BC4295005394C3 /* NetworkResponse.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -408,10 +428,14 @@
 				B256DB4D24ADFBD300925A0B /* YelpApi.swift in Sources */,
 				B26AA01124B613A8007A0755 /* ReservationUserInfoViewController.swift in Sources */,
 				B2580EB124B494FC00A704FB /* ReservationViewController.swift in Sources */,
+				B2D10DB424BC494F005394C3 /* YelpError.swift in Sources */,
 				B2580EB324B4956C00A704FB /* ReservationViewModel.swift in Sources */,
 				B27CC4BC24AF7CA000A3117F /* GenericParser.swift in Sources */,
 				B2580EC524B4A73F00A704FB /* ReservationPeopleCell.swift in Sources */,
+				B2D10DAD24BC4128005394C3 /* NetworkError.swift in Sources */,
+				B2D10DAF24BC4295005394C3 /* NetworkResponse.swift in Sources */,
 				B256DB4B24ADFBBE00925A0B /* TRPProvider.swift in Sources */,
+				B2D10DAB24BC32DF005394C3 /* HttpMethod.swift in Sources */,
 				B26AA00D24B5E3ED007A0755 /* ReservationAlternatviceHourCollectionCell.swift in Sources */,
 				B26AA01324B613CA007A0755 /* ReservationUserInfoViewModel.swift in Sources */,
 				B256DB5324AE087C00925A0B /* YelpBusiness.swift in Sources */,
@@ -421,6 +445,7 @@
 				B2580EC124B49EA300A704FB /* ReservationBaseCell.swift in Sources */,
 				B2580EC724B4A82900A704FB /* ReservationAlternativeHour.swift in Sources */,
 				B256DB5624AE220E00925A0B /* YelpOpenings.swift in Sources */,
+				B2D10DBC24BC4AFE005394C3 /* YelpCoordinater.swift in Sources */,
 				B26AA00B24B5DCE8007A0755 /* ReservationExplainCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,16 +454,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D10DB524BC4975005394C3 /* YelpError.swift in Sources */,
 				B2580E9024B4620E00A704FB /* YelpOpenings.swift in Sources */,
 				B24B823724B727DF0059A4B9 /* GenericParser.swift in Sources */,
+				B2D10DB124BC479F005394C3 /* Reservation.swift in Sources */,
 				B2580E8024B4521300A704FB /* MockSession.swift in Sources */,
 				B256DB5024ADFD7E00925A0B /* YelpApiTest.swift in Sources */,
 				B2145EF924B348D9002F112A /* NetworkControllerWithComponentTest.swift in Sources */,
 				B256DB4824ADF4C600925A0B /* NetworkingTests.swift in Sources */,
+				B2D10DBD24BC4CFE005394C3 /* YelpCoordinater.swift in Sources */,
 				B2580E8224B452E800A704FB /* YelpApi.swift in Sources */,
 				B2580E8324B4543500A704FB /* YelpBusiness.swift in Sources */,
 				B2580E8924B457C100A704FB /* FileReader.swift in Sources */,
+				B2D10DB024BC4790005394C3 /* NetworkResponse.swift in Sources */,
 				B2CD2E1224B31E2E00AFB8E2 /* NetworkControllerTest.swift in Sources */,
+				B2D10DB224BC47AE005394C3 /* HttpMethod.swift in Sources */,
 				B2580E8124B452DE00A704FB /* NetworkController.swift in Sources */,
 				B2580E9324B4714F00A704FB /* YelpHolds.swift in Sources */,
 				B2BDAE9C24ADED3B0056D5E0 /* Networking.swift in Sources */,

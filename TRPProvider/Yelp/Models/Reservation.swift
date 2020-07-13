@@ -37,7 +37,7 @@ public class Reservation {
         self.uniqueId = uniqueId
     }
     
-    convenience init(businessId id: String, covers: Int = 1, date: String, time: String) {
+    public convenience init(businessId id: String, covers: Int = 1, date: String, time: String) {
         let uniqueId = UIDevice.current.identifierForVendor?.uuidString ?? "asd"
         self.init(businessId: id,
                   covers: covers,

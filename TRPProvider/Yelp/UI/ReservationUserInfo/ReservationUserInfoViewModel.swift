@@ -34,7 +34,15 @@ public class ReservationUserInfoViewModel {
     var phone: String?
     
     
-    public init() {}
+    public init(userName: String? = nil,
+                lastName: String? = nil,
+                email: String? = nil,
+                phone: String? = nil) {
+        self.userName = userName
+        self.lastName = lastName
+        self.email = email
+        self.phone = phone
+    }
     
     public func start() {
         createData()

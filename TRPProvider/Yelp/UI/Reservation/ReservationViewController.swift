@@ -8,12 +8,15 @@
 
 import UIKit
 import TRPUIKit
+public protocol ReservationViewControllerDelegate: class {
+    func reservationViewControllerContinues()
+}
+
 public class ReservationViewController: UIViewController {
     
     private(set) var viewModel: ReservationViewModel
     private var loader: TRPLoaderView?
     private(set) var tableView = UITableView()
-    
     private var continueButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("Make a Reservation", for: .normal)
@@ -24,6 +27,8 @@ public class ReservationViewController: UIViewController {
         btn.layer.cornerRadius = 6
         return btn
     }()
+    
+    public weak var delegate: ReservationViewControllerDelegate?
     
     public init(viewModel: ReservationViewModel = ReservationViewModel(date: "2020-09-09", time: "19:00", covers: 2)) {
         self.viewModel = viewModel
@@ -38,10 +43,7 @@ public class ReservationViewController: UIViewController {
         view.backgroundColor = UIColor.white
         loader = TRPLoaderView(superView: self.view)
         setupButtonUI()
-        viewModel.start()
         setupTableView()
-        //Todo: -  Coordinater'a taşınacak
-        viewModel.delegate = self
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -63,8 +65,7 @@ public class ReservationViewController: UIViewController {
         if viewModel.fetchNewHour {
             viewModel.findATable()
         }else {
-            let userInfo = ReservationUserInfoViewController()
-            present(userInfo, animated: true, completion: nil)
+            delegate?.reservationViewControllerContinues()
         }
     }
     
