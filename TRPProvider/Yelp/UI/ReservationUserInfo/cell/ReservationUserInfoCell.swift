@@ -13,6 +13,7 @@ class ReservationUserInfoCell: ReservationBaseCell {
         let input = UITextField()
         input.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         input.textColor = UIColor.black //UIColor(red: 73.0/255.0, green: 73.0/255.0, blue: 73.0/255.0, alpha: 1.0);
+        
         input.text = ""
         return input
     }()
@@ -21,9 +22,8 @@ class ReservationUserInfoCell: ReservationBaseCell {
     override func setupCustom(stack: UIStackView) {
         stack.addArrangedSubview(inputText)
         inputText.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
-        
     }
     
-  
+    
 }
 

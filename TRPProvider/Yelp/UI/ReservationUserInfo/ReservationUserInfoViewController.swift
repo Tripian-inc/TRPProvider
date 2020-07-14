@@ -79,7 +79,7 @@ extension ReservationUserInfoViewController: UITableViewDataSource, UITableViewD
         tableView.bottomAnchor.constraint(equalTo: continueButton.topAnchor).isActive = true
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(ReservationUserInfoCell.self, forCellReuseIdentifier: "userInfoCell")
-        
+        tableView.keyboardDismissMode = .onDrag
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
@@ -97,36 +97,60 @@ extension ReservationUserInfoViewController: UITableViewDataSource, UITableViewD
         let model = viewModel.getCellViewModel(at: indexPath)
         
         cell.titleLabel.text = model.title
+        cell.inputText.addTarget(self, action: #selector(inputTextChanged(_:)), for: .editingChanged)
         if model.contentType == .userName {
             cell.inputText.placeholder = "User Name"
             cell.inputText.text = viewModel.userName
+            cell.inputText.tag = 1
         }else if model.contentType == .lastName {
             cell.inputText.placeholder = "Last Name"
             cell.inputText.text = viewModel.lastName
+            cell.inputText.tag = 2
         }else if model.contentType == .phone {
             cell.inputText.placeholder = "Phone Number"
             cell.inputText.text = viewModel.phone
+            cell.inputText.tag = 3
+            cell.inputText.keyboardType = .numberPad
         }else if model.contentType == .email {
             cell.inputText.placeholder = "E-Mail"
             cell.inputText.text = viewModel.email
+            cell.inputText.tag = 4
+            cell.inputText.keyboardType = .emailAddress
         }
-        
         cell.selectionStyle = .none
         return cell
+    }
+    
+    @objc func inputTextChanged(_ sender: UITextField) {
+        switch sender.tag {
+        case 1:
+            viewModel.userName = sender.text
+        case 2:
+            viewModel.lastName = sender.text
+        case 3:
+            viewModel.phone = sender.text
+        case 4:
+            viewModel.email = sender.text
+        default: ()
+        }
     }
     
 }
 
 extension ReservationUserInfoViewController: ReservationUserInfoViewModelDelegate {
     
-    
     public func reservationUserInfoViewModelCompleted(reservation: Reservation, result: YelpReservation) {
         delegate?.reservationUserInfoCompleted(self, reservation: reservation, result: result)
     }
     
     public func reservationUserInfoViewModel(error: Error) {
-        TRPMessage(contentText: error.localizedDescription, type: .error).show()
+        TRPMessage(contentText: error.localizedDescription, type: .error, closeTime: 4).show()
     }
+    
+    public func reservationUserInfoViewModel(message: String) {
+        TRPMessage(contentText: message, type: .error, closeTime: 4).show()
+    }
+    
     public func reservationUserInfoViewModel(showLoader: Bool) {
         if showLoader {
             loader?.show()

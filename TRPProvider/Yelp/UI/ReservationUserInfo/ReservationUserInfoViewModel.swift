@@ -16,6 +16,7 @@ struct ReservationUserInfoCellModel {
 public protocol ReservationUserInfoViewModelDelegate:class {
     func reservationUserInfoViewModel(showLoader: Bool)
     func reservationUserInfoViewModel(error: Error)
+    func reservationUserInfoViewModel(message: String)
     func reservationUserInfoViewModelCompleted(reservation: Reservation, result: YelpReservation)
 }
 
@@ -30,10 +31,26 @@ public class ReservationUserInfoViewModel {
     //Data of UI
     var numberOfCells: Int { return cellViewModels.count }
     var cellViewModels: [ReservationUserInfoCellModel] = []
-    var userName: String?
-    var lastName: String?
-    var email: String?
-    var phone: String?
+    var userName: String? {
+        didSet {
+            reservation?.firstName = userName
+        }
+    }
+    var lastName: String? {
+        didSet {
+            reservation?.lastName = lastName
+        }
+    }
+    var email: String? {
+        didSet {
+            reservation?.email = email
+        }
+    }
+    var phone: String? {
+        didSet {
+            reservation?.phone = phone
+        }
+    }
     private(set) var reservation: Reservation?
     
     public init(reservation: Reservation) {
@@ -62,7 +79,43 @@ public class ReservationUserInfoViewModel {
         return cellViewModels[indexPath.row]
     }
     
+    private func isValuesValid() -> Bool {
+        if !isValueValid(userName) {
+            showError("First name can`t be empty")
+            return false
+        }
+        
+        if !isValueValid(lastName) {
+            showError("Last name can`t be empty")
+            return false
+        }
+        
+        if !isValueValid(email) {
+            showError("Email name can`t be empty")
+            return false
+        }else if let mail = email, !mail.isValidEmail{
+            showError("Email format is not valid")
+            return false
+        }
+        
+        if !isValueValid(phone) {
+            showError("Mobile number can`t be empty")
+            return false
+        }
+        return true
+    }
+    
+    private func isValueValid(_ value: String?) -> Bool{
+        guard let value = value else {return false}
+        return !value.isEmpty
+    }
+    
+    private func showError(_ message: String) {
+        delegate?.reservationUserInfoViewModel(message: message)
+    }
+    
     func makeAReservation() {
+        if !isValuesValid() {return}
         guard let reservation = reservation else {return}
         delegate?.reservationUserInfoViewModel(showLoader: true)
         YelpApi(isProduct: false).reservations(reservation: reservation) {[weak self] (result) in
@@ -72,7 +125,6 @@ public class ReservationUserInfoViewModel {
                 self?.delegate?.reservationUserInfoViewModelCompleted(reservation: reservation, result: yelpModel)
             case .failure(let error):
                 self?.delegate?.reservationUserInfoViewModel(error: error)
-                print("[ERROR] in UserInfoVM \(error.localizedDescription)")
             }
         }
     }

@@ -25,8 +25,6 @@ public protocol ReservationViewModelDelegate: class {
 
 public class ReservationViewModel {
     
-    
-    
     public enum CellContentType {
         case date, time, people, alternativeTime, explain
     }
@@ -41,13 +39,22 @@ public class ReservationViewModel {
     //Data of UI
     public var numberOfCells: Int { return cellViewModels.count }
     public var cellViewModels: [ReservationCellModel] = []
-    public var date: String
+    public var date: String {
+        didSet {
+            reservation.date = date
+        }
+    }
     public var time: String = "16:00" {
         didSet {
+            reservation.time = time
             delegate?.reservationVM(dataLoaded: true)
         }
     }
-    public var people: Int = 2
+    public var people: Int = 2 {
+        didSet {
+            reservation.covers = people
+        }
+    }
     public var explainText = ""
     public var hours: [String] = [] {
         didSet {
@@ -106,15 +113,9 @@ public class ReservationViewModel {
     }
     
     public func makeAReservation() {
-        changeReservationParameters()
         postHold(reservation: reservation)
     }
     
-    public func changeReservationParameters() {
-        reservation.covers = people
-        reservation.date = date
-        reservation.time = time
-    }
 }
 
 //TODO: - DOMAIN MODELE TASINACAK
@@ -156,14 +157,10 @@ extension ReservationViewModel {
             self?.delegate?.reservationVM(showLoader: false)
             switch(result) {
             case .success(let yelpHoldModel):
-                print("[Info] Yelp Model geldi \(yelpHoldModel)")
-                print("[Info] Yelp Model geldi \(yelpHoldModel.holdID)")
                 reservation.holdId = yelpHoldModel.holdID
                 self?.reservation = reservation
                 self?.delegate?.reservationVMHold(yelpHoldModel, reservation: reservation)
             case .failure(let error):
-                print("[ERROR] 1 YELP HOLD ERROR: \(error)")
-                print("[ERROR] YELP HOLD ERROR: \(error.localizedDescription)")
                 self?.delegate?.reservationVM(error: error)
             }
         }

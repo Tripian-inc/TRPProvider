@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 public class YelpCoordinater {
     
-    public var isProduct = true
+    public var isProduct = false
     public var testBusinessId = "rC5mIHMNF5C1Jtpb2obSkA"
     private(set) var navigationController: UINavigationController
     private var reservationViewController: ReservationViewController?
