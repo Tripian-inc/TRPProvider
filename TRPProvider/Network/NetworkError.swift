@@ -11,4 +11,28 @@ public enum NetworkError: String, Error {
     case parametersNil = "Parameters were nil."
     case encodingFailed = "Parameters encoding failed."
     case missingUrl = "URL is nil."
+    
+}
+
+public enum YelpNetworkError: Error {
+    case yelpErrorMessage(message: String)
+}
+
+
+extension YelpNetworkError : LocalizedError{
+    
+    public var localizedDescription: String? {
+        switch self {
+        case .yelpErrorMessage(let message):
+            return message
+        }
+    }
+    
+    public var errorDescription: String? {
+        switch self {
+        case .yelpErrorMessage(let message):
+            return message
+        }
+    }
+    
 }

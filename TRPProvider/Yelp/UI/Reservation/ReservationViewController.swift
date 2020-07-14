@@ -9,7 +9,7 @@
 import UIKit
 import TRPUIKit
 public protocol ReservationViewControllerDelegate: class {
-    func reservationViewControllerContinues()
+    func reservationViewController(reservation: Reservation, hold: YelpHolds)
 }
 
 public class ReservationViewController: UIViewController {
@@ -30,7 +30,7 @@ public class ReservationViewController: UIViewController {
     
     public weak var delegate: ReservationViewControllerDelegate?
     
-    public init(viewModel: ReservationViewModel = ReservationViewModel(date: "2020-09-09", time: "19:00", covers: 2)) {
+    public init(viewModel: ReservationViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -65,7 +65,8 @@ public class ReservationViewController: UIViewController {
         if viewModel.fetchNewHour {
             viewModel.findATable()
         }else {
-            delegate?.reservationViewControllerContinues()
+            viewModel.makeAReservation()
+            //delegate?.reservationViewControllerContinues()
         }
     }
     
@@ -199,6 +200,8 @@ extension ReservationViewController {
 }
 
 extension ReservationViewController: ReservationViewModelDelegate {
+    
+    
     public func reservationVMAlternativeHoursLoaded() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.changeSelectedTimePositionInAlternativeTime()
@@ -223,6 +226,10 @@ extension ReservationViewController: ReservationViewModelDelegate {
     }
     
     public func reservationVM(error: Error) {
-        
+        TRPMessage(contentText: error.localizedDescription, type: .error).show()
+    }
+    
+    public func reservationVMHold(_ hold: YelpHolds, reservation: Reservation) {
+        delegate?.reservationViewController(reservation: reservation, hold: hold)
     }
 }

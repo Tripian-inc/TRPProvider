@@ -19,12 +19,13 @@ public protocol ReservationViewModelDelegate: class {
     func reservationVM(error: Error)
     func reservationVMChangeButtonStatus()
     func reservationVMAlternativeHoursLoaded()
+    func reservationVMHold(_ hold: YelpHolds, reservation: Reservation)
 }
 
 
 public class ReservationViewModel {
     
-    private var placeId = "rC5mIHMNF5C1Jtpb2obSkA"
+    
     
     public enum CellContentType {
         case date, time, people, alternativeTime, explain
@@ -47,7 +48,7 @@ public class ReservationViewModel {
         }
     }
     public var people: Int = 2
-    public var explainText = "Mock Explain"
+    public var explainText = ""
     public var hours: [String] = [] {
         didSet {
             delegate?.reservationVM(dataLoaded: true)
@@ -59,17 +60,20 @@ public class ReservationViewModel {
             delegate?.reservationVMChangeButtonStatus()
         }
     }
+    private(set) var reservation: Reservation
+    public var isYelpApiProduct = true
     
-    public init(date: String, time: String, covers: Int) {
-        self.date = date
-        self.time = time
-        self.people = covers
+    public init(reservation: Reservation) {
+        self.reservation = reservation
+        self.date = reservation.date
+        self.time = reservation.time
+        self.people = reservation.covers
     }
     
     func start() {
         createData()
-        fetchBusinessInfo(withId: placeId)
-        fetchOpeningsHour(id: placeId, covers: people, date: date, time: time)
+        fetchBusinessInfo(withId: reservation.businessId)
+        fetchOpeningsHour(id: reservation.businessId, covers: people, date: date, time: time)
     }
     
     private func createData() {
@@ -93,12 +97,23 @@ public class ReservationViewModel {
     
     public func findATable() {
         hours = []
-        fetchOpeningsHour(id: placeId, covers: people, date: date, time: time)
+        fetchOpeningsHour(id: reservation.businessId, covers: people, date: date, time: time)
     }
     
     public func clearATable() {
         hours = []
         buttonStatus = .findATable
+    }
+    
+    public func makeAReservation() {
+        changeReservationParameters()
+        postHold(reservation: reservation)
+    }
+    
+    public func changeReservationParameters() {
+        reservation.covers = people
+        reservation.date = date
+        reservation.time = time
     }
 }
 
@@ -106,7 +121,7 @@ public class ReservationViewModel {
 extension ReservationViewModel {
     private func fetchBusinessInfo(withId id: String) {
         delegate?.reservationVM(showLoader: true)
-        YelpApi(isProduct: true).business(id: id) {[weak self] (result) in
+        YelpApi(isProduct: isYelpApiProduct).business(id: id) {[weak self] (result) in
             self?.delegate?.reservationVM(showLoader: false)
             switch result {
             case .success(let model):
@@ -120,7 +135,7 @@ extension ReservationViewModel {
     
     private func fetchOpeningsHour(id: String, covers: Int, date: String, time: String) {
         delegate?.reservationVM(showLoader: true)
-        YelpApi(isProduct: false).openings(businessId: id, covers: covers, date: date, time: time) { [weak self] result in
+        YelpApi(isProduct: isYelpApiProduct).openings(businessId: id, covers: covers, date: date, time: time) { [weak self] result in
             self?.delegate?.reservationVM(showLoader: false)
             switch result {
             case .success(let model):
@@ -135,6 +150,28 @@ extension ReservationViewModel {
         }
     }
     
+    private func postHold(reservation: Reservation) {
+        delegate?.reservationVM(showLoader: true)
+        YelpApi(isProduct: isYelpApiProduct).hold(businessId: reservation.businessId, covers: reservation.covers, date: reservation.date, time: reservation.time, uniqueId: reservation.uniqueId) { [weak self] result in
+            self?.delegate?.reservationVM(showLoader: false)
+            switch(result) {
+            case .success(let yelpHoldModel):
+                print("[Info] Yelp Model geldi \(yelpHoldModel)")
+                print("[Info] Yelp Model geldi \(yelpHoldModel.holdID)")
+                reservation.holdId = yelpHoldModel.holdID
+                self?.reservation = reservation
+                self?.delegate?.reservationVMHold(yelpHoldModel, reservation: reservation)
+            case .failure(let error):
+                print("[ERROR] 1 YELP HOLD ERROR: \(error)")
+                print("[ERROR] YELP HOLD ERROR: \(error.localizedDescription)")
+                self?.delegate?.reservationVM(error: error)
+            }
+        }
+    }
+    
+    private func reservationStatus(reservationId: String) {
+        
+    }
 }
 
 //MARK: - MODEL TO UI

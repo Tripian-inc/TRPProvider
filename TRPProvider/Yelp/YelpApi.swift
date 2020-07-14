@@ -32,8 +32,9 @@ public class YelpApi {
         urlComponent.scheme = "https"
         urlComponent.host = "api.yelp.com"
         return NetworkController(network: network)
-                                .urlComponent(urlComponent)
-                                .addValue("Authorization", value: "Bearer \(token)")
+            .urlComponent(urlComponent)
+            .addValue("Authorization", value: "Bearer \(token)")
+            
     }
     
 }
@@ -67,12 +68,12 @@ extension YelpApi {
             .urlComponentPath(path)
             .parameters(params)
             .responseDecodable(type: YelpOpenings.self) { (result) in
-            switch result {
-            case .success(let model):
-                completion(.success(model))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+                switch result {
+                case .success(let model):
+                    completion(.success(model))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
         }
     }
     
@@ -85,7 +86,7 @@ extension YelpApi {
     
     public func hold(reservation: Reservation,
                      completion: @escaping (Result<YelpHolds, Error>)-> Void) {
-       
+        
         
         hold(businessId: reservation.businessId,
              covers: reservation.covers,
@@ -101,19 +102,19 @@ extension YelpApi {
                      uniqueId: String,
                      completion: @escaping (Result<YelpHolds, Error>)-> Void ) {
         let path = "/v3/bookings/\(id)/holds"
-        let bodyParams = ["covers": "2", "date":date, "time": time, "unique_id" : uniqueId]
+        let bodyParams = ["covers": "\(covers)", "date":date, "time": time, "unique_id" : uniqueId]
         networkController?
             .urlComponentPath(path)
             .httpMethod(.post)
             .addValue("Content-Type", value: "application/x-www-form-urlencoded")
             .bodyParameters(bodyParams)
             .responseDecodable(type: YelpHolds.self) { (result) in
-            switch result {
-            case .success(let model):
-                completion(.success(model))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+                switch result {
+                case .success(let model):
+                    completion(.success(model))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
         }
     }
 }
@@ -122,10 +123,10 @@ extension YelpApi {
 extension YelpApi {
     
     public func reservations(reservation: Reservation,
-                             completion: @escaping (Result<YelpHolds, Error>)-> Void) {
+                             completion: @escaping (Result<YelpReservation, Error>)-> Void) {
         
-        if !reservation.isUserInfoValid {
-            print("UserInfo info is not valid")
+        if !reservation.isValidReservation {
+            print("Reservation values are not valid")
             return
         }
         
@@ -133,11 +134,11 @@ extension YelpApi {
                      date: reservation.date,
                      time: reservation.time,
                      uniqueId: reservation.uniqueId,
-                     holdId: reservation.holdId!,
+                     holdId: reservation.holdId! ,
                      firstName: reservation.firstName!,
                      lastName: reservation.lastName!,
                      email: reservation.email!,
-                     phone: reservation.phone!, completion: completion)
+                     phone: reservation.phone ?? "0", completion: completion)
     }
     
     public func reservations(businessId id: String,
@@ -150,31 +151,32 @@ extension YelpApi {
                              lastName: String,
                              email: String,
                              phone: String,
-                             completion: @escaping (Result<YelpHolds, Error>)-> Void ) {
+                             completion: @escaping (Result<YelpReservation, Error>)-> Void ) {
+        
         let path = "/v3/bookings/\(id)/reservations"
         let bodyParams = ["covers": "\(covers)",
-                            "date":date,
-                            "time": time,
-                            "unique_id" : uniqueId,
-                            "hold_id": holdId,
-                            "first_name":firstName,
-                            "last_name":lastName,
-                            "email":email,
-                            "phone":phone]
+            "date":date,
+            "time": time,
+            "unique_id" : uniqueId,
+            "hold_id": holdId,
+            "first_name":firstName,
+            "last_name":lastName,
+            "email":email,
+            "phone":phone]
         networkController?
             .urlComponentPath(path)
             .httpMethod(.post)
             .addValue("Content-Type", value: "application/x-www-form-urlencoded")
             .bodyParameters(bodyParams)
-            .responseDecodable(type: YelpHolds.self) { (result) in
-            switch result {
-            case .success(let model):
-                completion(.success(model))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+            .responseDecodable(type: YelpReservation.self) { (result) in
+                switch result {
+                case .success(let model):
+                    completion(.success(model))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
         }
-
+        
     }
     
     
@@ -184,10 +186,35 @@ extension YelpApi {
 //MARK: - ReservationStatus
 extension YelpApi {
     
+    public func reservationStatus(reservationId id: String, completion: @escaping (Result<YelpBusiness, Error>) -> Void) {
+        let path = "/v3/bookings/reservation/\(id)/status"
+        networkController?.urlComponentPath(path).responseDecodable(type: YelpBusiness.self) { (result) in
+            switch result {
+            case .success(let model):
+                completion(.success(model))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
 }
 
 //MARK: - ReservationCancel
 extension YelpApi {
+    
+    public func reservationCancel(reservationId id: String, completion: @escaping (Result<YelpBusiness, Error>) -> Void) {
+        let path = "/v3/bookings/reservation/\(id)/cancel"
+        networkController?.urlComponentPath(path).responseDecodable(type: YelpBusiness.self) { (result) in
+            switch result {
+            case .success(let model):
+                completion(.success(model))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
     
 }
 

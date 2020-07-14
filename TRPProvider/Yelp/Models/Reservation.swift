@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 public class Reservation {
     
-    private(set) var businessId: String
+    public var businessId: String
     public var covers: Int = 1
     public var date: String
     public var time: String
@@ -20,14 +20,25 @@ public class Reservation {
     public var firstName: String?
     public var lastName: String?
     public var email: String?
-    public var phone: String?
+    public var phone: String? = "5339271371"
 
-    public var isUserInfoValid: Bool {
-        return firstName != nil &&
-            lastName != nil &&
-            email != nil &&
-            phone != nil
+    public var isValidReservation: Bool {
+        if holdId == nil { print("HoldId is nil"); return false}
+        
+        if firstName == nil { print("Firstname is nil"); return false}
+        
+        if lastName == nil { print("LastName is nil"); return false }
+        
+        if email == nil { print("Email is nil"); return false }
+        
+        if phone == nil { print("phone is nil"); return false}
+        
+        if firstName == nil { print("Firstname is nil"); return false}
+        
+        
+        return true
     }
+    
     
     public init(businessId id: String, covers: Int = 1, date: String, time: String, uniqueId: String) {
         self.businessId = id

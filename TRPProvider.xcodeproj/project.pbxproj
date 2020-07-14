@@ -10,6 +10,18 @@
 		B2145EF924B348D9002F112A /* NetworkControllerWithComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */; };
 		B24B823724B727DF0059A4B9 /* GenericParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BB24AF7CA000A3117F /* GenericParser.swift */; };
 		B24B823A24B7452A0059A4B9 /* TRPUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24B823924B7452A0059A4B9 /* TRPUIKit.framework */; };
+		B252FC3624BD72620014B750 /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580EB024B494FC00A704FB /* ReservationViewController.swift */; };
+		B252FC3724BD727C0014B750 /* ReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580EB224B4956C00A704FB /* ReservationViewModel.swift */; };
+		B252FC3824BD72810014B750 /* ReservationUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26AA01224B613CA007A0755 /* ReservationUserInfoViewModel.swift */; };
+		B252FC3924BD72860014B750 /* ReservationUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26AA01024B613A8007A0755 /* ReservationUserInfoViewController.swift */; };
+		B252FC3A24BD72990014B750 /* ReservationExplainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26AA00A24B5DCE8007A0755 /* ReservationExplainCell.swift */; };
+		B252FC3B24BD729D0014B750 /* ReservationAlternativeHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580EC624B4A82900A704FB /* ReservationAlternativeHour.swift */; };
+		B252FC3C24BD72A20014B750 /* ReservationPeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580EC424B4A73F00A704FB /* ReservationPeopleCell.swift */; };
+		B252FC3D24BD72B60014B750 /* ReservationBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580EC024B49EA300A704FB /* ReservationBaseCell.swift */; };
+		B252FC3E24BD72C70014B750 /* ReservationDatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580EC224B49F0800A704FB /* ReservationDatePickerCell.swift */; };
+		B252FC3F24BD72D20014B750 /* ReservationAlternatviceHourCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26AA00C24B5E3ED007A0755 /* ReservationAlternatviceHourCollectionCell.swift */; };
+		B252FC4024BD72DA0014B750 /* ReservationUserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26AA01524B61582007A0755 /* ReservationUserInfoCell.swift */; };
+		B252FC4224BDC1450014B750 /* YelpReservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B252FC4124BDC1450014B750 /* YelpReservation.swift */; };
 		B256DB4824ADF4C600925A0B /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4724ADF4C600925A0B /* NetworkingTests.swift */; };
 		B256DB4B24ADFBBE00925A0B /* TRPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4A24ADFBBE00925A0B /* TRPProvider.swift */; };
 		B256DB4D24ADFBD300925A0B /* YelpApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4C24ADFBD300925A0B /* YelpApi.swift */; };
@@ -70,6 +82,7 @@
 /* Begin PBXFileReference section */
 		B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkControllerWithComponentTest.swift; sourceTree = "<group>"; };
 		B24B823924B7452A0059A4B9 /* TRPUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TRPUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B252FC4124BDC1450014B750 /* YelpReservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpReservation.swift; sourceTree = "<group>"; };
 		B256DB4724ADF4C600925A0B /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
 		B256DB4A24ADFBBE00925A0B /* TRPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRPProvider.swift; sourceTree = "<group>"; };
 		B256DB4C24ADFBD300925A0B /* YelpApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApi.swift; sourceTree = "<group>"; };
@@ -163,6 +176,7 @@
 				B2580E9124B4712200A704FB /* YelpHolds.swift */,
 				B25C832624B8AC89006167E4 /* Reservation.swift */,
 				B2D10DB324BC494F005394C3 /* YelpError.swift */,
+				B252FC4124BDC1450014B750 /* YelpReservation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -430,6 +444,7 @@
 				B2580EB124B494FC00A704FB /* ReservationViewController.swift in Sources */,
 				B2D10DB424BC494F005394C3 /* YelpError.swift in Sources */,
 				B2580EB324B4956C00A704FB /* ReservationViewModel.swift in Sources */,
+				B252FC4224BDC1450014B750 /* YelpReservation.swift in Sources */,
 				B27CC4BC24AF7CA000A3117F /* GenericParser.swift in Sources */,
 				B2580EC524B4A73F00A704FB /* ReservationPeopleCell.swift in Sources */,
 				B2D10DAD24BC4128005394C3 /* NetworkError.swift in Sources */,
@@ -457,9 +472,15 @@
 				B2D10DB524BC4975005394C3 /* YelpError.swift in Sources */,
 				B2580E9024B4620E00A704FB /* YelpOpenings.swift in Sources */,
 				B24B823724B727DF0059A4B9 /* GenericParser.swift in Sources */,
+				B252FC3724BD727C0014B750 /* ReservationViewModel.swift in Sources */,
+				B252FC3B24BD729D0014B750 /* ReservationAlternativeHour.swift in Sources */,
+				B252FC3A24BD72990014B750 /* ReservationExplainCell.swift in Sources */,
 				B2D10DB124BC479F005394C3 /* Reservation.swift in Sources */,
 				B2580E8024B4521300A704FB /* MockSession.swift in Sources */,
+				B252FC3624BD72620014B750 /* ReservationViewController.swift in Sources */,
 				B256DB5024ADFD7E00925A0B /* YelpApiTest.swift in Sources */,
+				B252FC3924BD72860014B750 /* ReservationUserInfoViewController.swift in Sources */,
+				B252FC3C24BD72A20014B750 /* ReservationPeopleCell.swift in Sources */,
 				B2145EF924B348D9002F112A /* NetworkControllerWithComponentTest.swift in Sources */,
 				B256DB4824ADF4C600925A0B /* NetworkingTests.swift in Sources */,
 				B2D10DBD24BC4CFE005394C3 /* YelpCoordinater.swift in Sources */,
@@ -468,10 +489,15 @@
 				B2580E8924B457C100A704FB /* FileReader.swift in Sources */,
 				B2D10DB024BC4790005394C3 /* NetworkResponse.swift in Sources */,
 				B2CD2E1224B31E2E00AFB8E2 /* NetworkControllerTest.swift in Sources */,
+				B252FC3824BD72810014B750 /* ReservationUserInfoViewModel.swift in Sources */,
+				B252FC4024BD72DA0014B750 /* ReservationUserInfoCell.swift in Sources */,
 				B2D10DB224BC47AE005394C3 /* HttpMethod.swift in Sources */,
+				B252FC3E24BD72C70014B750 /* ReservationDatePickerCell.swift in Sources */,
 				B2580E8124B452DE00A704FB /* NetworkController.swift in Sources */,
+				B252FC3F24BD72D20014B750 /* ReservationAlternatviceHourCollectionCell.swift in Sources */,
 				B2580E9324B4714F00A704FB /* YelpHolds.swift in Sources */,
 				B2BDAE9C24ADED3B0056D5E0 /* Networking.swift in Sources */,
+				B252FC3D24BD72B60014B750 /* ReservationBaseCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

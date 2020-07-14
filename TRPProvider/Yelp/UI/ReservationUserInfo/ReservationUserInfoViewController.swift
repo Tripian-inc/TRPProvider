@@ -8,6 +8,11 @@
 
 import UIKit
 import TRPUIKit
+
+public protocol ReservationUserInfoViewControllerDelegate: class {
+    func reservationUserInfoCompleted(_ viewController: UIViewController, reservation: Reservation, result: YelpReservation)
+}
+
 public class ReservationUserInfoViewController: UIViewController {
     
     private(set) var viewModel: ReservationUserInfoViewModel
@@ -25,7 +30,9 @@ public class ReservationUserInfoViewController: UIViewController {
         return btn
     }()
     
-    public init(viewModel: ReservationUserInfoViewModel = ReservationUserInfoViewModel()) {
+    public weak var delegate: ReservationUserInfoViewControllerDelegate?
+    
+    public init(viewModel: ReservationUserInfoViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -56,7 +63,7 @@ public class ReservationUserInfoViewController: UIViewController {
     }
     
     @objc func applyPressed() {
-        
+        viewModel.makeAReservation()
     }
     
 }
@@ -112,6 +119,14 @@ extension ReservationUserInfoViewController: UITableViewDataSource, UITableViewD
 
 extension ReservationUserInfoViewController: ReservationUserInfoViewModelDelegate {
     
+    
+    public func reservationUserInfoViewModelCompleted(reservation: Reservation, result: YelpReservation) {
+        delegate?.reservationUserInfoCompleted(self, reservation: reservation, result: result)
+    }
+    
+    public func reservationUserInfoViewModel(error: Error) {
+        TRPMessage(contentText: error.localizedDescription, type: .error).show()
+    }
     public func reservationUserInfoViewModel(showLoader: Bool) {
         if showLoader {
             loader?.show()

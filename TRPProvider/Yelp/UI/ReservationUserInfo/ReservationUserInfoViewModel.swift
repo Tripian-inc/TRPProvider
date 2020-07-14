@@ -15,6 +15,8 @@ struct ReservationUserInfoCellModel {
 
 public protocol ReservationUserInfoViewModelDelegate:class {
     func reservationUserInfoViewModel(showLoader: Bool)
+    func reservationUserInfoViewModel(error: Error)
+    func reservationUserInfoViewModelCompleted(reservation: Reservation, result: YelpReservation)
 }
 
 public class ReservationUserInfoViewModel {
@@ -32,17 +34,16 @@ public class ReservationUserInfoViewModel {
     var lastName: String?
     var email: String?
     var phone: String?
+    private(set) var reservation: Reservation?
     
-    
-    public init(userName: String? = nil,
-                lastName: String? = nil,
-                email: String? = nil,
-                phone: String? = nil) {
-        self.userName = userName
-        self.lastName = lastName
-        self.email = email
-        self.phone = phone
+    public init(reservation: Reservation) {
+        self.reservation = reservation
+        self.userName = reservation.firstName
+        self.lastName = reservation.lastName
+        self.email = reservation.email
+        self.phone = reservation.phone
     }
+   
     
     public func start() {
         createData()
@@ -61,5 +62,19 @@ public class ReservationUserInfoViewModel {
         return cellViewModels[indexPath.row]
     }
     
+    func makeAReservation() {
+        guard let reservation = reservation else {return}
+        delegate?.reservationUserInfoViewModel(showLoader: true)
+        YelpApi(isProduct: false).reservations(reservation: reservation) {[weak self] (result) in
+            self?.delegate?.reservationUserInfoViewModel(showLoader: false)
+            switch(result) {
+            case .success(let yelpModel):
+                self?.delegate?.reservationUserInfoViewModelCompleted(reservation: reservation, result: yelpModel)
+            case .failure(let error):
+                self?.delegate?.reservationUserInfoViewModel(error: error)
+                print("[ERROR] in UserInfoVM \(error.localizedDescription)")
+            }
+        }
+    }
     
 }
