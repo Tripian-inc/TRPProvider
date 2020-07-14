@@ -9,6 +9,11 @@
 import Foundation
 
 import UIKit
+public protocol YelpCoordinaterDelegate: class {
+    func yelpCoordinaterReservationCompleted(_ viewController: UIViewController, reservation: Reservation, result: YelpReservation)
+}
+
+
 public class YelpCoordinater {
     
     public var isProduct = false
@@ -17,6 +22,8 @@ public class YelpCoordinater {
     private var reservationViewController: ReservationViewController?
     private(set) var reservation: Reservation
     private(set) var hold: YelpHolds?
+    public weak var delegate: YelpCoordinaterDelegate?
+    
     
     public init(navigationController: UINavigationController,  reservation: Reservation) {
         self.navigationController = navigationController
@@ -63,9 +70,7 @@ extension YelpCoordinater: ReservationUserInfoViewControllerDelegate {
     }
     
     public func reservationUserInfoCompleted(_ viewController: UIViewController, reservation: Reservation, result: YelpReservation) {
-        print("------------------------------------")
-        print("Reservation \(reservation)")
-        print("Result \(result)")
+        delegate?.yelpCoordinaterReservationCompleted(viewController, reservation: reservation, result: result)
     }
     
 }
