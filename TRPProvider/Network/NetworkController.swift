@@ -98,8 +98,7 @@ class NetworkController {
             switch result {
             case .success(let model):
                 if let model = model {
-                    let yelpError = YelpNetworkError.yelpErrorMessage(message: model.error.errorDescription)
-                    
+                    let yelpError = YelpNetworkError(code: model.error.code, message: model.error.errorDescription)
                     completion(.failure(yelpError))
                 }else {
                     completion(.failure(mainError))

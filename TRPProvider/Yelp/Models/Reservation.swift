@@ -20,8 +20,12 @@ public class Reservation {
     public var firstName: String?
     public var lastName: String?
     public var email: String?
-    public var phone: String? = "5339271371"
-
+    public var phone: String?
+    public var poiId: Int?
+    public var poiName: String?
+    public var poiImage: String?
+    public var tripHash: String?
+    
     public var isValidReservation: Bool {
         if holdId == nil { print("HoldId is nil"); return false}
         
@@ -34,8 +38,7 @@ public class Reservation {
         if phone == nil { print("phone is nil"); return false}
         
         if firstName == nil { print("Firstname is nil"); return false}
-        
-        
+
         return true
     }
     

@@ -10,7 +10,7 @@ import Foundation
 
 import UIKit
 public protocol YelpCoordinaterDelegate: class {
-    func yelpCoordinaterReservationCompleted(_ viewController: UIViewController, reservation: Reservation, result: YelpReservation)
+    func yelpCoordinaterReservationCompleted(_ viewController: UIViewController, reservation: Reservation, business: YelpBusiness?, result: YelpReservation)
 }
 
 
@@ -23,6 +23,7 @@ public class YelpCoordinater {
     private(set) var reservation: Reservation
     private(set) var hold: YelpHolds?
     public weak var delegate: YelpCoordinaterDelegate?
+    public var yelpBusiness: YelpBusiness?
     
     
     public init(navigationController: UINavigationController,  reservation: Reservation) {
@@ -52,9 +53,10 @@ extension YelpCoordinater: ReservationViewControllerDelegate {
     }
     
     
-    public func reservationViewController(reservation: Reservation, hold: YelpHolds) {
+    public func reservationViewController(reservation: Reservation, hold: YelpHolds, business: YelpBusiness?) {
         self.reservation = reservation
         self.hold = hold
+        self.yelpBusiness = business
         openUserInfoVC(reservation: reservation)
     }
 }
@@ -70,7 +72,7 @@ extension YelpCoordinater: ReservationUserInfoViewControllerDelegate {
     }
     
     public func reservationUserInfoCompleted(_ viewController: UIViewController, reservation: Reservation, result: YelpReservation) {
-        delegate?.yelpCoordinaterReservationCompleted(viewController, reservation: reservation, result: result)
+        delegate?.yelpCoordinaterReservationCompleted(viewController, reservation: reservation, business: yelpBusiness, result: result)
     }
     
 }

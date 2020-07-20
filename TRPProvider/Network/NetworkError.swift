@@ -15,7 +15,27 @@ public enum NetworkError: String, Error {
 }
 
 public enum YelpNetworkError: Error {
-    case yelpErrorMessage(message: String)
+    case yelpErrorMessage(code: String, message: String)
+    case reservationCanceled
+    
+    init(code: String, message: String) {
+        switch code {
+        case "RESERVATION_CANCELED": self = .reservationCanceled
+        default: self = .yelpErrorMessage(code: code, message: message)
+        }
+    }
+    
+}
+
+extension YelpNetworkError: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.yelpErrorMessage,.yelpErrorMessage): return true
+        case (.reservationCanceled,.reservationCanceled): return true
+        default:
+            return false
+        }
+    }
 }
 
 
@@ -23,15 +43,19 @@ extension YelpNetworkError : LocalizedError{
     
     public var localizedDescription: String? {
         switch self {
-        case .yelpErrorMessage(let message):
+        case .yelpErrorMessage(_, let message):
             return message
+        case .reservationCanceled:
+            return "This reservation has been canceled."
         }
     }
     
     public var errorDescription: String? {
         switch self {
-        case .yelpErrorMessage(let message):
+        case .yelpErrorMessage(_, let message):
             return message
+        case .reservationCanceled:
+            return "This reservation has been canceled."
         }
     }
     

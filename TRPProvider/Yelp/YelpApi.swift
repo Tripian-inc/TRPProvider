@@ -103,6 +103,9 @@ extension YelpApi {
                      completion: @escaping (Result<YelpHolds, Error>)-> Void ) {
         let path = "/v3/bookings/\(id)/holds"
         let bodyParams = ["covers": "\(covers)", "date":date, "time": time, "unique_id" : uniqueId]
+        print("")
+        print("-----")
+        print("HOLD \(bodyParams)")
         networkController?
             .urlComponentPath(path)
             .httpMethod(.post)
@@ -131,6 +134,7 @@ extension YelpApi {
         }
         
         reservations(businessId: reservation.businessId,
+                     covers: reservation.covers,
                      date: reservation.date,
                      time: reservation.time,
                      uniqueId: reservation.uniqueId,
@@ -142,7 +146,7 @@ extension YelpApi {
     }
     
     public func reservations(businessId id: String,
-                             covers: Int = 1,
+                             covers: Int,
                              date: String,
                              time: String,
                              uniqueId: String,
@@ -163,6 +167,9 @@ extension YelpApi {
             "last_name":lastName,
             "email":email,
             "phone":phone]
+        print("")
+        print("-----")
+        print("RESERVATİON \(bodyParams)")
         networkController?
             .urlComponentPath(path)
             .httpMethod(.post)
@@ -186,9 +193,9 @@ extension YelpApi {
 //MARK: - ReservationStatus
 extension YelpApi {
     
-    public func reservationStatus(reservationId id: String, completion: @escaping (Result<YelpBusiness, Error>) -> Void) {
+    public func reservationStatus(reservationId id: String, completion: @escaping (Result<YelpStatus, Error>) -> Void) {
         let path = "/v3/bookings/reservation/\(id)/status"
-        networkController?.urlComponentPath(path).responseDecodable(type: YelpBusiness.self) { (result) in
+        networkController?.urlComponentPath(path).responseDecodable(type: YelpStatus.self) { (result) in
             switch result {
             case .success(let model):
                 completion(.success(model))

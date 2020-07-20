@@ -19,7 +19,8 @@ public protocol ReservationViewModelDelegate: class {
     func reservationVM(error: Error)
     func reservationVMChangeButtonStatus()
     func reservationVMAlternativeHoursLoaded()
-    func reservationVMHold(_ hold: YelpHolds, reservation: Reservation)
+    func reservationVMHold(_ hold: YelpHolds, reservation: Reservation, business: YelpBusiness?)
+    
 }
 
 
@@ -66,6 +67,9 @@ public class ReservationViewModel {
         didSet {
             delegate?.reservationVMChangeButtonStatus()
         }
+    }
+    var title: String? {
+        return reservation.poiName 
     }
     private(set) var reservation: Reservation
     public var isYelpApiProduct = true
@@ -159,7 +163,7 @@ extension ReservationViewModel {
             case .success(let yelpHoldModel):
                 reservation.holdId = yelpHoldModel.holdID
                 self?.reservation = reservation
-                self?.delegate?.reservationVMHold(yelpHoldModel, reservation: reservation)
+                self?.delegate?.reservationVMHold(yelpHoldModel, reservation: reservation, business: self?.model)
             case .failure(let error):
                 self?.delegate?.reservationVM(error: error)
             }

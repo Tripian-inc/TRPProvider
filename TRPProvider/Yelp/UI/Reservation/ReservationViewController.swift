@@ -9,10 +9,11 @@
 import UIKit
 import TRPUIKit
 public protocol ReservationViewControllerDelegate: class {
-    func reservationViewController(reservation: Reservation, hold: YelpHolds)
+    func reservationViewController(reservation: Reservation, hold: YelpHolds, business: YelpBusiness?)
 }
 
 public class ReservationViewController: UIViewController {
+    
     
     private(set) var viewModel: ReservationViewModel
     private var loader: TRPLoaderView?
@@ -27,7 +28,7 @@ public class ReservationViewController: UIViewController {
         btn.layer.cornerRadius = 6
         return btn
     }()
-    
+    private var peopleLimit = 7
     public weak var delegate: ReservationViewControllerDelegate?
     
     public init(viewModel: ReservationViewModel) {
@@ -41,14 +42,16 @@ public class ReservationViewController: UIViewController {
     
     public override func viewDidLoad() {
         view.backgroundColor = UIColor.white
+        title = viewModel.title
         loader = TRPLoaderView(superView: self.view)
         setupButtonUI()
         setupTableView()
+        
+        if let image = UIImage(named: "close_btn_icon", in: Bundle.init(for: type(of: self)), compatibleWith: nil) {
+            navigationItem.leftBarButtonItem =  UIBarButtonItem(image: image, style: UIBarButtonItem.Style.done, target: self, action: #selector(closedPressed))
+        }
     }
     
-    public override func viewDidAppear(_ animated: Bool) {
-        
-    }
     
     private func setupButtonUI() {
         view.addSubview(continueButton)
@@ -78,6 +81,10 @@ public class ReservationViewController: UIViewController {
                 alternativeCell.setSelectedCellCenter()
             }
         }
+    }
+    
+    @objc func closedPressed() {
+        dismiss(animated: true, completion: nil)
     }
     
 }
@@ -151,10 +158,11 @@ extension ReservationViewController {
                 cell.inputText.text = date
                 self?.viewModel.findATable()
             }
-            
             cell.inputText.addTarget(self, action: #selector(dateEditingEndingEnd), for: .editingDidEnd)
+            cell.inputText.isUserInteractionEnabled = true
         }else {
             cell.inputText.text = viewModel.time
+            cell.inputText.isUserInteractionEnabled = false
         }
         return cell
     }
@@ -163,6 +171,7 @@ extension ReservationViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "people", for: indexPath) as! ReservationPeople
         cell.titleLabel.text = model.title
         cell.inputText.text = "\(viewModel.people)"
+        cell.inputText.addTarget(self, action: #selector(peopleCountInputText(sender:)), for: .editingChanged)
         cell.selectionStyle = .none
         return cell
     }
@@ -197,6 +206,17 @@ extension ReservationViewController {
             
         }
     }
+    
+    @objc func peopleCountInputText( sender: UITextField) {
+        if let inputText = sender.text, let value = Int(inputText) {
+            var inputValue = value
+            if value > peopleLimit {
+                inputValue = peopleLimit
+            }
+            sender.text = "\(inputValue)"
+            viewModel.people = inputValue
+        }
+    }
 }
 
 extension ReservationViewController: ReservationViewModelDelegate {
@@ -229,7 +249,7 @@ extension ReservationViewController: ReservationViewModelDelegate {
         TRPMessage(contentText: error.localizedDescription, type: .error).show()
     }
     
-    public func reservationVMHold(_ hold: YelpHolds, reservation: Reservation) {
-        delegate?.reservationViewController(reservation: reservation, hold: hold)
+    public func reservationVMHold(_ hold: YelpHolds, reservation: Reservation,business: YelpBusiness?) {
+        delegate?.reservationViewController(reservation: reservation, hold: hold, business: business)
     }
 }
