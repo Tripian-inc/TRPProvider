@@ -78,13 +78,7 @@ class NetworkController {
     
     private func readableJson(_ data: Data) {
         let result = String(data: data, encoding: .utf8)
-        print(" ")
-        print("-----------")
-        print(" ")
-        print(result!)
-        print(" ")
-        print("!!!!!!!!!!!!!!!")
-        print(" ")
+        print("[Error] JsonDecoder \(result)")
     }
     
     

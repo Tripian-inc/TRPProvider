@@ -170,9 +170,7 @@ extension ReservationViewModel {
         }
     }
     
-    private func reservationStatus(reservationId: String) {
-        
-    }
+    
 }
 
 //MARK: - MODEL TO UI

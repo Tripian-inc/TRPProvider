@@ -103,9 +103,6 @@ extension YelpApi {
                      completion: @escaping (Result<YelpHolds, Error>)-> Void ) {
         let path = "/v3/bookings/\(id)/holds"
         let bodyParams = ["covers": "\(covers)", "date":date, "time": time, "unique_id" : uniqueId]
-        print("")
-        print("-----")
-        print("HOLD \(bodyParams)")
         networkController?
             .urlComponentPath(path)
             .httpMethod(.post)
