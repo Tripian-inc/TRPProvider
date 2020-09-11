@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct GYGTour: Codable {
+public struct GYGTour: Codable {
     
     let tourID: Int
     let tourCode: String
@@ -17,12 +17,12 @@ struct GYGTour: Codable {
     let overallRating: Double
     let numberOfRatings: Int
     let pictures: [GYGPicture]
-    let coordinates: GYGCoordinates
-    let price: GYGPrice
+    let coordinates: GYGCoordinates?
+    let price: GYGPrice?
     let categories: [GYGCategory]
     let locations: [GYGLocation]
     let url: String
-    let durations: [GYGDuration]
+    let durations: [GYGDuration]?
 
     enum CodingKeys: String, CodingKey {
         case tourID = "tour_id"
@@ -54,14 +54,11 @@ struct GYGCoordinates: Codable {
 
 // MARK: - Duration
 struct GYGDuration: Codable {
-    let duration: Double
-    let unit: GYGUnit
+    let duration: Double?
+    let unit: String?
 }
 
-enum GYGUnit: String, Codable {
-    case day = "day"
-    case hour = "hour"
-}
+
 
 // MARK: - Location
 struct GYGLocation: Codable {

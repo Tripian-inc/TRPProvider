@@ -47,6 +47,7 @@
 		B2580EC724B4A82900A704FB /* ReservationAlternativeHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580EC624B4A82900A704FB /* ReservationAlternativeHour.swift */; };
 		B25A7842250B6C1500F9395C /* GetYourGuideApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25A7841250B6C1500F9395C /* GetYourGuideApi.swift */; };
 		B25A7845250B6C3800F9395C /* GYGTour.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25A7844250B6C3800F9395C /* GYGTour.swift */; };
+		B25A7847250B977200F9395C /* GYGGenericParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25A7846250B977200F9395C /* GYGGenericParser.swift */; };
 		B25C832724B8AC89006167E4 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25C832624B8AC89006167E4 /* Reservation.swift */; };
 		B26AA00B24B5DCE8007A0755 /* ReservationExplainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26AA00A24B5DCE8007A0755 /* ReservationExplainCell.swift */; };
 		B26AA00D24B5E3ED007A0755 /* ReservationAlternatviceHourCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26AA00C24B5E3ED007A0755 /* ReservationAlternatviceHourCollectionCell.swift */; };
@@ -108,6 +109,7 @@
 		B2580EC624B4A82900A704FB /* ReservationAlternativeHour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationAlternativeHour.swift; sourceTree = "<group>"; };
 		B25A7841250B6C1500F9395C /* GetYourGuideApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetYourGuideApi.swift; sourceTree = "<group>"; };
 		B25A7844250B6C3800F9395C /* GYGTour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGTour.swift; sourceTree = "<group>"; };
+		B25A7846250B977200F9395C /* GYGGenericParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGGenericParser.swift; sourceTree = "<group>"; };
 		B25C832624B8AC89006167E4 /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
 		B26AA00A24B5DCE8007A0755 /* ReservationExplainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationExplainCell.swift; sourceTree = "<group>"; };
 		B26AA00C24B5E3ED007A0755 /* ReservationAlternatviceHourCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationAlternatviceHourCollectionCell.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				B25A7844250B6C3800F9395C /* GYGTour.swift */,
+				B25A7846250B977200F9395C /* GYGGenericParser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				B2580EC524B4A73F00A704FB /* ReservationPeopleCell.swift in Sources */,
 				B2D10DAD24BC4128005394C3 /* NetworkError.swift in Sources */,
 				B2D10DAF24BC4295005394C3 /* NetworkResponse.swift in Sources */,
+				B25A7847250B977200F9395C /* GYGGenericParser.swift in Sources */,
 				B252FC4524BDE1020014B750 /* String+Extensions.swift in Sources */,
 				B256DB4B24ADFBBE00925A0B /* TRPProvider.swift in Sources */,
 				B25A7845250B6C3800F9395C /* GYGTour.swift in Sources */,
