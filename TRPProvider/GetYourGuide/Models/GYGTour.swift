@@ -9,20 +9,20 @@
 import Foundation
 public struct GYGTour: Codable {
     
-    let tourID: Int
-    let tourCode: String
-    let condLanguage: [String]
-    let title, abstract: String
-    let bestseller, certified: Bool
-    let overallRating: Double
-    let numberOfRatings: Int
-    let pictures: [GYGPicture]
-    let coordinates: GYGCoordinates?
-    let price: GYGPrice?
-    let categories: [GYGCategory]
-    let locations: [GYGLocation]
-    let url: String
-    let durations: [GYGDuration]?
+    public let tourID: Int
+    public let tourCode: String
+    public let condLanguage: [String]
+    public let title, abstract: String
+    public let bestseller, certified: Bool
+    public let overallRating: Double
+    public let numberOfRatings: Int
+    public let pictures: [GYGPicture]
+    public let coordinates: GYGCoordinates?
+    public let price: GYGPrice?
+    public let categories: [GYGCategory]
+    public let locations: [GYGLocation]
+    public let url: String
+    public let durations: [GYGDuration]?
 
     enum CodingKeys: String, CodingKey {
         case tourID = "tour_id"
@@ -35,39 +35,30 @@ public struct GYGTour: Codable {
     }
 }
 
-struct GYGCategory: Codable {
-    let categoryID: Int
-    let name: String?
-    let parentID: Int?
 
-    enum CodingKeys: String, CodingKey {
-        case categoryID = "category_id"
-        case name
-        case parentID = "parent_id"
-    }
-}
 
 // MARK: - Coordinates
-struct GYGCoordinates: Codable {
-    let lat, long: Double
+public struct GYGCoordinates: Codable {
+    public let lat, long: Double
 }
 
 // MARK: - Duration
-struct GYGDuration: Codable {
-    let duration: Double?
-    let unit: String?
+public struct GYGDuration: Codable {
+    public let duration: Double?
+    public let unit: String?
 }
 
 
 
 // MARK: - Location
-struct GYGLocation: Codable {
-    let locationID: Int
-    let type: String
-    let name, englishName, city: String
-    let country: String
-    let coordinates: GYGCoordinates
-    let viewport: GYGViewport
+public struct GYGLocation: Codable {
+    public let locationID: Int
+    public let type: String
+    public let name, englishName: String
+    public let city: String?
+    public let country: String
+    public let coordinates: GYGCoordinates
+    public let viewport: GYGViewport
 
     enum CodingKeys: String, CodingKey {
         case locationID = "location_id"
@@ -79,8 +70,8 @@ struct GYGLocation: Codable {
 
 
 // MARK: - Viewport
-struct GYGViewport: Codable {
-    let swLat, swLong, neLat, neLong: Double
+public struct GYGViewport: Codable {
+    public let swLat, swLong, neLat, neLong: Double
 
     enum CodingKeys: String, CodingKey {
         case swLat = "sw_lat"
@@ -91,10 +82,10 @@ struct GYGViewport: Codable {
 }
 
 // MARK: - Picture
-struct GYGPicture: Codable {
-    let id: Int
-    let url, sslURL: String
-    let verified: Bool
+public struct GYGPicture: Codable {
+    public let id: Int
+    public let url, sslURL: String
+    public let verified: Bool
 
     enum CodingKeys: String, CodingKey {
         case id, url
@@ -104,9 +95,9 @@ struct GYGPicture: Codable {
 }
 
 // MARK: - Price
-struct GYGPrice: Codable {
-    let values: GYGValues
-    let priceDescription: String
+public struct GYGPrice: Codable {
+    public let values: GYGValues
+    public let priceDescription: String
 
     enum CodingKeys: String, CodingKey {
         case values
@@ -116,15 +107,15 @@ struct GYGPrice: Codable {
 
 
 // MARK: - Values
-struct GYGValues: Codable {
-    let amount: Double
-    let special: GYGSpecial?
+public struct GYGValues: Codable {
+    public let amount: Double
+    public let special: GYGSpecial?
 }
 
 // MARK: - Special
-struct GYGSpecial: Codable {
-    let originalPrice: Double
-    let savings: Int
+public struct GYGSpecial: Codable {
+    public let originalPrice: Double
+    public let savings: Int
 
     enum CodingKeys: String, CodingKey {
         case originalPrice = "original_price"

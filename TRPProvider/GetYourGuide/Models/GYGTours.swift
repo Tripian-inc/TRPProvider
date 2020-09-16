@@ -1,27 +1,23 @@
 //
-//  GYGGenericParser.swift
+//  GYGTours.swift
 //  TRPProvider
 //
-//  Created by Evren Yaşar on 11.09.2020.
+//  Created by Evren Yaşar on 14.09.2020.
 //  Copyright © 2020 Tripian Inc. All rights reserved.
 //
 
 import Foundation
-internal class GYGGenericDataParser<T: Decodable>: Decodable {
+internal class GYGTours: Decodable {
     
-    public var data: T?
+    public var tours: [GYGTour]?
     
     private enum CodingKeys: String, CodingKey {
-        case data
+        case tours
     }
     
     required public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.data = try values.decodeIfPresent(T.self, forKey: .data)
-        
+        self.tours = try values.decodeIfPresent([GYGTour].self, forKey: .tours)
     }
     
 }
-
-
-

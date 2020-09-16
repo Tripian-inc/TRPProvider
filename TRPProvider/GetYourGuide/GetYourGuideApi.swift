@@ -16,7 +16,6 @@ public class GetYourGuideApi {
     private var networkController: NetworkController?
     
     
-    
     public init(network: Networking = Networking()) {
         self.network = network
         networkController = createNetworkController(network: network)
@@ -29,25 +28,24 @@ public class GetYourGuideApi {
         return NetworkController(network: network)
             .urlComponent(urlComponent)
             .addValue("X-ACCESS-TOKEN", value: apiKey)
-            
     }
     
 }
 
 
-//MARK: - Business
+//MARK: - Tours
 extension GetYourGuideApi {
     
     
     public func tours(cityName: String,
-                      cagetoryIds: [Int]? = [],
+                      categoryIds: [Int]? = [],
                       preformatted: String = "teaser",
                       language: String = "en",
                       currency: String = "usd",
                       limit: Int = 100,
                       completion: @escaping (Result<[GYGTour], Error>) -> Void) {
         
-        //let path = "/1/tours?cnt_language=\(language)&currency=\(currency)&q=\(cityName)&preformatted=\(preformatted)&limit=\(limit)&categoryIds=\(cagetoryIds ?? [])"
+        
         let path = "/1/tours"
         var params = [String: String]()
         params["cnt_language"] = "\(language)"
@@ -55,13 +53,42 @@ extension GetYourGuideApi {
         params["q"] = "\(cityName)"
         params["preformatted"] = "\(preformatted)"
         params["limit"] = "\(limit)"
-        //params["categoryIds"] = "\(cagetoryIds ?? "")"
+        if let category = categoryIds {
+            let converted = category.map{"\($0)"}
+            params["category[]="] = converted.joined(separator: ",")
+        }
         
-        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericData.self) { (result) in
+        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGTours>.self) { (result) in
             switch result {
             case .success(let model):
-                
                 completion(.success(model.data?.tours ?? []))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
+    
+    public func tour(id: Int,
+                    preformatted: String = "full",
+                    language: String = "en",
+                    currency: String = "usd",
+                    completion: @escaping (Result<GYGTour, Error>) -> Void) {
+        let path = "/1/tours/\(id)"
+        var params = [String: String]()
+        params["cnt_language"] = "\(language)"
+        params["currency"] = "\(currency)"
+        params["preformatted"] = "\(preformatted)"
+        
+        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGTours>.self) { (result) in
+            switch result {
+            case .success(let model):
+                if let tour = model.data?.tours?.first {
+                    completion(.success(tour))
+                }else {
+                    print("Error tour is not found")
+                }
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -70,3 +97,56 @@ extension GetYourGuideApi {
     
 }
 
+//MARK: - Category
+extension GetYourGuideApi {
+    
+    public func categories(language: String = "en",
+                           currency: String = "usd",
+                           limit: Int? = nil,
+                           completion: @escaping (Result<[GYGCategory], Error>) -> Void) {
+
+        let path = "/1/categories"
+        var params = [String: String]()
+        params["cnt_language"] = "\(language)"
+        params["currency"] = "\(currency)"
+        
+        if let limit = limit {
+            params["limit"] = "\(limit)"
+        }
+        
+        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGCategories>.self) { (result) in
+            switch result {
+            case .success(let model):
+                completion(.success(model.data?.categories ?? []))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
+    public func category(id: Int,
+                         language: String = "en",
+                           currency: String = "usd",
+                           limit: Int? = nil,
+                           completion: @escaping (Result<[GYGCategory], Error>) -> Void) {
+
+        let path = "/1/categories/\(id)"
+        var params = [String: String]()
+        params["cnt_language"] = "\(language)"
+        params["currency"] = "\(currency)"
+        
+        if let limit = limit {
+            params["limit"] = "\(limit)"
+        }
+        
+        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGCategories>.self) { (result) in
+            switch result {
+            case .success(let model):
+                completion(.success(model.data?.categories ?? []))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+}

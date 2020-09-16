@@ -54,6 +54,10 @@
 		B26AA01124B613A8007A0755 /* ReservationUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26AA01024B613A8007A0755 /* ReservationUserInfoViewController.swift */; };
 		B26AA01324B613CA007A0755 /* ReservationUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26AA01224B613CA007A0755 /* ReservationUserInfoViewModel.swift */; };
 		B26AA01624B61582007A0755 /* ReservationUserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26AA01524B61582007A0755 /* ReservationUserInfoCell.swift */; };
+		B276F1AD250F8C4500AC2360 /* GYGTours.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276F1AC250F8C4500AC2360 /* GYGTours.swift */; };
+		B276F1AF250FB66F00AC2360 /* GYGCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276F1AE250FB66F00AC2360 /* GYGCategory.swift */; };
+		B276F1B1250FB6D000AC2360 /* GYGCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276F1B0250FB6D000AC2360 /* GYGCategories.swift */; };
+		B276F1B3250FB7FF00AC2360 /* GYGCatalogCategoryIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276F1B2250FB7FF00AC2360 /* GYGCatalogCategoryIds.swift */; };
 		B27CC4BC24AF7CA000A3117F /* GenericParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BB24AF7CA000A3117F /* GenericParser.swift */; };
 		B27CC4BE24AFA0E300A3117F /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BD24AFA0E300A3117F /* NetworkController.swift */; };
 		B297DC5524C5B24D00540788 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B297DC5424C5B24D00540788 /* Assets.xcassets */; };
@@ -116,6 +120,10 @@
 		B26AA01024B613A8007A0755 /* ReservationUserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationUserInfoViewController.swift; sourceTree = "<group>"; };
 		B26AA01224B613CA007A0755 /* ReservationUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationUserInfoViewModel.swift; sourceTree = "<group>"; };
 		B26AA01524B61582007A0755 /* ReservationUserInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationUserInfoCell.swift; sourceTree = "<group>"; };
+		B276F1AC250F8C4500AC2360 /* GYGTours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGTours.swift; sourceTree = "<group>"; };
+		B276F1AE250FB66F00AC2360 /* GYGCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGCategory.swift; sourceTree = "<group>"; };
+		B276F1B0250FB6D000AC2360 /* GYGCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGCategories.swift; sourceTree = "<group>"; };
+		B276F1B2250FB7FF00AC2360 /* GYGCatalogCategoryIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGCatalogCategoryIds.swift; sourceTree = "<group>"; };
 		B27CC4BB24AF7CA000A3117F /* GenericParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericParser.swift; sourceTree = "<group>"; };
 		B27CC4BD24AFA0E300A3117F /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		B297DC5424C5B24D00540788 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -281,8 +289,12 @@
 		B25A7843250B6C2000F9395C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B25A7844250B6C3800F9395C /* GYGTour.swift */,
 				B25A7846250B977200F9395C /* GYGGenericParser.swift */,
+				B25A7844250B6C3800F9395C /* GYGTour.swift */,
+				B276F1AC250F8C4500AC2360 /* GYGTours.swift */,
+				B276F1AE250FB66F00AC2360 /* GYGCategory.swift */,
+				B276F1B0250FB6D000AC2360 /* GYGCategories.swift */,
+				B276F1B2250FB7FF00AC2360 /* GYGCatalogCategoryIds.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -491,7 +503,10 @@
 				B252FC4224BDC1450014B750 /* YelpReservation.swift in Sources */,
 				B297DC5B24C5E8DB00540788 /* YelpStatus.swift in Sources */,
 				B27CC4BC24AF7CA000A3117F /* GenericParser.swift in Sources */,
+				B276F1B3250FB7FF00AC2360 /* GYGCatalogCategoryIds.swift in Sources */,
 				B2580EC524B4A73F00A704FB /* ReservationPeopleCell.swift in Sources */,
+				B276F1B1250FB6D000AC2360 /* GYGCategories.swift in Sources */,
+				B276F1AD250F8C4500AC2360 /* GYGTours.swift in Sources */,
 				B2D10DAD24BC4128005394C3 /* NetworkError.swift in Sources */,
 				B2D10DAF24BC4295005394C3 /* NetworkResponse.swift in Sources */,
 				B25A7847250B977200F9395C /* GYGGenericParser.swift in Sources */,
@@ -505,6 +520,7 @@
 				B27CC4BE24AFA0E300A3117F /* NetworkController.swift in Sources */,
 				B26AA01624B61582007A0755 /* ReservationUserInfoCell.swift in Sources */,
 				B2580E9224B4712200A704FB /* YelpHolds.swift in Sources */,
+				B276F1AF250FB66F00AC2360 /* GYGCategory.swift in Sources */,
 				B2580EC124B49EA300A704FB /* ReservationBaseCell.swift in Sources */,
 				B2580EC724B4A82900A704FB /* ReservationAlternativeHour.swift in Sources */,
 				B256DB5624AE220E00925A0B /* YelpOpenings.swift in Sources */,
