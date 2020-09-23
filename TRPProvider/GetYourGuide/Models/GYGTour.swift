@@ -23,7 +23,11 @@ public struct GYGTour: Codable {
     public let locations: [GYGLocation]
     public let url: String
     public let durations: [GYGDuration]?
-
+    public let description: String?
+    public let inclusions:  String?
+    public let exclusions:  String?
+    public let highlights:  [String]?
+    
     enum CodingKeys: String, CodingKey {
         case tourID = "tour_id"
         case tourCode = "tour_code"
@@ -31,7 +35,7 @@ public struct GYGTour: Codable {
         case title, abstract, bestseller, certified
         case overallRating = "overall_rating"
         case numberOfRatings = "number_of_ratings"
-        case pictures, coordinates, price, categories, locations, url, durations
+        case pictures, coordinates, price, categories, locations, url, durations, description,inclusions, exclusions, highlights
     }
 }
 

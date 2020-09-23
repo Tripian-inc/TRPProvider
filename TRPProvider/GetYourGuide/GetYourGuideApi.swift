@@ -150,3 +150,38 @@ extension GetYourGuideApi {
         }
     }
 }
+
+
+//MARK: - Category
+extension GetYourGuideApi {
+    
+    public func reviews(tourId:Int,
+                        language: String = "en",
+                           currency: String = "usd",
+                           limit: Int? = nil,
+                           completion: @escaping (Result<GYGReviews, Error>) -> Void) {
+
+        let path = "/1/reviews/tour/\(tourId)"
+        var params = [String: String]()
+        params["cnt_language"] = "\(language)"
+        params["currency"] = "\(currency)"
+        
+        if let limit = limit {
+            params["limit"] = "\(limit)"
+        }
+        
+        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGToursParser>.self) { (result) in
+            switch result {
+            case .success(let model):
+                
+                if model.data?.reviews != nil {
+                    completion(.success(model.data!.reviews!))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+
+}
