@@ -36,10 +36,10 @@ public class GetYourGuideApi {
 //MARK: - Tours
 extension GetYourGuideApi {
     
-    
+    //preformatted: String = "teaser",
     public func tours(cityName: String,
                       categoryIds: [Int]? = [],
-                      preformatted: String = "teaser",
+                      preformatted: String = "full",
                       language: String = "en",
                       currency: String = "usd",
                       limit: Int = 100,
@@ -52,10 +52,11 @@ extension GetYourGuideApi {
         params["currency"] = "\(currency)"
         params["q"] = "\(cityName)"
         params["preformatted"] = "\(preformatted)"
+        
         params["limit"] = "\(limit)"
         if let category = categoryIds {
             let converted = category.map{"\($0)"}
-            params["category[]="] = converted.joined(separator: ",")
+            params["categories"] = converted.joined(separator: ",")
         }
         
         networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGTours>.self) { (result) in
@@ -158,6 +159,8 @@ extension GetYourGuideApi {
     public func reviews(tourId:Int,
                         language: String = "en",
                            currency: String = "usd",
+                           sortfield: GYGSortField? = nil,
+                           sortDirection: GYGSortDirection? = nil,
                            limit: Int? = nil,
                            completion: @escaping (Result<GYGReviews, Error>) -> Void) {
 
@@ -166,9 +169,18 @@ extension GetYourGuideApi {
         params["cnt_language"] = "\(language)"
         params["currency"] = "\(currency)"
         
+        if let sortField = sortfield {
+            params["sortfield"] = sortField.rawValue
+        }
+        
+        if let sortDirection = sortDirection {
+            params["sortdirection"] = sortDirection.rawValue
+        }
+        
         if let limit = limit {
             params["limit"] = "\(limit)"
         }
+        
         
         networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGToursParser>.self) { (result) in
             switch result {
@@ -184,4 +196,16 @@ extension GetYourGuideApi {
     }
     
 
+}
+
+public enum GYGSortField: String {
+    case popularity = "popularity"
+    case price = "price"
+    case rating = "rating"
+    case duration = "duration"
+}
+
+public enum GYGSortDirection: String {
+    case asc = "ASC"
+    case desc = "DESC"
 }

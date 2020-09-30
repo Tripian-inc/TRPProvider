@@ -27,6 +27,8 @@ public struct GYGTour: Codable {
     public let inclusions:  String?
     public let exclusions:  String?
     public let highlights:  [String]?
+    public let cancellationText: String?
+    
     
     enum CodingKeys: String, CodingKey {
         case tourID = "tour_id"
@@ -36,6 +38,7 @@ public struct GYGTour: Codable {
         case overallRating = "overall_rating"
         case numberOfRatings = "number_of_ratings"
         case pictures, coordinates, price, categories, locations, url, durations, description,inclusions, exclusions, highlights
+        case cancellationText = "cancellation_policy_text"
     }
 }
 
