@@ -19,14 +19,3 @@ public struct GYGReviews: Codable {
 
 
 
-
-internal class GYGToursParser: Decodable {
-    
-    public var reviews: GYGReviews?
-    
-    private enum CodingKeys: String, CodingKey {
-        case reviews
-    }
-    
-}
-
