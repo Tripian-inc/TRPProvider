@@ -19,18 +19,18 @@ internal class GYGToursOptionParser: Decodable {
 
 
 
-struct GYGTourOption: Codable {
-    let optionID, tourID: Int
-    let title, meetingPoint, dropOff: String
-    let duration: Int
-    let durationUnit: String
-    let condLanguage: GYGCondLanguage
-    let bookingParameter: [GYGBookingParameter]
-    let services: [String: Bool]
-    let coordinateType: String
-    let coordinates: GYGCoordinates
-    let price: GYGPrice
-    let freeSale: Bool
+public struct GYGTourOption: Codable {
+    public let optionID, tourID: Int
+    public let title, meetingPoint, dropOff: String
+    public let duration: Int
+    public let durationUnit: String
+    public let condLanguage: GYGCondLanguage
+    public let bookingParameter: [GYGBookingParameter]
+    public let services: [String: Bool]
+    public let coordinateType: String
+    public let coordinates: GYGCoordinates
+    public let price: GYGPrice
+    public let freeSale: Bool
 
     enum CodingKeys: String, CodingKey {
         case optionID = "option_id"
@@ -50,10 +50,10 @@ struct GYGTourOption: Codable {
 }
 
 // MARK: - BookingParameter
-struct GYGBookingParameter: Codable {
-    let name: String
-    let mandatory: Bool
-    let description: String?
+public struct GYGBookingParameter: Codable {
+    public let name: String
+    public let mandatory: Bool
+    public let description: String?
 
     enum CodingKeys: String, CodingKey {
         case name, mandatory
@@ -61,9 +61,9 @@ struct GYGBookingParameter: Codable {
     }
 }
 
-struct GYGCondLanguage: Codable {
-    let languageAudio: [String]
-    let languageBooklet, languageLive: [String]
+public struct GYGCondLanguage: Codable {
+    public let languageAudio: [String]
+    public let languageBooklet, languageLive: [String]
 
     enum CodingKeys: String, CodingKey {
         case languageAudio = "language_audio"

@@ -140,18 +140,18 @@ extension GetYourGuideApi {
     public func tourOptions(tourId id: Int,
                                    language: String = "en",
                                    currency: String = "usd",
-                                   completion: @escaping (Result<[GYGAvailability], Error>) -> Void) {
+                                   completion: @escaping (Result<[GYGTourOption], Error>) -> Void) {
         let path = "/1/tours/\(id)/options"
         var params = [String: String]()
         params["cnt_language"] = "\(language)"
         params["currency"] = "\(currency)"
         
-        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGAvailabilities>.self) { (result) in
+        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGToursOptionParser>.self) { (result) in
             switch result {
             case .success(let model):
                 
                 print("MODEL \(model)")
-                completion(.success(model.data?.availabilities ?? []))
+                completion(.success(model.data?.options ?? []))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -263,39 +263,21 @@ extension GetYourGuideApi {
 
 
 extension GetYourGuideApi {
-    public func options(id:Int,
-                        language: String = "en",
-                        currency: String = "usd",
-                        sortfield: GYGSortField? = nil,
-                        sortDirection: GYGSortDirection? = nil,
-                        limit: Int? = nil,
-                        completion: @escaping (Result<GYGReviews, Error>) -> Void) {
-        
-        let path = "/1/options/\(id)"
+    public func optionPricings(optionId id: Int,
+                                   language: String = "en",
+                                   currency: String = "usd",
+                                   completion: @escaping (Result<[GYGPricingWithCategory], Error>) -> Void) {
+        let path = "/1/options/\(id)/pricings"
         var params = [String: String]()
         params["cnt_language"] = "\(language)"
         params["currency"] = "\(currency)"
         
-        if let sortField = sortfield {
-            params["sortfield"] = sortField.rawValue
-        }
-        
-        if let sortDirection = sortDirection {
-            params["sortdirection"] = sortDirection.rawValue
-        }
-        
-        if let limit = limit {
-            params["limit"] = "\(limit)"
-        }
-        
-        
-        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGToursParser>.self) { (result) in
+        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGGYGPricingWithCategoryParser>.self) { (result) in
             switch result {
             case .success(let model):
                 
-                if model.data?.reviews != nil {
-                    completion(.success(model.data!.reviews!))
-                }
+                print("MODEL \(model)")
+                completion(.success(model.data?.pricing ?? []))
             case .failure(let error):
                 completion(.failure(error))
             }

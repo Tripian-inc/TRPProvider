@@ -50,6 +50,7 @@
 		B25A7845250B6C3800F9395C /* GYGTour.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25A7844250B6C3800F9395C /* GYGTour.swift */; };
 		B25A7847250B977200F9395C /* GYGGenericParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25A7846250B977200F9395C /* GYGGenericParser.swift */; };
 		B25B375725274CE600B595AB /* GYGTourOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25B375625274CE600B595AB /* GYGTourOption.swift */; };
+		B25B378925275C6800B595AB /* GYGOptionPricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25B378825275C6800B595AB /* GYGOptionPricing.swift */; };
 		B25C832724B8AC89006167E4 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25C832624B8AC89006167E4 /* Reservation.swift */; };
 		B269E5B5251B82AC001195F0 /* GYGReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269E5B4251B82AC001195F0 /* GYGReview.swift */; };
 		B269E5B9251B82C3001195F0 /* GYGOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269E5B8251B82C3001195F0 /* GYGOutline.swift */; };
@@ -124,6 +125,7 @@
 		B25A7844250B6C3800F9395C /* GYGTour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGTour.swift; sourceTree = "<group>"; };
 		B25A7846250B977200F9395C /* GYGGenericParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGGenericParser.swift; sourceTree = "<group>"; };
 		B25B375625274CE600B595AB /* GYGTourOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGTourOption.swift; sourceTree = "<group>"; };
+		B25B378825275C6800B595AB /* GYGOptionPricing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGOptionPricing.swift; sourceTree = "<group>"; };
 		B25C832624B8AC89006167E4 /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
 		B269E5B4251B82AC001195F0 /* GYGReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGReview.swift; sourceTree = "<group>"; };
 		B269E5B8251B82C3001195F0 /* GYGOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGOutline.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				B2723E0D2525C7F30022E4D4 /* GYGAvailability.swift */,
 				B25580662525DD4D00E2F42F /* GYGToursParser.swift */,
 				B25B375625274CE600B595AB /* GYGTourOption.swift */,
+				B25B378825275C6800B595AB /* GYGOptionPricing.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -535,6 +538,7 @@
 				B276F1B1250FB6D000AC2360 /* GYGCategories.swift in Sources */,
 				B2723DFC2525BA680022E4D4 /* GYGSortDirection.swift in Sources */,
 				B276F1AD250F8C4500AC2360 /* GYGTours.swift in Sources */,
+				B25B378925275C6800B595AB /* GYGOptionPricing.swift in Sources */,
 				B2D10DAD24BC4128005394C3 /* NetworkError.swift in Sources */,
 				B2D10DAF24BC4295005394C3 /* NetworkResponse.swift in Sources */,
 				B25A7847250B977200F9395C /* GYGGenericParser.swift in Sources */,
