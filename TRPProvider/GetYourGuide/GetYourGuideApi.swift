@@ -263,10 +263,11 @@ extension GetYourGuideApi {
 
 
 extension GetYourGuideApi {
+    
     public func optionPricings(optionId id: Int,
                                    language: String = "en",
                                    currency: String = "usd",
-                                   completion: @escaping (Result<[GYGPricingWithCategory], Error>) -> Void) {
+                                   completion: @escaping (Result<[GYGOptionPricing], Error>) -> Void) {
         let path = "/1/options/\(id)/pricings"
         var params = [String: String]()
         params["cnt_language"] = "\(language)"

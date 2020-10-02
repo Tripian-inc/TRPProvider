@@ -21,7 +21,8 @@ internal class GYGToursOptionParser: Decodable {
 
 public struct GYGTourOption: Codable {
     public let optionID, tourID: Int
-    public let title, meetingPoint, dropOff: String
+    public let title: String
+    public let meetingPoint, dropOff: String?
     public let duration: Int
     public let durationUnit: String
     public let condLanguage: GYGCondLanguage
@@ -29,9 +30,10 @@ public struct GYGTourOption: Codable {
     public let services: [String: Bool]
     public let coordinateType: String
     public let coordinates: GYGCoordinates
-    public let price: GYGPrice
+    public let price: GYGPrice?
     public let freeSale: Bool
-
+    public let description: String
+    
     enum CodingKeys: String, CodingKey {
         case optionID = "option_id"
         case tourID = "tour_id"
@@ -46,6 +48,7 @@ public struct GYGTourOption: Codable {
         case coordinateType = "coordinate_type"
         case coordinates, price
         case freeSale = "free_sale"
+        case description
     }
 }
 
