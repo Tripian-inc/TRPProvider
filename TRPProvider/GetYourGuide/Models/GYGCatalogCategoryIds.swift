@@ -17,20 +17,20 @@ public enum GYGCatalogCategory: String, CaseIterable {
     case localAndNeigborhood = "Local and Neighborhood"
     
     
-    public func ids() -> [Int] {
+    public func id() -> Int {
         switch  self {
         case .adventure:
-            return [35]
+            return 35
         case .food:
-            return [103] 
+            return 103
         case .cultureAndHistory:
-            return [27]
+            return 27
         case .sightseeing:
-            return [2]
+            return 2
         case .artAndMuseums:
-            return [28] //28
+            return 28 //28
         case .localAndNeigborhood:
-            return [21]
+            return 21
         }
     }
 }

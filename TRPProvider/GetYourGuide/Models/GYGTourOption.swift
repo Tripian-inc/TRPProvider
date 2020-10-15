@@ -23,7 +23,7 @@ public struct GYGTourOption: Codable {
     public let optionID, tourID: Int
     public let title: String
     public let meetingPoint, dropOff: String?
-    public let duration: Int
+    public let duration: Float
     public let durationUnit: String
     public let condLanguage: GYGCondLanguage
     public let bookingParameter: [GYGBookingParameter]
@@ -32,7 +32,7 @@ public struct GYGTourOption: Codable {
     public let coordinates: GYGCoordinates
     public let price: GYGPrice?
     public let freeSale: Bool
-    public let description: String
+    public let description: String?
     
     enum CodingKeys: String, CodingKey {
         case optionID = "option_id"

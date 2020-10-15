@@ -18,6 +18,7 @@ public class ReservationViewController: UIViewController {
     private(set) var viewModel: ReservationViewModel
     private var loader: TRPLoaderView?
     private(set) var tableView = UITableView()
+    
     private var continueButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("Make a Reservation", for: .normal)

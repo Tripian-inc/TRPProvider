@@ -104,11 +104,11 @@ public struct GYGPicture: Codable {
 // MARK: - Price
 public struct GYGPrice: Codable {
     public let values: GYGValues
-    public let priceDescription: String
+    public let description: String
 
     enum CodingKeys: String, CodingKey {
         case values
-        case priceDescription = "description"
+        case description 
     }
 }
 

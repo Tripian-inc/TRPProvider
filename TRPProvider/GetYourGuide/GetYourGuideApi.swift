@@ -38,7 +38,7 @@ extension GetYourGuideApi {
     
     //preformatted: String = "teaser",
     public func tours(cityName: String,
-                      categoryIds: [Int]? = [],
+                      categoryIds: [Int]? = nil,
                       preformatted: String = "full",
                       language: String = "en",
                       currency: String = "usd",
@@ -54,7 +54,7 @@ extension GetYourGuideApi {
         params["preformatted"] = "\(preformatted)"
         
         params["limit"] = "\(limit)"
-        if let category = categoryIds {
+        if let category = categoryIds, category.count > 0 {
             let converted = category.map{"\($0)"}
             params["categories"] = converted.joined(separator: ",")
         }
