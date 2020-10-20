@@ -52,7 +52,6 @@ extension GetYourGuideApi {
         params["currency"] = "\(currency)"
         params["q"] = "\(cityName)"
         params["preformatted"] = "\(preformatted)"
-        
         params["limit"] = "\(limit)"
         if let category = categoryIds, category.count > 0 {
             let converted = category.map{"\($0)"}
@@ -120,7 +119,6 @@ extension GetYourGuideApi {
         var params = [String: String]()
         params["cnt_language"] = "\(language)"
         params["currency"] = "\(currency)"
-        
         params["date"] = from
         params["date"] = to
         
@@ -137,14 +135,26 @@ extension GetYourGuideApi {
     }
     
     
+    //public func tourOptionsAvailability(id: Int, )
+    
+    
+    
     public func tourOptions(tourId id: Int,
                                    language: String = "en",
                                    currency: String = "usd",
+                                   fromDate from: String? = nil,
+                                   toDate to:String? = nil,
                                    completion: @escaping (Result<[GYGTourOption], Error>) -> Void) {
-        let path = "/1/tours/\(id)/options"
+        let path = "/1/options/\(id)/availabilities"
         var params = [String: String]()
         params["cnt_language"] = "\(language)"
         params["currency"] = "\(currency)"
+        if let fromDate = from {
+            params["date[]"] = fromDate
+        }
+        if let toDate = to {
+            params["date[]"] = toDate
+        }
         
         networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGToursOptionParser>.self) { (result) in
             switch result {
@@ -156,6 +166,22 @@ extension GetYourGuideApi {
                 completion(.failure(error))
             }
         }
+    }
+    
+    
+    public func optionsAvailability(tourId id: Int,
+                                   language: String = "en",
+                                   currency: String = "usd",
+                                   completion: @escaping (Result<[GYGTourOption], Error>) -> Void) {
+        
+    }
+    
+    public func optionsAvailability(optionId id: Int ) {
+        // /options/[option_id]/availabilities
+        
+        
+        
+            
     }
     
 }

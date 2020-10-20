@@ -30,20 +30,6 @@ class NetworkController {
             if httpBody.count != 0 {
                 request.httpBody = dictionaryToHttpBody(httpBody)
             }
-            request.cachePolicy = .returnCacheDataElseLoad
-            print(" ")
-            print("!!!!!!!--------************************")
-            print(request)
-            print(request.cachePolicy)
-        print(  " ")
-            if let cacheData = URLCache.shared.cachedResponse(for: request) {
-                print("Cache")
-              // Already cached
-            }else {
-                print("NOT CACHE")
-            }
-            print(  " ")
-            
             
             return request
         }
