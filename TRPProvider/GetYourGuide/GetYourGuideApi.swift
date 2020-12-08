@@ -116,11 +116,11 @@ extension GetYourGuideApi {
                                    toDate to:String,
                                    completion: @escaping (Result<[GYGAvailability], Error>) -> Void) {
         let path = "/1/tours/\(id)/availabilities"
-        var params = [String: String]()
-        params["cnt_language"] = "\(language)"
-        params["currency"] = "\(currency)"
-        params["date"] = from
-        params["date"] = to
+        var params = [URLQueryItem]()
+        params.append(URLQueryItem(name: "cnt_language", value: "\(language)"))
+        params.append(URLQueryItem(name: "currency", value: "\(currency)"))
+        params.append(URLQueryItem(name: "date[]", value: from))
+        params.append(URLQueryItem(name: "date[]", value: to))
         
         networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGAvailabilities>.self) { (result) in
             switch result {
@@ -135,17 +135,13 @@ extension GetYourGuideApi {
     }
     
     
-    //public func tourOptionsAvailability(id: Int, )
-    
-    
-    
     public func tourOptions(tourId id: Int,
                                    language: String = "en",
                                    currency: String = "usd",
                                    fromDate from: String? = nil,
                                    toDate to:String? = nil,
                                    completion: @escaping (Result<[GYGTourOption], Error>) -> Void) {
-        let path = "/1/options/\(id)/availabilities"
+        let path = "/1/tours/\(id)/options"
         var params = [String: String]()
         params["cnt_language"] = "\(language)"
         params["currency"] = "\(currency)"
@@ -310,4 +306,85 @@ extension GetYourGuideApi {
             }
         }
     }
+}
+
+extension GetYourGuideApi {
+    public func booking(optionId: Int,
+                        dateTime: String,
+                        price: String,
+                        categories: [GYGBookingCategoryPropeties],
+                        bookingParameters: [GYGBookingParameterProperties],
+                        language: String = "en",
+                        currency: String = "usd",
+                        completion: @escaping (Result<GYGBookings, Error>) -> Void) {
+        
+        let path = "/1/bookings"
+       
+        var bookableParams = [String: String]()
+        bookableParams["option_id"] = "\(optionId)"
+        bookableParams["datetime"] = "\(dateTime)"
+        bookableParams["price"] = "\(price)"
+        bookableParams["categories"] = "\(categories.compactMap({$0.getParams()}))"
+        bookableParams["booking_parameters"] = "\(bookingParameters.compactMap({$0.getParams()}))"
+        
+        var booking = [String: Any]()
+        booking["booking"] = bookableParams
+        
+        networkController?.urlComponentPath(path).bodyParameters(booking).responseDecodable(type: GYGGenericDataParser<GYGBookingsParser>.self) { (result) in
+            switch result {
+            case .success(let model):
+                
+                print("MODEL \(model)")
+                
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
+    
+}
+
+public protocol CustomDecodable {
+    func getParams() -> [String: Any]
+}
+
+public struct GYGBookingCategoryPropeties: CustomDecodable {
+
+    public var categoryId: Int
+    public var numberOfParticipants: Int
+    
+    public init(categoryId: Int, numberOfParticipants: Int) {
+        self.categoryId = categoryId
+        self.numberOfParticipants = numberOfParticipants
+    }
+    
+    public func getParams() -> [String : Any] {
+        return ["category_id": "\(categoryId)", "number_of_participants": "\(numberOfParticipants)"]
+    }
+}
+
+
+public struct GYGBookingParameterProperties: CustomDecodable {
+    public var name: String
+    public var value1: String
+    public var value2: String?
+    
+    public init(name: String, value1: String, value2: String? = nil) {
+        self.name = name
+        self.value1 = value1
+        self.value2 = value2
+    }
+    
+    public func getParams() -> [String : Any] {
+        var params = [String: String]()
+        params["name"] = name
+        params["value1"] = value1
+        if let wrappedValue2 = value2 {
+            params["value2"] = wrappedValue2
+        }
+        return params
+    }
+    
 }

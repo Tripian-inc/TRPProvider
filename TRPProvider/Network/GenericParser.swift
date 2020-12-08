@@ -22,6 +22,7 @@ internal class GenericParser<T: Decodable> {
             completion(.success(result))
         }catch(let error) {
             print("Json Parser Error \(error)")
+            
             completion(.failure(error))
         }
     }

@@ -14,10 +14,7 @@ internal class GYGToursOptionParser: Decodable {
     private enum CodingKeys: String, CodingKey {
         case options = "tour_options"
     }
-    
 }
-
-
 
 public struct GYGTourOption: Codable {
     public let optionID, tourID: Int
@@ -29,7 +26,7 @@ public struct GYGTourOption: Codable {
     public let bookingParameter: [GYGBookingParameter]
     public let services: [String: Bool]
     public let coordinateType: String
-    public let coordinates: GYGCoordinates
+   // public let coordinates: GYGCoordinates?
     public let price: GYGPrice?
     public let freeSale: Bool
     public let description: String?
@@ -46,7 +43,7 @@ public struct GYGTourOption: Codable {
         case bookingParameter = "booking_parameter"
         case services
         case coordinateType = "coordinate_type"
-        case coordinates, price
+        case  price
         case freeSale = "free_sale"
         case description
     }

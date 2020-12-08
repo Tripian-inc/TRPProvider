@@ -8,7 +8,7 @@
 
 import UIKit
 class ReservationDatePickerCell: ReservationBaseCell {
-
+    
     var dateChangeHandler: ((_ date: String) -> Void)?
     var findATableHandler: ((_ date: String) -> Void)?
     
@@ -20,19 +20,21 @@ class ReservationDatePickerCell: ReservationBaseCell {
         picker.datePickerMode = UIDatePicker.Mode.date
         picker.backgroundColor = UIColor.white
         picker.addTarget(self, action: #selector(datePickerValeuChanged(sender:)), for: UIControl.Event.valueChanged)
-        
+        if #available(iOS 13.4, *) {
+            picker.preferredDatePickerStyle = .wheels
+        }
         return picker
     }()
-
+    
     /*private lazy var timePicker: TRPTimePickerView = {
-        let picker = TRPTimePickerView()
-        picker.timePickerDelegate = self
-        picker.dataSource = picker
-        picker.delegate = picker
-        picker.setTimeFieldType(with: .start)
-        return picker
-    }() */
-
+     let picker = TRPTimePickerView()
+     picker.timePickerDelegate = self
+     picker.dataSource = picker
+     picker.delegate = picker
+     picker.setTimeFieldType(with: .start)
+     return picker
+     }() */
+    
     private var dateToolBar: UIToolbar = {
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
@@ -40,7 +42,7 @@ class ReservationDatePickerCell: ReservationBaseCell {
         toolBar.sizeToFit()
         return toolBar
     }()
-
+    
     public var inputText: UITextField = {
         let input = UITextField()
         input.font = UIFont.systemFont(ofSize: 18, weight: .regular)
@@ -64,7 +66,6 @@ class ReservationDatePickerCell: ReservationBaseCell {
         inputText.inputAccessoryView = dateToolBar
         dateToolBar.items = [flexItem, toolBarButton]
         dateToolBar.updateConstraintsIfNeeded()
-        
     }
     
     @objc func findATablePressed() {

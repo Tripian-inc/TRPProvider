@@ -28,6 +28,7 @@ class ReservationBaseCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.isHidden = true
         setupHorizontalStack()
         setupCustom(stack: horizontalStackView)
     }

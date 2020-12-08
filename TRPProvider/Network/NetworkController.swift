@@ -19,7 +19,7 @@ class NetworkController {
     public var urlComponent: URLComponents?
     private(set) var allHTTPHeaderFields = [String:String]()
     private(set) var httpMethod: HttpMethod = .get
-    private(set) var httpBody = [String: String]()
+    private(set) var httpBody = [String: Any]()
     
     
     private var request: URLRequest? {
@@ -28,7 +28,7 @@ class NetworkController {
             request.allHTTPHeaderFields = allHTTPHeaderFields
             request.httpMethod = httpMethod.rawValue
             if httpBody.count != 0 {
-                request.httpBody = dictionaryToHttpBody(httpBody)
+                request.httpBody = dictonaryToHttpData(httpBody)
             }
             
             return request
@@ -56,6 +56,7 @@ class NetworkController {
                         }
                     case .failure(let error):
                         queue.async {
+                            print("Error \(error)")
                             self.readableJson(strongData!)
                             self.errorHandler(rawData: strongData, mainError: error, completion: completion)
                         }
@@ -101,6 +102,7 @@ class NetworkController {
         }
     }
     
+    
     @discardableResult
     func responseDecodable<T: Decodable> (type: T.Type, completion: @escaping (NetworkControllerResult<T>) -> Void) -> Self {
         request(queue: .main, type: T.self, completion: completion)
@@ -136,11 +138,19 @@ extension NetworkController {
         return self
     }
     
+    func parameters(_ parameters: [URLQueryItem]) -> Self {
+        urlComponent?.queryItems = parameters
+        return self
+    }
+    
+    
     @discardableResult
-    func bodyParameters(_ parameters: [String: String]) -> Self {
+    func bodyParameters(_ parameters: [String: Any]) -> Self {
         httpBody = parameters
         return self
     }
+    
+ 
     
     @discardableResult
     func httpMethod(_ type: HttpMethod) -> Self {
@@ -161,10 +171,19 @@ extension NetworkController {
 
 extension NetworkController {
     
-    func dictionaryToHttpBody(_ dictionary: [String: String]) -> Data? {
+    /*func dictionaryToHttpBody(_ dictionary: [String: String]) -> Data? {
         var components = URLComponents()
         components.queryItems = httpBody.map{ URLQueryItem(name: $0.key, value: $0.value)}
         return components.query?.data(using: .utf8)
-    }
+    }*/
     
+    func dictonaryToHttpData(_ parameters: [String: Any]) -> Data? {
+        do {
+            let result = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            return result
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        return nil
+    }
 }

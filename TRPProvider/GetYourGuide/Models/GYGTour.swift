@@ -28,7 +28,7 @@ public struct GYGTour: Codable {
     public let exclusions:  String?
     public let highlights:  [String]?
     public let cancellationText: String?
-    
+    public let additionalInformation: String?
     
     enum CodingKeys: String, CodingKey {
         case tourID = "tour_id"
@@ -39,6 +39,7 @@ public struct GYGTour: Codable {
         case numberOfRatings = "number_of_ratings"
         case pictures, coordinates, price, categories, locations, url, durations, description,inclusions, exclusions, highlights
         case cancellationText = "cancellation_policy_text"
+        case additionalInformation = "additional_information"
     }
 }
 
@@ -65,7 +66,7 @@ public struct GYGLocation: Codable {
     public let city: String?
     public let country: String
     public let coordinates: GYGCoordinates
-    public let viewport: GYGViewport
+    public let viewport: GYGViewport?
 
     enum CodingKeys: String, CodingKey {
         case locationID = "location_id"
@@ -90,12 +91,11 @@ public struct GYGViewport: Codable {
 
 // MARK: - Picture
 public struct GYGPicture: Codable {
-    public let id: Int
     public let url, sslURL: String
-    public let verified: Bool
+    public let verified: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case id, url
+        case url
         case sslURL = "ssl_url"
         case verified
     }
@@ -121,8 +121,8 @@ public struct GYGValues: Codable {
 
 // MARK: - Special
 public struct GYGSpecial: Codable {
-    public let originalPrice: Double
-    public let savings: Int
+    public let originalPrice: Double?
+    public let savings: Double?
 
     enum CodingKeys: String, CodingKey {
         case originalPrice = "original_price"

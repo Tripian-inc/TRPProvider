@@ -33,13 +33,13 @@ public struct GYGOptionPricing: Codable {
 
 // MARK: - Category
 public struct PricingCategory: Codable {
-    public let maxAge: Int
+    public let maxAge: Int?
     public let addon: Bool
     public let scale: [PricingScale]
     public let id: Int
     public let standAlone: Bool
     public let name: String
-    public let minAge: Int
+    public let minAge: Int?
 
     enum CodingKeys: String, CodingKey {
         case maxAge = "max_age"
@@ -53,8 +53,8 @@ public struct PricingCategory: Codable {
 // MARK: - Scale
 public struct PricingScale: Codable {
     public let type: String
-    public let minParticipants, maxParticipants: Int
-    public let retailPrice, netPrice: Double
+    public let minParticipants, maxParticipants: Int?
+    public let retailPrice, netPrice: Double?
 
     enum CodingKeys: String, CodingKey {
         case type
