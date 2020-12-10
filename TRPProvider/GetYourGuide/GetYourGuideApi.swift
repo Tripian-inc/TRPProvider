@@ -25,9 +25,9 @@ public class GetYourGuideApi {
         var urlComponent = URLComponents()
         urlComponent.scheme = "https"
         urlComponent.host = "api.getyourguide.com"
-        return NetworkController(network: network)
-            .urlComponent(urlComponent)
-            .addValue("X-ACCESS-TOKEN", value: apiKey)
+        let network =  NetworkController(network: network).urlComponent(urlComponent).addValue("X-ACCESS-TOKEN", value: apiKey)
+        network.provider = .gyg
+        return network
     }
     
 }
@@ -174,10 +174,6 @@ extension GetYourGuideApi {
     
     public func optionsAvailability(optionId id: Int ) {
         // /options/[option_id]/availabilities
-        
-        
-        
-            
     }
     
 }
@@ -309,28 +305,33 @@ extension GetYourGuideApi {
 }
 
 extension GetYourGuideApi {
+    
     public func booking(optionId: Int,
                         dateTime: String,
                         price: String,
-                        categories: [GYGBookingCategoryPropeties],
-                        bookingParameters: [GYGBookingParameterProperties],
+                        categories: [GYGBookingCategoryPropety],
+                        bookingParameters: [GYGBookingParameterProperty],
                         language: String = "en",
                         currency: String = "usd",
                         completion: @escaping (Result<GYGBookings, Error>) -> Void) {
         
         let path = "/1/bookings"
        
-        var bookableParams = [String: String]()
+        var bookableParams = [String: Any]()
         bookableParams["option_id"] = "\(optionId)"
         bookableParams["datetime"] = "\(dateTime)"
         bookableParams["price"] = "\(price)"
-        bookableParams["categories"] = "\(categories.compactMap({$0.getParams()}))"
-        bookableParams["booking_parameters"] = "\(bookingParameters.compactMap({$0.getParams()}))"
+        bookableParams["categories"] = [categories.first!.getParams()]
+        bookableParams["booking_parameters"] = [bookingParameters.first!.getParams()]
+        let bookable = ["bookable": bookableParams]
+        let booking = ["booking": bookable]
+        let baseData = ["cnt_language": language, "currency": currency]
         
-        var booking = [String: Any]()
-        booking["booking"] = bookableParams
+        var main = [String: Any]()
+        main["base_data"] = baseData
+        main["data"] = booking
         
-        networkController?.urlComponentPath(path).bodyParameters(booking).responseDecodable(type: GYGGenericDataParser<GYGBookingsParser>.self) { (result) in
+        networkController?.urlComponentPath(path).bodyParameters(main).httpMethod(.post).addValue("Content-Type", value: "application/json").responseDecodable(type: GYGGenericDataParser<GYGBookingsParser>.self) { (result) in
             switch result {
             case .success(let model):
                 
@@ -343,14 +344,35 @@ extension GetYourGuideApi {
     }
     
     
-    
+    public func paymentConfiguration(country: String = "US",
+                                        language: String = "en",
+                                        currency: String = "usd",
+                                        completion: @escaping (Result<[GYGPaymentMethod], Error>) -> Void) {
+        let path = "/1/configuration/payment"
+        
+        var params = [String: String]()
+        params["cnt_language"] = "\(language)"
+        params["currency"] = "\(currency)"
+        params["country"] = "\(country)"
+        
+        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<PaymentConfiuration>.self) { (result) in
+            switch result {
+            case .success(let model):
+                
+                print("MODEL \(model)")
+                completion(.success(model.data?.paymentMethods ?? []))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
 
 public protocol CustomDecodable {
     func getParams() -> [String: Any]
 }
 
-public struct GYGBookingCategoryPropeties: CustomDecodable {
+public struct GYGBookingCategoryPropety: CustomDecodable {
 
     public var categoryId: Int
     public var numberOfParticipants: Int
@@ -361,12 +383,12 @@ public struct GYGBookingCategoryPropeties: CustomDecodable {
     }
     
     public func getParams() -> [String : Any] {
-        return ["category_id": "\(categoryId)", "number_of_participants": "\(numberOfParticipants)"]
+        return ["category_id": categoryId, "number_of_participants": numberOfParticipants]
     }
 }
 
 
-public struct GYGBookingParameterProperties: CustomDecodable {
+public struct GYGBookingParameterProperty: CustomDecodable {
     public var name: String
     public var value1: String
     public var value2: String?
@@ -380,9 +402,9 @@ public struct GYGBookingParameterProperties: CustomDecodable {
     public func getParams() -> [String : Any] {
         var params = [String: String]()
         params["name"] = name
-        params["value1"] = value1
+        params["value_1"] = value1
         if let wrappedValue2 = value2 {
-            params["value2"] = wrappedValue2
+            params["value_2"] = wrappedValue2
         }
         return params
     }

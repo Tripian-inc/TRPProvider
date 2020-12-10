@@ -10,6 +10,11 @@ import Foundation
 
 public typealias NetworkControllerResult<Success> = Result<Success, Error>
 
+enum ProviderType {
+    case yelp
+    case gyg
+}
+
 class NetworkController {
     
     let network: Networking
@@ -20,7 +25,9 @@ class NetworkController {
     private(set) var allHTTPHeaderFields = [String:String]()
     private(set) var httpMethod: HttpMethod = .get
     private(set) var httpBody = [String: Any]()
+    public var provider: ProviderType = .yelp
     
+
     
     private var request: URLRequest? {
         if let component = urlComponent, let componentUrl = component.url {
@@ -86,26 +93,45 @@ class NetworkController {
             completion(.failure(mainError))
             return
         }
-        
-        GenericParser<YelpErrorResult>().parse(data: data) { result in
-            switch result {
-            case .success(let model):
-                if let model = model {
-                    let yelpError = YelpNetworkError(code: model.error.code, message: model.error.errorDescription)
-                    completion(.failure(yelpError))
-                }else {
+        if provider == .yelp {
+            GenericParser<YelpErrorResult>().parse(data: data) { result in
+                switch result {
+                case .success(let model):
+                    if let model = model {
+                        let yelpError = YelpNetworkError(code: model.error.code, message: model.error.errorDescription)
+                        completion(.failure(yelpError))
+                    }else {
+                        completion(.failure(mainError))
+                    }
+                case .failure(_):
                     completion(.failure(mainError))
                 }
-            case .failure(_):
-                completion(.failure(mainError))
+            }
+        }else if provider == .gyg {
+            GenericParser<GYGErrorParser>().parse(data: data) { result in
+                switch result {
+                case .success(let model):
+                    if let model = model {
+                        if let error = model.errors.first {
+                            let gygCustomError = GYGNetworkError(code:"\(error.errorCode)", message: error.errorMessage)
+                            completion(.failure(gygCustomError))
+                        }
+                    }else {
+                        completion(.failure(mainError))
+                    }
+                case .failure(_):
+                    completion(.failure(mainError))
+                }
             }
         }
+       
     }
     
     
     @discardableResult
     func responseDecodable<T: Decodable> (type: T.Type, completion: @escaping (NetworkControllerResult<T>) -> Void) -> Self {
-        request(queue: .main, type: T.self, completion: completion)
+        //request(queue: .main, type: T.self, completion: completion)
+        request(queue: .main, type: T.self,  completion: completion)
         return self
     }
     

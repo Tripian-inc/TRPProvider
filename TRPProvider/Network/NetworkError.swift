@@ -14,6 +14,16 @@ public enum NetworkError: String, Error {
     
 }
 
+public enum GYGNetworkError: Error {
+    case customError(code:String, message:String)
+    
+    init(code: String, message: String) {
+        switch code {
+        default: self = .customError(code: code, message: message)
+        }
+    }
+}
+
 public enum YelpNetworkError: Error {
     case yelpErrorMessage(code: String, message: String)
     case reservationCanceled
