@@ -25,6 +25,7 @@ class NetworkController {
     private(set) var allHTTPHeaderFields = [String:String]()
     private(set) var httpMethod: HttpMethod = .get
     private(set) var httpBody = [String: Any]()
+    private(set) var httpBodyData: Data?
     public var provider: ProviderType = .yelp
     
 
@@ -34,7 +35,10 @@ class NetworkController {
             var request = URLRequest(url: componentUrl)
             request.allHTTPHeaderFields = allHTTPHeaderFields
             request.httpMethod = httpMethod.rawValue
-            if httpBody.count != 0 {
+            
+            if let bodyData = httpBodyData {
+                request.httpBody = bodyData
+            }else if httpBody.count != 0 {
                 request.httpBody = dictonaryToHttpData(httpBody)
             }
             
@@ -176,7 +180,16 @@ extension NetworkController {
         return self
     }
     
- 
+    @discardableResult
+    func bodyData<E: Encodable>(_ model: E) -> Self {
+        httpBodyData = encodeData(model)
+        return self
+    }
+    
+    /*
+    @discardableResult
+    func bodyParameters<T: >(_ )
+  */
     
     @discardableResult
     func httpMethod(_ type: HttpMethod) -> Self {
@@ -196,19 +209,25 @@ extension NetworkController {
 }
 
 extension NetworkController {
-    
-    /*func dictionaryToHttpBody(_ dictionary: [String: String]) -> Data? {
-        var components = URLComponents()
-        components.queryItems = httpBody.map{ URLQueryItem(name: $0.key, value: $0.value)}
-        return components.query?.data(using: .utf8)
-    }*/
+
+    public func encodeData<E: Encodable>(_ model: E) -> Data? {
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let result = try encoder.encode(model)
+            return result
+        }catch let error {
+            print("[Error] JsonEncode \(error.localizedDescription)")
+        }
+        return nil
+    }
     
     func dictonaryToHttpData(_ parameters: [String: Any]) -> Data? {
         do {
             let result = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             return result
         } catch let error {
-            print(error.localizedDescription)
+            print("[Error] JsonEncode \(error.localizedDescription)")
         }
         return nil
     }
