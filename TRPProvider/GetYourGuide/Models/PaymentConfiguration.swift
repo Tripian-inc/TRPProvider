@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - DataClass
-struct PaymentConfiuration: Codable {
+struct GYGPaymentConfiuration: Codable {
     let paymentMethods: [GYGPaymentMethod]
 
     enum CodingKeys: String, CodingKey {

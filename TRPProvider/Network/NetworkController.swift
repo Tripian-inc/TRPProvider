@@ -62,6 +62,12 @@ class NetworkController {
                 GenericParser<T>().parse(data: strongData) { result in
                     switch result {
                     case .success(let decoded):
+                        if data == nil {
+                            print("DATA İS NİL")
+                            //self.errorHandler(rawData: strongData, mainError: error, completion: completion)
+                        }else {
+                            
+                        }
                         queue.async {
                             completion(.success(decoded!))
                         }

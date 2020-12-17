@@ -8,6 +8,9 @@
 
 import Foundation
 public class GetYourGuideApi {
+    
+    static let DEVELOPER_MODE = true
+    
     //rC5mIHMNF5C1Jtpb2obSkA
     var network: Networking?
     //TODO: TAŞINACAK
@@ -24,13 +27,14 @@ public class GetYourGuideApi {
         networkController = createNetworkController(network: network)
     }
     
-    
-    
     private func createNetworkController(network: Networking) -> NetworkController {
         var urlComponent = URLComponents()
         urlComponent.scheme = "https"
-        
-        urlComponent.host = testApiKey
+        if GetYourGuideApi.DEVELOPER_MODE {
+            urlComponent.host = testApiKey
+        }else {
+            urlComponent.host = productApiKey
+        }
         let network =  NetworkController(network: network).urlComponent(urlComponent).addValue("X-ACCESS-TOKEN", value: apiKey)
         network.provider = .gyg
         return network
@@ -384,7 +388,7 @@ extension GetYourGuideApi {
         params["currency"] = "\(currency)"
         params["country"] = "\(country)"
         
-        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<PaymentConfiuration>.self) { (result) in
+        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGPaymentConfiuration>.self) { (result) in
             switch result {
             case .success(let model):
                 
@@ -447,7 +451,7 @@ extension GetYourGuideApi {
 }
 
 
-
+//TODO: - DATA YAPISI DEĞİŞECEK
 struct MainData: Codable {
     let baseData: BaseData
     let data: DataClass
