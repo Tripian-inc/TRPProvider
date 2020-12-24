@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 public class GetYourGuideApi {
     
     static let DEVELOPER_MODE = true
@@ -28,6 +29,7 @@ public class GetYourGuideApi {
     }
     
     private func createNetworkController(network: Networking) -> NetworkController {
+        
         var urlComponent = URLComponents()
         urlComponent.scheme = "https"
         if GetYourGuideApi.DEVELOPER_MODE {
@@ -39,29 +41,7 @@ public class GetYourGuideApi {
         network.provider = .gyg
         return network
     }
-    
-    public func adyen() {
-        
-        /*
-        let card = CardEncryptor.Card(number: "5555444433331111", securityCode: "737", expiryMonth: "08", expiryYear: "2018")
-        let publicKey = "10001|8903C4F04E66D9932D76C8172DB5246477529B7187F53DB9B5BB0857818AD771A66EDD185BEEF32E76077DAAC927DBFF972F6D1EF063CE93A3BE052BB55B28CEB6C7575C2D040611AF011510E6A4CF7DB92CB48DBF9E0E05DD9530A4AD39ACCC82EB8AFC91393AB492F9D6282B23BB5C367557CEE13483232DD451EC07C673DE350FA57B727E0D915EF2FDB37BFAFC6A41367584C18D3A291D70FEC15AC2DA2A8E06C72047C3D10C8FE621122E3A69D2B323273236D3B7931019A1AC1356D47D620D84EBCA6614841E1E835966A42E3D260CB033884E133AB6D3F86EF574DD7C59A7EE6F28FEA291560C7D9DD9C799D4358BCEDFD3F4D3D7CFCBDB2984FD90F5"
-        do {
-            let sonuc = try CardEncryptor.encryptedCard(for: card, publicKey: publicKey)
-            let token = try card.encryptedToToken(publicKey: publicKey, holderName: "First Last")
-            print(" ")
-            print("------------")
-            print("Sonuc \(sonuc)")
-            print(" ")
-            print("Token \(token)")
-            print("------------")
-            print(" ")
-        }catch(let error) {
-            print("Error\(error.localizedDescription)")
-        }
-        
-        */
-    }
-    
+ 
     
 }
 
@@ -75,20 +55,30 @@ extension GetYourGuideApi {
                       preformatted: String = "full",
                       language: String = "en",
                       currency: String = "usd",
+                      fromDate from: String? = nil,
+                      toDate to:String? = nil,
                       limit: Int = 100,
                       completion: @escaping (Result<[GYGTour], Error>) -> Void) {
         
         
         let path = "/1/tours"
-        var params = [String: String]()
-        params["cnt_language"] = "\(language)"
-        params["currency"] = "\(currency)"
-        params["q"] = "\(cityName)"
-        params["preformatted"] = "\(preformatted)"
-        params["limit"] = "\(limit)"
+        
+        var params = [URLQueryItem]()
+        params.append(URLQueryItem(name: "cnt_language", value: "\(language)"))
+        params.append(URLQueryItem(name: "currency", value: "\(currency)"))
+        params.append(URLQueryItem(name: "q", value: "\(cityName)"))
+        params.append(URLQueryItem(name: "preformatted", value: "\(preformatted)"))
+        params.append(URLQueryItem(name: "limit", value: "\(limit)"))
         if let category = categoryIds, category.count > 0 {
             let converted = category.map{"\($0)"}
-            params["categories"] = converted.joined(separator: ",")
+            params.append(URLQueryItem(name: "categories", value: converted.joined(separator: ",")))
+            
+        }
+        if let from = from {
+            params.append(URLQueryItem(name: "date[]", value: from))
+        }
+        if let to = to {
+            params.append(URLQueryItem(name: "date[]", value: to))
         }
         
         networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGTours>.self) { (result) in
@@ -346,7 +336,7 @@ extension GetYourGuideApi {
                         bookingParameters: [GYGBookingParameterProperty],
                         language: String = "en",
                         currency: String = "usd",
-                        completion: @escaping (Result<GYGBookings, Error>) -> Void) {
+                        completion: @escaping (Result<GYGBookings?, Error>) -> Void) {
         
         let path = "/1/bookings"
        
@@ -367,9 +357,7 @@ extension GetYourGuideApi {
         networkController?.urlComponentPath(path).bodyParameters(main).httpMethod(.post).addValue("Content-Type", value: "application/json").responseDecodable(type: GYGGenericDataParser<GYGBookingsParser>.self) { (result) in
             switch result {
             case .success(let model):
-                
-                print("MODEL \(model)")
-                
+                completion(.success(model.data?.bookings))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -415,7 +403,6 @@ extension GetYourGuideApi {
         let path = "/1/carts"
         let travelModel = traveler == nil ? GYGTraveler(billing: billing) : traveler!
         let shoppingCart = GYGShoppingCart(shoppingCartID: shoppingCartId,
-                                           shoppingCartHash: shoppingCartHash,
                                            billing: billing,
                                            traveler: travelModel,
                                            payment: payment)

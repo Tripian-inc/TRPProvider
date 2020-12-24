@@ -9,14 +9,14 @@
 import Foundation
 public struct GYGShoppingCart: Codable {
     public let shoppingCartID: Int
-    public let shoppingCartHash: String
+    //public let shoppingCartHash: String
     public let billing: GYGBilling
     public let traveler: GYGTraveler
     public let payment: GYGPayment
     
     enum CodingKeys: String, CodingKey {
         case shoppingCartID = "shopping_cart_id"
-        case shoppingCartHash = "shopping_cart_hash"
+      //  case shoppingCartHash = "shopping_cart_hash"
         case billing, traveler, payment
     }
     
@@ -131,21 +131,10 @@ public struct GYGPayment: Codable {
     }
     
     
-    init(holderName: String = "", adyenCard: CardEncryptor.Card, publicKey: String) {
-        var token: String = ""
-        do {
-            token = try adyenCard.encryptedToToken(publicKey: publicKey, holderName: holderName)
-        }catch let error {
-            print("[Error] \(error.localizedDescription)")
-        }
-        self.encryptedCreditCard = GYGEncryptedCreditCard(format: "adyen", data: token)
+    init(format: String = "adyen", data token: String) {
+        self.encryptedCreditCard = GYGEncryptedCreditCard(format: format, data: token)
     }
     
-    
-    public static func makeMockWith(publicKey: String) -> Self{
-        let mock = CardEncryptor.Card(number: "5555444433331111", securityCode: "737", expiryMonth: "08", expiryYear: "2018")
-        return GYGPayment(adyenCard: mock, publicKey: publicKey)
-    }
 }
 
 // MARK: - EncryptedCreditCard

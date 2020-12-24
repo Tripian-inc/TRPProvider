@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import AdyenCSE
 public protocol BookingOptionsUseCase {
     
     func setBookinOptionId(id: Int)
@@ -25,19 +25,24 @@ public protocol BookingParametersUseCase {
 }
 
 public protocol PostBookingUseCase {
-    func postBooking(completion: ((Result<GYGBookings, Error>) -> Void)?)
+    func postBooking(completion: ((Result<GYGBookings?, Error>) -> Void)?)
 }
 
 public protocol BillingUseCase {
-    func getConfiguration(completion: ((Result<[GYGPaymentMethod], Error>) -> Void)?)
     
     func setBillingInfo(_ billing: GYGBilling)
+    
     func setTravellerInfo(_ traveller: GYGTraveler)
+    
 }
 
 public protocol PaymentUseCase {
-     
-    func setCreditCard(holderName: String?, number: String?, securityCode: String?, expiryMonth: String?, expiryYear: String)
+    
+    func getConfiguration(completion: ((Result<[GYGPaymentMethod], Error>) -> Void)?)
+    
+    func setCreditCard(card: GYGCard)
+    
+    func createAdyenKey() -> String?
     
     func postCart(completion: ((Result<GYGBookings, Error>) -> Void)?)
     
@@ -56,7 +61,8 @@ public class TRPMakeBookingUseCases {
     private(set) var billingInfo: GYGBilling?
     private(set) var travellerInfo: GYGTraveler?
     private(set) var paymentInfo: GYGPayment?
-    
+    private(set) var cardInfo: GYGCard?
+    private(set) var adyenToken: String?
     public init() {}
 }
 
@@ -93,7 +99,7 @@ extension TRPMakeBookingUseCases: BookingParametersUseCase {
 extension TRPMakeBookingUseCases: PostBookingUseCase {
     
     
-    public func postBooking(completion: ((Result<GYGBookings, Error>) -> Void)?) {
+    public func postBooking(completion: ((Result<GYGBookings?, Error>) -> Void)?) {
         
         guard let id = optionId, let date = bookingDateTime, let price = bookingPrice else {
             print("[Error] OptionId, dateTime or price is nil")
@@ -103,9 +109,10 @@ extension TRPMakeBookingUseCases: PostBookingUseCase {
         GetYourGuideApi().booking(optionId: id,
                                   dateTime: date,
                                   price: "\(price)",
-                                  categories: bookingCategry ?? [], bookingParameters: bookingParameters ?? []) { result in
+                                  categories: bookingCategry ?? [], bookingParameters: bookingParameters ?? []) { [weak self] result in
             switch result {
             case .success(let booking):
+                self?.bookingInfo = booking
                 completion?(.success(booking))
             case .failure(let error):
                 completion?(.failure(error))
@@ -117,6 +124,20 @@ extension TRPMakeBookingUseCases: PostBookingUseCase {
 
 extension TRPMakeBookingUseCases: BillingUseCase {
     
+  
+    
+    public func setBillingInfo(_ billing: GYGBilling) {
+        self.billingInfo = billing
+    }
+    
+    public func setTravellerInfo(_ traveller: GYGTraveler) {
+        self.travellerInfo = traveller
+    }
+    
+}
+
+extension TRPMakeBookingUseCases: PaymentUseCase {
+
     public func getConfiguration(completion: ((Result<[GYGPaymentMethod], Error>) -> Void)?) {
         GetYourGuideApi().paymentConfiguration { [weak self] result in
             switch result {
@@ -131,34 +152,46 @@ extension TRPMakeBookingUseCases: BillingUseCase {
         }
     }
     
-    public func setBillingInfo(_ billing: GYGBilling) {
-        self.billingInfo = billing
+    
+    
+    public func setCreditCard(card: GYGCard) {
+        self.cardInfo = card
     }
     
-    public func setTravellerInfo(_ traveller: GYGTraveler) {
-        self.travellerInfo = traveller
-    }
-    
-}
-
-extension TRPMakeBookingUseCases: PaymentUseCase {
-    
-    public func setCreditCard(holderName: String?,
-                              number: String?,
-                              securityCode: String?,
-                              expiryMonth: String?,
-                              expiryYear: String) {
+    public func createAdyenKey() -> String?{
         
-        guard let publicKey = self.publicKey else {
-            print("[Error] Please fetch PublicKey with getConfiguration()")
-            return
+        guard let adyenCard = cardInfo else {
+            print("[Error] Card is nil. You must card with setCreditCard function")
+            return nil
         }
         
-        let card = CardEncryptor.Card(number: number, securityCode: securityCode, expiryMonth: expiryMonth, expiryYear: expiryYear)
+        guard let publicKey = publicKey else {
+            print("[Error] PublicKey is nil. You must call getConfiguration() function")
+            return nil
+        }
         
-        let payment = GYGPayment(holderName: holderName ?? "", adyenCard: card, publicKey: publicKey)
-        self.paymentInfo = payment
+        //Adyen Logic
+        let card = ADYCard()
+        card.holderName = adyenCard.holderName
+        card.cvc = adyenCard.securityCode
+        card.expiryYear = adyenCard.expiryYear
+        card.expiryMonth = adyenCard.expiryMonth
+        card.number = adyenCard.number
+        card.generationtime = Date()
+        
+        if let encodedCard = card.encode() {
+            let adyenToken = ADYEncrypter.encrypt(encodedCard, publicKeyInHex: publicKey) ?? ""
+            if adyenToken.isEmpty {
+                print("[Error] Adyen token is empty")
+            }
+            self.adyenToken = adyenToken
+            paymentInfo = GYGPayment(data: adyenToken)
+            return adyenToken
+        }
+        
+        return nil
     }
+    
     
     public func postCart(completion: ((Result<GYGBookings, Error>) -> Void)?) {
         
@@ -173,7 +206,7 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
         }
         
         guard let booking = bookingInfo else {
-            print("[Error] Billing Info is nil")
+            print("[Error] BookingInfo Info is nil")
             return
         }
         
