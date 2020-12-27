@@ -42,7 +42,43 @@ public class GetYourGuideApi {
         return network
     }
  
-    
+    public func jsonParser() {
+        let bookingHash = "PXYB4N00PRSRD0ANFHY09HA30Q7DO9WD"
+        let cardHash = "58YAF7I7OJSKFUKFHK0IUNQLJ1FB3L3L"
+        getCart(hash: cardHash) { (result) in
+            print("Result")
+            print(result)
+        }
+        
+        /*getBooking(hash: "PXYB4N00PRSRD0ANFHY09HA30Q7DO9WD") { (result) in
+            print("Result")
+            print(result)
+        }*/
+        
+        /*deleteBooking(hash:hash) { (result) in
+            print("Result")
+            print(result)
+        }*/
+        
+        
+        
+        /*let data = Data(paymentJsonResult.utf8)
+        GenericParser<GYGGenericDataParser<GYGPaymentResult>>().parse(data: data) { result in
+            switch result {
+            case .success(let decoded):
+                if data == nil {
+                    print("DATA İS NİL")
+                    //self.errorHandler(rawData: strongData, mainError: error, completion: completion)
+                }else {
+                    
+                }
+               print("PARSER ÇALIŞTI \(decoded)")
+            case .failure(let error):
+                print("Error \(error.localizedDescription)")
+            }
+            
+        } */
+    }
 }
 
 
@@ -354,7 +390,12 @@ extension GetYourGuideApi {
         main["base_data"] = baseData
         main["data"] = booking
         
-        networkController?.urlComponentPath(path).bodyParameters(main).httpMethod(.post).addValue("Content-Type", value: "application/json").responseDecodable(type: GYGGenericDataParser<GYGBookingsParser>.self) { (result) in
+        networkController?
+            .urlComponentPath(path)
+            .bodyParameters(main)
+            .httpMethod(.post)
+            .addValue("Content-Type", value: "application/json")
+            .responseDecodable(type: GYGGenericDataParser<GYGBookingsParser>.self) { (result) in
             switch result {
             case .success(let model):
                 completion(.success(model.data?.bookings))
@@ -364,6 +405,58 @@ extension GetYourGuideApi {
         }
     }
     
+    public func getBooking(hash: String,
+                           language: String = "en",
+                           currency: String = "usd",
+                           completion: @escaping (Result<GYGPaymentBooking?, Error>) -> Void) {
+        let path = "/1/bookings/\(hash)"
+        var params = [String: String]()
+        params["cnt_language"] = "\(language)"
+        params["currency"] = "\(currency)"
+        networkController?
+            .urlComponentPath(path)
+            .parameters(params)
+            .httpMethod(.get)
+            .addValue("Content-Type", value: "application/json")
+            .responseDecodable(type: GYGGenericDataParser<GYGGetBookingResult>.self) { (result) in
+            switch result {
+            case .success(let model):
+                completion(.success(model.data?.booking))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
+    func deleteBooking(hash: String,
+                       language: String = "en",
+                       currency: String = "usd",
+                       completion: @escaping (Result<GYGBookings?, Error>) -> Void) {
+        let path = "/1/bookings/\(hash)"
+        var params = [String: String]()
+        params["cnt_language"] = "\(language)"
+        params["currency"] = "\(currency)"
+        networkController?
+            .urlComponentPath(path)
+            .parameters(params)
+            .httpMethod(.delete)
+            .addValue("Content-Type", value: "application/json")
+            .responseDecodable(type: GYGGenericDataParser<GYGBookingsParser>.self) { (result) in
+            switch result {
+            case .success(let model):
+                completion(.success(model.data?.bookings))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+}
+
+
+
+extension GetYourGuideApi {
     
     public func paymentConfiguration(country: String = "US",
                                         language: String = "en",
@@ -379,7 +472,6 @@ extension GetYourGuideApi {
         networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGPaymentConfiuration>.self) { (result) in
             switch result {
             case .success(let model):
-                
                 print("MODEL \(model)")
                 completion(.success(model.data?.paymentMethods ?? []))
             case .failure(let error):
@@ -387,10 +479,6 @@ extension GetYourGuideApi {
             }
         }
     }
-}
-
-
-extension GetYourGuideApi {
     
     public func cart(shoppingCartId: Int,
                      shoppingCartHash: String,
@@ -398,7 +486,8 @@ extension GetYourGuideApi {
                      traveler: GYGTraveler? = nil,
                      payment: GYGPayment,
                      language: String = "en",
-                     currency: String = "usd") {
+                     currency: String = "usd",
+                     completion: @escaping (Result<GYGPaymentResult?, Error>) -> Void) {
         
         let path = "/1/carts"
         let travelModel = traveler == nil ? GYGTraveler(billing: billing) : traveler!
@@ -411,30 +500,47 @@ extension GetYourGuideApi {
         let mainData = MainData(baseData, data)
     
         let result = networkController!.encodeData(mainData)
-        print(" ")
-        print("-----")
-        print(String(data: result!, encoding: .utf8)!)
-        print("-----")
-        print(" ")
-        
         networkController?
             .urlComponentPath(path)
             .bodyData(mainData)
             .httpMethod(.post)
             .addValue("Content-Type", value: "application/json")
-            .responseDecodable(type: GYGGenericDataParser<GYGBookingsParser>.self) { (result) in
+            .responseDecodable(type: GYGGenericDataParser<GYGPaymentResult>.self) { (result) in
             switch result {
             case .success(let model):
-                
                 print("MODEL \(model)")
-                
+                completion(.success(model.data))
             case .failure(let error):
                 print("Mazinga \(error)")
-                //completion(.failure(error))
+                completion(.failure(error))
             }
         }
- 
     }
+    
+    public func getCart(hash: String,
+                        language: String = "en",
+                        currency: String = "usd",
+                        completion: @escaping (Result<GYGPaymentResult?, Error>) -> Void) {
+        let path = "/1/carts/\(hash)"
+        var params = [String: String]()
+        params["cnt_language"] = "\(language)"
+        params["currency"] = "\(currency)"
+        networkController?
+            .urlComponentPath(path)
+            .parameters(params)
+            .httpMethod(.get)
+            .addValue("Content-Type", value: "application/json")
+            .responseDecodable(type: GYGGenericDataParser<GYGGetCartResult>.self) { (result) in
+            switch result {
+            case .success(let model):
+                completion(.success(model.data?.shoppingCart))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
 }
 
 
@@ -505,9 +611,11 @@ public struct GYGBookingCategoryPropety: CustomDecodable {
 
     public var categoryId: Int
     public var numberOfParticipants: Int
+    public var name: String
     
-    public init(categoryId: Int, numberOfParticipants: Int) {
+    public init(categoryId: Int, name:String, numberOfParticipants: Int) {
         self.categoryId = categoryId
+        self.name = name
         self.numberOfParticipants = numberOfParticipants
     }
     

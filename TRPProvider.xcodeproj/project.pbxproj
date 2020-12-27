@@ -6,10 +6,23 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		B265064725574F0400E4C1C6 /* TRPProviderAggregater */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = B265064A25574F0400E4C1C6 /* Build configuration list for PBXAggregateTarget "TRPProviderAggregater" */;
+			buildPhases = (
+				B265064E25574F1800E4C1C6 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = TRPProviderAggregater;
+			productName = TRPProviderAggregater;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		B2145EF924B348D9002F112A /* NetworkControllerWithComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */; };
 		B24B823724B727DF0059A4B9 /* GenericParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BB24AF7CA000A3117F /* GenericParser.swift */; };
-		B24B823A24B7452A0059A4B9 /* TRPUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24B823924B7452A0059A4B9 /* TRPUIKit.framework */; };
 		B252FC3624BD72620014B750 /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580EB024B494FC00A704FB /* ReservationViewController.swift */; };
 		B252FC3724BD727C0014B750 /* ReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580EB224B4956C00A704FB /* ReservationViewModel.swift */; };
 		B252FC3824BD72810014B750 /* ReservationUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26AA01224B613CA007A0755 /* ReservationUserInfoViewModel.swift */; };
@@ -30,6 +43,9 @@
 		B256DB5024ADFD7E00925A0B /* YelpApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4F24ADFD7E00925A0B /* YelpApiTest.swift */; };
 		B256DB5324AE087C00925A0B /* YelpBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB5224AE087C00925A0B /* YelpBusiness.swift */; };
 		B256DB5624AE220E00925A0B /* YelpOpenings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB5524AE220E00925A0B /* YelpOpenings.swift */; };
+		B25808012598C43F00E3F562 /* JsonExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25808002598C43F00E3F562 /* JsonExample.swift */; };
+		B25808062598DC0700E3F562 /* GYGGetBookingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25808052598DC0700E3F562 /* GYGGetBookingResult.swift */; };
+		B258080A2598DF5800E3F562 /* GYGGetCartResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25808092598DF5800E3F562 /* GYGGetCartResult.swift */; };
 		B2580E8024B4521300A704FB /* MockSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580E7F24B4521300A704FB /* MockSession.swift */; };
 		B2580E8124B452DE00A704FB /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BD24AFA0E300A3117F /* NetworkController.swift */; };
 		B2580E8224B452E800A704FB /* YelpApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4C24ADFBD300925A0B /* YelpApi.swift */; };
@@ -52,6 +68,18 @@
 		B25B375725274CE600B595AB /* GYGTourOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25B375625274CE600B595AB /* GYGTourOption.swift */; };
 		B25B378925275C6800B595AB /* GYGOptionPricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25B378825275C6800B595AB /* GYGOptionPricing.swift */; };
 		B25C832724B8AC89006167E4 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25C832624B8AC89006167E4 /* Reservation.swift */; };
+		B25F814A257FBF54001503A0 /* GYGBookingsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F8149257FBF54001503A0 /* GYGBookingsParser.swift */; };
+		B26100122596656400466247 /* GYGCardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26100112596656400466247 /* GYGCardType.swift */; };
+		B2610019259707F400466247 /* FetchTourOptionsUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2610018259707F400466247 /* FetchTourOptionsUseCases.swift */; };
+		B261003625977ECA00466247 /* GYGBilling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261003525977ECA00466247 /* GYGBilling.swift */; };
+		B261003A25977F2900466247 /* GYGTraveler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261003925977F2900466247 /* GYGTraveler.swift */; };
+		B261003E2597801A00466247 /* GYGPaymentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261003D2597801A00466247 /* GYGPaymentResult.swift */; };
+		B265065925574F6F00E4C1C6 /* TRPUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B265065825574F6F00E4C1C6 /* TRPUIKit.framework */; };
+		B265950E25808E63008BA3C2 /* MakeBookingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B265950D25808E63008BA3C2 /* MakeBookingUseCase.swift */; };
+		B265954925811B5C008BA3C2 /* GYGErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B265954825811B5C008BA3C2 /* GYGErrorParser.swift */; };
+		B26664F425839CBF001D7008 /* GYGShoppingCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26664F325839CBF001D7008 /* GYGShoppingCart.swift */; };
+		B2677B5D2593D7AF00EDB183 /* GYGCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2677B5C2593D7AF00EDB183 /* GYGCard.swift */; };
+		B2677B7E2593DDA200EDB183 /* TRPProvider-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = B2677B7D2593DDA200EDB183 /* TRPProvider-Bridging-Header.m */; };
 		B269E5B5251B82AC001195F0 /* GYGReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269E5B4251B82AC001195F0 /* GYGReview.swift */; };
 		B269E5B9251B82C3001195F0 /* GYGOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269E5B8251B82C3001195F0 /* GYGOutline.swift */; };
 		B269E5BD251B82DB001195F0 /* GYGReviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269E5BC251B82DB001195F0 /* GYGReviews.swift */; };
@@ -69,6 +97,11 @@
 		B276F1B3250FB7FF00AC2360 /* GYGCatalogCategoryIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276F1B2250FB7FF00AC2360 /* GYGCatalogCategoryIds.swift */; };
 		B27CC4BC24AF7CA000A3117F /* GenericParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BB24AF7CA000A3117F /* GenericParser.swift */; };
 		B27CC4BE24AFA0E300A3117F /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BD24AFA0E300A3117F /* NetworkController.swift */; };
+		B27EE334258288990018F103 /* PaymentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27EE333258288990018F103 /* PaymentConfiguration.swift */; };
+		B281B51B25946DB1006A0D96 /* AdyenCSE in Resources */ = {isa = PBXBuildFile; fileRef = B281B51A25946DB0006A0D96 /* AdyenCSE */; };
+		B281B55A25947D21006A0D96 /* TRPProvider.h in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE8224ADECCF0056D5E0 /* TRPProvider.h */; };
+		B281B58A25947EC9006A0D96 /* AdyenCSE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B281B58525947EB3006A0D96 /* AdyenCSE.framework */; };
+		B281B58B25947EC9006A0D96 /* AdyenCSE.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B281B58525947EB3006A0D96 /* AdyenCSE.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B297DC5524C5B24D00540788 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B297DC5424C5B24D00540788 /* Assets.xcassets */; };
 		B297DC5B24C5E8DB00540788 /* YelpStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B297DC5A24C5E8DB00540788 /* YelpStatus.swift */; };
 		B2BDAE8924ADECCF0056D5E0 /* TRPProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2BDAE7F24ADECCF0056D5E0 /* TRPProvider.framework */; };
@@ -89,6 +122,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B281B58425947EB3006A0D96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B281B58025947EB3006A0D96 /* AdyenCSE.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E20AD18F1EFBE0220065B70E;
+			remoteInfo = AdyenCSE;
+		};
 		B2BDAE8A24ADECCF0056D5E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B2BDAE7624ADECCF0056D5E0 /* Project object */;
@@ -97,6 +137,20 @@
 			remoteInfo = TRPProvider;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B281B58C25947EC9006A0D96 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B281B58B25947EC9006A0D96 /* AdyenCSE.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkControllerWithComponentTest.swift; sourceTree = "<group>"; };
@@ -110,6 +164,9 @@
 		B256DB4F24ADFD7E00925A0B /* YelpApiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiTest.swift; sourceTree = "<group>"; };
 		B256DB5224AE087C00925A0B /* YelpBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpBusiness.swift; sourceTree = "<group>"; };
 		B256DB5524AE220E00925A0B /* YelpOpenings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpOpenings.swift; sourceTree = "<group>"; };
+		B25808002598C43F00E3F562 /* JsonExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonExample.swift; sourceTree = "<group>"; };
+		B25808052598DC0700E3F562 /* GYGGetBookingResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGGetBookingResult.swift; sourceTree = "<group>"; };
+		B25808092598DF5800E3F562 /* GYGGetCartResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGGetCartResult.swift; sourceTree = "<group>"; };
 		B2580E7F24B4521300A704FB /* MockSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSession.swift; sourceTree = "<group>"; };
 		B2580E8824B457C100A704FB /* FileReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileReader.swift; sourceTree = "<group>"; };
 		B2580E8A24B458F700A704FB /* test_business.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_business.json; sourceTree = "<group>"; };
@@ -127,6 +184,18 @@
 		B25B375625274CE600B595AB /* GYGTourOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGTourOption.swift; sourceTree = "<group>"; };
 		B25B378825275C6800B595AB /* GYGOptionPricing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGOptionPricing.swift; sourceTree = "<group>"; };
 		B25C832624B8AC89006167E4 /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
+		B25F8149257FBF54001503A0 /* GYGBookingsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGBookingsParser.swift; sourceTree = "<group>"; };
+		B26100112596656400466247 /* GYGCardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGCardType.swift; sourceTree = "<group>"; };
+		B2610018259707F400466247 /* FetchTourOptionsUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTourOptionsUseCases.swift; sourceTree = "<group>"; };
+		B261003525977ECA00466247 /* GYGBilling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGBilling.swift; sourceTree = "<group>"; };
+		B261003925977F2900466247 /* GYGTraveler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGTraveler.swift; sourceTree = "<group>"; };
+		B261003D2597801A00466247 /* GYGPaymentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGPaymentResult.swift; sourceTree = "<group>"; };
+		B265065825574F6F00E4C1C6 /* TRPUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TRPUIKit.framework; sourceTree = "<group>"; };
+		B265950D25808E63008BA3C2 /* MakeBookingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeBookingUseCase.swift; sourceTree = "<group>"; };
+		B265954825811B5C008BA3C2 /* GYGErrorParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGErrorParser.swift; sourceTree = "<group>"; };
+		B26664F325839CBF001D7008 /* GYGShoppingCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGShoppingCart.swift; sourceTree = "<group>"; };
+		B2677B5C2593D7AF00EDB183 /* GYGCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGCard.swift; sourceTree = "<group>"; };
+		B2677B7D2593DDA200EDB183 /* TRPProvider-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TRPProvider-Bridging-Header.m"; sourceTree = "<group>"; };
 		B269E5B4251B82AC001195F0 /* GYGReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGReview.swift; sourceTree = "<group>"; };
 		B269E5B8251B82C3001195F0 /* GYGOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGOutline.swift; sourceTree = "<group>"; };
 		B269E5BC251B82DB001195F0 /* GYGReviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGReviews.swift; sourceTree = "<group>"; };
@@ -144,6 +213,9 @@
 		B276F1B2250FB7FF00AC2360 /* GYGCatalogCategoryIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGCatalogCategoryIds.swift; sourceTree = "<group>"; };
 		B27CC4BB24AF7CA000A3117F /* GenericParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericParser.swift; sourceTree = "<group>"; };
 		B27CC4BD24AFA0E300A3117F /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		B27EE333258288990018F103 /* PaymentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfiguration.swift; sourceTree = "<group>"; };
+		B281B51A25946DB0006A0D96 /* AdyenCSE */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AdyenCSE; sourceTree = "<group>"; };
+		B281B58025947EB3006A0D96 /* AdyenCSE.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AdyenCSE.xcodeproj; path = "adyen-cse-ios-master/AdyenCSE.xcodeproj"; sourceTree = "<group>"; };
 		B297DC5424C5B24D00540788 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B297DC5A24C5E8DB00540788 /* YelpStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpStatus.swift; sourceTree = "<group>"; };
 		B2BDAE7F24ADECCF0056D5E0 /* TRPProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TRPProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,7 +237,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B24B823A24B7452A0059A4B9 /* TRPUIKit.framework in Frameworks */,
+				B281B58A25947EC9006A0D96 /* AdyenCSE.framework in Frameworks */,
+				B265065925574F6F00E4C1C6 /* TRPUIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +256,7 @@
 		B24B823824B7452A0059A4B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B265065825574F6F00E4C1C6 /* TRPUIKit.framework */,
 				B24B823924B7452A0059A4B9 /* TRPUIKit.framework */,
 			);
 			name = Frameworks;
@@ -298,6 +372,8 @@
 		B25A7840250B6BF900F9395C /* GetYourGuide */ = {
 			isa = PBXGroup;
 			children = (
+				B26100172597070400466247 /* UseCase */,
+				B281B51A25946DB0006A0D96 /* AdyenCSE */,
 				B25A7843250B6C2000F9395C /* Models */,
 				B25A7841250B6C1500F9395C /* GetYourGuideApi.swift */,
 			);
@@ -322,8 +398,28 @@
 				B25580662525DD4D00E2F42F /* GYGToursParser.swift */,
 				B25B375625274CE600B595AB /* GYGTourOption.swift */,
 				B25B378825275C6800B595AB /* GYGOptionPricing.swift */,
+				B25F8149257FBF54001503A0 /* GYGBookingsParser.swift */,
+				B265954825811B5C008BA3C2 /* GYGErrorParser.swift */,
+				B27EE333258288990018F103 /* PaymentConfiguration.swift */,
+				B26664F325839CBF001D7008 /* GYGShoppingCart.swift */,
+				B2677B5C2593D7AF00EDB183 /* GYGCard.swift */,
+				B26100112596656400466247 /* GYGCardType.swift */,
+				B261003525977ECA00466247 /* GYGBilling.swift */,
+				B261003925977F2900466247 /* GYGTraveler.swift */,
+				B261003D2597801A00466247 /* GYGPaymentResult.swift */,
+				B25808052598DC0700E3F562 /* GYGGetBookingResult.swift */,
+				B25808092598DF5800E3F562 /* GYGGetCartResult.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B26100172597070400466247 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				B265950D25808E63008BA3C2 /* MakeBookingUseCase.swift */,
+				B2610018259707F400466247 /* FetchTourOptionsUseCases.swift */,
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		B26AA00F24B61390007A0755 /* ReservationUserInfo */ = {
@@ -344,9 +440,18 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		B281B58125947EB3006A0D96 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B281B58525947EB3006A0D96 /* AdyenCSE.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		B2BDAE7524ADECCF0056D5E0 = {
 			isa = PBXGroup;
 			children = (
+				B281B58025947EB3006A0D96 /* AdyenCSE.xcodeproj */,
 				B2BDAE8124ADECCF0056D5E0 /* TRPProvider */,
 				B2BDAE8C24ADECCF0056D5E0 /* TRPProviderTests */,
 				B2BDAE8024ADECCF0056D5E0 /* Products */,
@@ -374,6 +479,8 @@
 				B2BDAE8224ADECCF0056D5E0 /* TRPProvider.h */,
 				B2BDAE8324ADECCF0056D5E0 /* Info.plist */,
 				B297DC5424C5B24D00540788 /* Assets.xcassets */,
+				B2677B7D2593DDA200EDB183 /* TRPProvider-Bridging-Header.m */,
+				B25808002598C43F00E3F562 /* JsonExample.swift */,
 			);
 			path = TRPProvider;
 			sourceTree = "<group>";
@@ -427,6 +534,7 @@
 				B2BDAE7B24ADECCF0056D5E0 /* Sources */,
 				B2BDAE7C24ADECCF0056D5E0 /* Frameworks */,
 				B2BDAE7D24ADECCF0056D5E0 /* Resources */,
+				B281B58C25947EC9006A0D96 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -465,9 +573,12 @@
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Tripian Inc";
 				TargetAttributes = {
+					B265064725574F0400E4C1C6 = {
+						CreatedOnToolsVersion = 12.0;
+					};
 					B2BDAE7E24ADECCF0056D5E0 = {
 						CreatedOnToolsVersion = 11.5;
-						LastSwiftMigration = 1150;
+						LastSwiftMigration = 1200;
 					};
 					B2BDAE8724ADECCF0056D5E0 = {
 						CreatedOnToolsVersion = 11.5;
@@ -485,19 +596,37 @@
 			mainGroup = B2BDAE7524ADECCF0056D5E0;
 			productRefGroup = B2BDAE8024ADECCF0056D5E0 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B281B58125947EB3006A0D96 /* Products */;
+					ProjectRef = B281B58025947EB3006A0D96 /* AdyenCSE.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B2BDAE7E24ADECCF0056D5E0 /* TRPProvider */,
 				B2BDAE8724ADECCF0056D5E0 /* TRPProviderTests */,
+				B265064725574F0400E4C1C6 /* TRPProviderAggregater */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B281B58525947EB3006A0D96 /* AdyenCSE.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AdyenCSE.framework;
+			remoteRef = B281B58425947EB3006A0D96 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B2BDAE7D24ADECCF0056D5E0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B281B51B25946DB1006A0D96 /* AdyenCSE in Resources */,
 				B297DC5524C5B24D00540788 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -513,36 +642,71 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B265064E25574F1800E4C1C6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#!/bin/sh\n\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target \"${PROJECT_NAME}\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"${PROJECT_NAME}\" -configuration ${CONFIGURATION} -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build EXCLUDED_ARCHS=\"arm64\"\n\n# Step 2. Copy the framework structure (from iphoneos build) to the universal folder\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# Step 3. Copy Swift modules from iphonesimulator build (if it exists) to the copied framework directory\nSIMULATOR_SWIFT_MODULES_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule/.\"\nif [ -d \"${SIMULATOR_SWIFT_MODULES_DIR}\" ]; then\ncp -R \"${SIMULATOR_SWIFT_MODULES_DIR}\" \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule\"\nfi\n\n# Step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n\n# Step 5. Convenience step to copy the framework to the project's directory\ncp -R \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework\" \"${PROJECT_DIR}\"\n\n# Step 6. Convenience step to open the project's directory in Finder\nopen \"${PROJECT_DIR}\"\n\n\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B2BDAE7B24ADECCF0056D5E0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B281B55A25947D21006A0D96 /* TRPProvider.h in Sources */,
 				B2580EC324B49F0800A704FB /* ReservationDatePickerCell.swift in Sources */,
 				B2BDAE9B24ADECF40056D5E0 /* Networking.swift in Sources */,
 				B25C832724B8AC89006167E4 /* Reservation.swift in Sources */,
+				B25F814A257FBF54001503A0 /* GYGBookingsParser.swift in Sources */,
+				B258080A2598DF5800E3F562 /* GYGGetCartResult.swift in Sources */,
 				B256DB4D24ADFBD300925A0B /* YelpApi.swift in Sources */,
 				B26AA01124B613A8007A0755 /* ReservationUserInfoViewController.swift in Sources */,
+				B2610019259707F400466247 /* FetchTourOptionsUseCases.swift in Sources */,
+				B261003E2597801A00466247 /* GYGPaymentResult.swift in Sources */,
 				B269E5BD251B82DB001195F0 /* GYGReviews.swift in Sources */,
 				B2580EB124B494FC00A704FB /* ReservationViewController.swift in Sources */,
 				B2D10DB424BC494F005394C3 /* YelpError.swift in Sources */,
 				B2580EB324B4956C00A704FB /* ReservationViewModel.swift in Sources */,
+				B25808062598DC0700E3F562 /* GYGGetBookingResult.swift in Sources */,
 				B25B375725274CE600B595AB /* GYGTourOption.swift in Sources */,
+				B26100122596656400466247 /* GYGCardType.swift in Sources */,
 				B25A7842250B6C1500F9395C /* GetYourGuideApi.swift in Sources */,
+				B25808012598C43F00E3F562 /* JsonExample.swift in Sources */,
 				B269E5B9251B82C3001195F0 /* GYGOutline.swift in Sources */,
 				B252FC4224BDC1450014B750 /* YelpReservation.swift in Sources */,
 				B297DC5B24C5E8DB00540788 /* YelpStatus.swift in Sources */,
 				B27CC4BC24AF7CA000A3117F /* GenericParser.swift in Sources */,
 				B276F1B3250FB7FF00AC2360 /* GYGCatalogCategoryIds.swift in Sources */,
+				B2677B5D2593D7AF00EDB183 /* GYGCard.swift in Sources */,
 				B2580EC524B4A73F00A704FB /* ReservationPeopleCell.swift in Sources */,
 				B276F1B1250FB6D000AC2360 /* GYGCategories.swift in Sources */,
 				B2723DFC2525BA680022E4D4 /* GYGSortDirection.swift in Sources */,
+				B261003A25977F2900466247 /* GYGTraveler.swift in Sources */,
 				B276F1AD250F8C4500AC2360 /* GYGTours.swift in Sources */,
+				B2677B7E2593DDA200EDB183 /* TRPProvider-Bridging-Header.m in Sources */,
 				B25B378925275C6800B595AB /* GYGOptionPricing.swift in Sources */,
 				B2D10DAD24BC4128005394C3 /* NetworkError.swift in Sources */,
+				B265950E25808E63008BA3C2 /* MakeBookingUseCase.swift in Sources */,
 				B2D10DAF24BC4295005394C3 /* NetworkResponse.swift in Sources */,
+				B26664F425839CBF001D7008 /* GYGShoppingCart.swift in Sources */,
 				B25A7847250B977200F9395C /* GYGGenericParser.swift in Sources */,
 				B252FC4524BDE1020014B750 /* String+Extensions.swift in Sources */,
+				B27EE334258288990018F103 /* PaymentConfiguration.swift in Sources */,
+				B261003625977ECA00466247 /* GYGBilling.swift in Sources */,
 				B256DB4B24ADFBBE00925A0B /* TRPProvider.swift in Sources */,
 				B25A7845250B6C3800F9395C /* GYGTour.swift in Sources */,
 				B2723E0E2525C7F30022E4D4 /* GYGAvailability.swift in Sources */,
@@ -551,6 +715,7 @@
 				B26AA00D24B5E3ED007A0755 /* ReservationAlternatviceHourCollectionCell.swift in Sources */,
 				B2723DF82525BA540022E4D4 /* GYGSortField.swift in Sources */,
 				B26AA01324B613CA007A0755 /* ReservationUserInfoViewModel.swift in Sources */,
+				B265954925811B5C008BA3C2 /* GYGErrorParser.swift in Sources */,
 				B256DB5324AE087C00925A0B /* YelpBusiness.swift in Sources */,
 				B25580672525DD4D00E2F42F /* GYGToursParser.swift in Sources */,
 				B27CC4BE24AFA0E300A3117F /* NetworkController.swift in Sources */,
@@ -612,6 +777,24 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		B265064825574F0400E4C1C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CWX3XD8XC2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B265064925574F0400E4C1C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CWX3XD8XC2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		B2BDAE9124ADECCF0056D5E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -667,8 +850,10 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -723,8 +908,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -742,6 +929,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = TRPProvider/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -753,6 +944,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tripian.TRPProvider;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -769,6 +962,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = TRPProvider/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -780,6 +977,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tripian.TRPProvider;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -826,6 +1025,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B265064A25574F0400E4C1C6 /* Build configuration list for PBXAggregateTarget "TRPProviderAggregater" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B265064825574F0400E4C1C6 /* Debug */,
+				B265064925574F0400E4C1C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B2BDAE7924ADECCF0056D5E0 /* Build configuration list for PBXProject "TRPProvider" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

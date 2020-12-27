@@ -38,16 +38,17 @@ public protocol BillingUseCase {
 
 public protocol PaymentUseCase {
     
+    func getReviewOrder() -> (title: String?, dateTime: String?, option:GYGTourOption?, price: Double?, people: [GYGBookingCategoryPropety]?)
+    
     func getConfiguration(completion: ((Result<[GYGPaymentMethod], Error>) -> Void)?)
     
     func setCreditCard(card: GYGCard)
     
     func createAdyenKey() -> String?
     
-    func postCart(completion: ((Result<GYGBookings, Error>) -> Void)?)
-    
+    func postCart(completion: ((Result<GYGPaymentResult?, Error>) -> Void)?)
+ 
 }
-
 
 public class TRPMakeBookingUseCases {
     private(set) var optionId: Int?
@@ -63,10 +64,11 @@ public class TRPMakeBookingUseCases {
     private(set) var paymentInfo: GYGPayment?
     private(set) var cardInfo: GYGCard?
     private(set) var adyenToken: String?
+    
+    public var optionDataHolder: TourOptionDataHolder?
+    public var tour: GYGTour?
     public init() {}
 }
-
-
 
 extension TRPMakeBookingUseCases: BookingOptionsUseCase {
     
@@ -98,7 +100,6 @@ extension TRPMakeBookingUseCases: BookingParametersUseCase {
 
 extension TRPMakeBookingUseCases: PostBookingUseCase {
     
-    
     public func postBooking(completion: ((Result<GYGBookings?, Error>) -> Void)?) {
         
         guard let id = optionId, let date = bookingDateTime, let price = bookingPrice else {
@@ -124,8 +125,6 @@ extension TRPMakeBookingUseCases: PostBookingUseCase {
 
 extension TRPMakeBookingUseCases: BillingUseCase {
     
-  
-    
     public func setBillingInfo(_ billing: GYGBilling) {
         self.billingInfo = billing
     }
@@ -138,12 +137,18 @@ extension TRPMakeBookingUseCases: BillingUseCase {
 
 extension TRPMakeBookingUseCases: PaymentUseCase {
 
+    public func getReviewOrder() -> (title: String?,dateTime: String?, option: GYGTourOption?, price: Double?, people: [GYGBookingCategoryPropety]?) {
+        let option = optionDataHolder?.tourOptions.first(where: {$0.optionID == (optionId ?? 0)})
+        return (self.tour?.title, self.bookingDateTime, option, self.bookingPrice, self.bookingCategry)
+    }
+
     public func getConfiguration(completion: ((Result<[GYGPaymentMethod], Error>) -> Void)?) {
         GetYourGuideApi().paymentConfiguration { [weak self] result in
             switch result {
             case .success(let methods):
-                if let key = methods.first?.publicKey {
-                    self?.publicKey = key
+                
+                if let encrytedMethod = methods.first(where: {$0.name == "encrypted_credit_card"}) {
+                    self?.publicKey = encrytedMethod.publicKey
                 }
                 completion?(.success(methods))
             case .failure(let error):
@@ -151,8 +156,6 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
             }
         }
     }
-    
-    
     
     public func setCreditCard(card: GYGCard) {
         self.cardInfo = card
@@ -193,7 +196,7 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
     }
     
     
-    public func postCart(completion: ((Result<GYGBookings, Error>) -> Void)?) {
+    public func postCart(completion: ((Result<GYGPaymentResult?, Error>) -> Void)?) {
         
         guard let payment = paymentInfo else {
             print("[Error] Payment Info is nil")
@@ -210,11 +213,21 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
             return
         }
         
+        
+        
         GetYourGuideApi().cart(shoppingCartId: booking.shoppingCartID,
                                shoppingCartHash: booking.bookingHash,
                                billing: billing,
                                traveler: travellerInfo,
-                               payment: payment)
+                               payment: payment) { result in
+            
+            switch result {
+            case .success(let payment):
+                completion?(.success(payment))
+            case .failure(let error):
+                completion?(.failure(error))
+            }
+        }
     }
     
 }

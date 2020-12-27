@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
 //! Project version number for TRPProvider.
 FOUNDATION_EXPORT double TRPProviderVersionNumber;
 
