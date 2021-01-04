@@ -12,7 +12,7 @@ public struct GYGPaymentResult: Codable {
     public let status: String
     public let billing: GYGBilling
     public let shoppingCartHash: String
-    public let traveler: GYGTraveler
+    public let traveler: GYGTraveler?
     public let bookings: [GYGPaymentBooking]
     public let shoppingCartID: Int
     public let paymentInfo: GYGPaymentInfo
@@ -27,9 +27,9 @@ public struct GYGPaymentResult: Codable {
 }
 
 public struct GYGPaymentInfo: Codable {
-    public let paymentMethod: String
+    public let paymentMethod: String?
     public let precouponPrice, totalPrice: Double
-    public let paymentCurrency, invoiceReference: String
+    public let paymentCurrency, invoiceReference: String?
 
     enum CodingKeys: String, CodingKey {
         case paymentMethod = "payment_method"

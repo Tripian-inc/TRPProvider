@@ -45,10 +45,9 @@ public class GetYourGuideApi {
     public func jsonParser() {
         let bookingHash = "PXYB4N00PRSRD0ANFHY09HA30Q7DO9WD"
         let cardHash = "58YAF7I7OJSKFUKFHK0IUNQLJ1FB3L3L"
-        getCart(hash: cardHash) { (result) in
-            print("Result")
-            print(result)
-        }
+        
+      
+        
         
         /*getBooking(hash: "PXYB4N00PRSRD0ANFHY09HA30Q7DO9WD") { (result) in
             print("Result")
@@ -62,8 +61,8 @@ public class GetYourGuideApi {
         
         
         
-        /*let data = Data(paymentJsonResult.utf8)
-        GenericParser<GYGGenericDataParser<GYGPaymentResult>>().parse(data: data) { result in
+        let data = Data(cardJsonResult.utf8)
+        GenericParser<GYGGenericDataParser<GYGGetCartResult>>().parse(data: data) { result in
             switch result {
             case .success(let decoded):
                 if data == nil {
@@ -77,7 +76,7 @@ public class GetYourGuideApi {
                 print("Error \(error.localizedDescription)")
             }
             
-        } */
+        }
     }
 }
 
@@ -224,15 +223,25 @@ extension GetYourGuideApi {
     }
     
     
-    public func optionsAvailability(tourId id: Int,
-                                   language: String = "en",
-                                   currency: String = "usd",
-                                   completion: @escaping (Result<[GYGTourOption], Error>) -> Void) {
+    public func options(optionId id: Int,
+                        language: String = "en",
+                        currency: String = "usd",
+                        completion: @escaping (Result<GYGTourOption?, Error>) -> Void) {
+        let path = "/1/options/\(id)"
+        var params = [String: String]()
+        params["cnt_language"] = "\(language)"
+        params["currency"] = "\(currency)"
         
-    }
-    
-    public func optionsAvailability(optionId id: Int ) {
-        // /options/[option_id]/availabilities
+        
+        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGToursOptionParser>.self) { (result) in
+            switch result {
+            case .success(let model):
+                print("MODEL \(model)")
+                completion(.success(model.data?.options?.first))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
     
 }

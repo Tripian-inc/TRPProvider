@@ -8,6 +8,7 @@
 
 import Foundation
 import AdyenCSE
+
 public protocol BookingOptionsUseCase {
     
     func setBookinOptionId(id: Int)
@@ -40,6 +41,8 @@ public protocol PaymentUseCase {
     
     func getReviewOrder() -> (title: String?, dateTime: String?, option:GYGTourOption?, price: Double?, people: [GYGBookingCategoryPropety]?)
     
+    func getReviewOrders(completion: ((Result<[GYGReviewOrder], Error>) -> Void)?)
+    
     func getConfiguration(completion: ((Result<[GYGPaymentMethod], Error>) -> Void)?)
     
     func setCreditCard(card: GYGCard)
@@ -47,18 +50,22 @@ public protocol PaymentUseCase {
     func createAdyenKey() -> String?
     
     func postCart(completion: ((Result<GYGPaymentResult?, Error>) -> Void)?)
- 
+    
+}
+
+public protocol CheckCardAndBookingUseCase {
+    func removeOldBookingInCardIfNeedeed(completion: ((Result<Bool?, Error>) -> Void)?)
 }
 
 public class TRPMakeBookingUseCases {
-    private(set) var optionId: Int?
-    private(set) var bookingDateTime: String?
-    private(set) var bookingPrice: Double?
-    private(set) var bookingCategry: [GYGBookingCategoryPropety]?
+    public var optionId: Int?
+    public var bookingDateTime: String?
+    public var bookingPrice: Double?
+    public var bookingCategry: [GYGBookingCategoryPropety]?
     private(set) var bookingParameters: [GYGBookingParameterProperty]?
     
     private(set) var publicKey: String?
-    private(set) var bookingInfo: GYGBookings?
+    public var bookingInfo: GYGBookings?
     private(set) var billingInfo: GYGBilling?
     private(set) var travellerInfo: GYGTraveler?
     private(set) var paymentInfo: GYGPayment?
@@ -91,11 +98,11 @@ extension TRPMakeBookingUseCases: BookingOptionsUseCase {
 }
 
 extension TRPMakeBookingUseCases: BookingParametersUseCase {
-
+    
     public func setBookingParameters(_ bookingParameters: [GYGBookingParameterProperty]) {
         self.bookingParameters = bookingParameters
     }
-
+    
 }
 
 extension TRPMakeBookingUseCases: PostBookingUseCase {
@@ -136,12 +143,60 @@ extension TRPMakeBookingUseCases: BillingUseCase {
 }
 
 extension TRPMakeBookingUseCases: PaymentUseCase {
-
+    
+    
+    //Depreceted
+    public func getReviewOrders(completion: ((Result<[GYGReviewOrder], Error>) -> Void)?) {
+        guard let cardHash = bookingInfo?.bookingHash else {
+            print("[Error] Card hash is nil")
+            return
+        }
+        GetYourGuideApi().getCart(hash: cardHash) { result in
+            switch result {
+            case .success(let card):
+                
+                var reviewOrders = [GYGReviewOrder]()
+                
+                if let bookings = card?.bookings {
+                    bookings.forEach { booking in
+                        GetYourGuideApi().options(optionId: booking.bookable.optionID) { result in
+                            switch result {
+                            case .success(let option):
+                                
+                                let reviewOrder = GYGReviewOrder(title: option?.title,
+                                                                 optionTitle: option?.title,
+                                                                 bookable: booking.bookable,
+                                                                 price: booking.bookable.price,
+                                                                 people: booking.bookable.categories,
+                                                                 status: booking.bookingStatus,
+                                                                 dateTime: booking.bookable.datetime)
+                                reviewOrders.append(reviewOrder)
+                                if reviewOrders.count == bookings.count {
+                                    completion?(.success(reviewOrders))
+                                }
+                                
+                            case .failure(let error):
+                                completion?(.failure(error))
+                            }
+                        }
+                    }
+                    
+                }else {
+                    completion?(.success([]))
+                }
+                
+            case .failure(let error):
+                completion?(.failure(error))
+            }
+        }
+    }
+    
+    
     public func getReviewOrder() -> (title: String?,dateTime: String?, option: GYGTourOption?, price: Double?, people: [GYGBookingCategoryPropety]?) {
         let option = optionDataHolder?.tourOptions.first(where: {$0.optionID == (optionId ?? 0)})
         return (self.tour?.title, self.bookingDateTime, option, self.bookingPrice, self.bookingCategry)
     }
-
+    
     public func getConfiguration(completion: ((Result<[GYGPaymentMethod], Error>) -> Void)?) {
         GetYourGuideApi().paymentConfiguration { [weak self] result in
             switch result {
@@ -213,8 +268,6 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
             return
         }
         
-        
-        
         GetYourGuideApi().cart(shoppingCartId: booking.shoppingCartID,
                                shoppingCartHash: booking.bookingHash,
                                billing: billing,
@@ -229,5 +282,60 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
             }
         }
     }
+    
+}
+
+extension TRPMakeBookingUseCases: CheckCardAndBookingUseCase {
+    
+    
+    public func removeOldBookingInCardIfNeedeed(completion: ((Result<Bool?, Error>) -> Void)?) {
+        
+        guard let booking = bookingInfo else {
+            print("[Error] bookingInfo is nil")
+            completion?(.success(false))
+            return
+        }
+        
+        
+        GetYourGuideApi().getCart(hash: booking.shoppingCartHash) { result in
+            switch result {
+            case .success(let payments):
+                
+                guard let _payments = payments else {return}
+                if _payments.bookings.count < 2 {
+                    completion?(.success(true))
+                }else {
+                    var removedCount = 0
+                    
+                    
+                    _payments.bookings.forEach({ bookingInCard in
+                        if bookingInCard.bookingID != booking.bookingID {
+                            GetYourGuideApi().deleteBooking(hash: bookingInCard.bookingHash) { deleteBookingResult in
+                                switch deleteBookingResult {
+                                case .success(let status):
+                                    removedCount += 1
+                                    
+                                    if ( _payments.bookings.count - 1) == removedCount {
+                                        completion?(.success(true))
+                                    }
+                                    
+                                case .failure(let error):
+                                    print("[Error] Delete Booking \(error)")
+                                }
+                            }
+                        }
+                    })
+                }
+                
+                
+            case .failure(let error):
+                completion?(.failure(error))
+                print("[Error] GetCard \(error.localizedDescription)")
+            }
+        }
+        
+    }
+    
+    
     
 }
