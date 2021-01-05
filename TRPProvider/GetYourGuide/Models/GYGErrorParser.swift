@@ -13,11 +13,12 @@ import Foundation
 
 // MARK: - Welcome
 public struct GYGErrorParser: Codable {
-    let method, status: String
-    let errors: [GYGError]
-    let date: Date
-    let helpURL: String
-    let apiVersion, descriptor: String
+    let method: String?
+    let status: String
+    let errors: [GYGError]?
+    let date: String?
+    let helpURL: String?
+    let apiVersion, descriptor: String?
 }
 
 // MARK: - Error

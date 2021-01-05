@@ -46,7 +46,11 @@ public class GetYourGuideApi {
         let bookingHash = "PXYB4N00PRSRD0ANFHY09HA30Q7DO9WD"
         let cardHash = "58YAF7I7OJSKFUKFHK0IUNQLJ1FB3L3L"
         
-      
+        
+    
+        
+        
+        
         
         
         /*getBooking(hash: "PXYB4N00PRSRD0ANFHY09HA30Q7DO9WD") { (result) in
@@ -58,25 +62,7 @@ public class GetYourGuideApi {
             print("Result")
             print(result)
         }*/
-        
-        
-        
-        let data = Data(cardJsonResult.utf8)
-        GenericParser<GYGGenericDataParser<GYGGetCartResult>>().parse(data: data) { result in
-            switch result {
-            case .success(let decoded):
-                if data == nil {
-                    print("DATA İS NİL")
-                    //self.errorHandler(rawData: strongData, mainError: error, completion: completion)
-                }else {
-                    
-                }
-               print("PARSER ÇALIŞTI \(decoded)")
-            case .failure(let error):
-                print("Error \(error.localizedDescription)")
-            }
-            
-        }
+  
     }
 }
 
@@ -116,7 +102,10 @@ extension GetYourGuideApi {
             params.append(URLQueryItem(name: "date[]", value: to))
         }
         
-        networkController?.urlComponentPath(path).parameters(params).responseDecodable(type: GYGGenericDataParser<GYGTours>.self) { (result) in
+        networkController?
+            .urlComponentPath(path)
+            .parameters(params)
+            .responseDecodable(type: GYGGenericDataParser<GYGTours>.self) { (result) in
             switch result {
             case .success(let model):
                 completion(.success(model.data?.tours ?? []))

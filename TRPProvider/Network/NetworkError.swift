@@ -23,6 +23,22 @@ public enum GYGNetworkError: Error {
         }
     }
 }
+extension GYGNetworkError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .customError(_, let message):
+            return message
+        }
+    }
+    
+    public var localizedDescription: String? {
+        switch self {
+        case .customError(_, let message):
+            return message
+        }
+    }
+}
+
 
 public enum YelpNetworkError: Error {
     case yelpErrorMessage(code: String, message: String)

@@ -10,6 +10,8 @@ import Foundation
 
 public typealias NetworkControllerResult<Success> = Result<Success, Error>
 
+
+
 enum ProviderType {
     case yelp
     case gyg
@@ -28,7 +30,7 @@ class NetworkController {
     private(set) var httpBodyData: Data?
     public var provider: ProviderType = .yelp
     
-
+    
     
     private var request: URLRequest? {
         if let component = urlComponent, let componentUrl = component.url {
@@ -59,17 +61,25 @@ class NetworkController {
             switch result {
             case .success(let data):
                 let strongData = data
+                
+                if self.provider == .gyg, let gygError = self.GYGError(data: strongData){
+                    
+                    if let firstError = gygError.errors?.first {
+                        let gygCustomError = GYGNetworkError(code:"\(firstError.errorCode)", message: firstError.errorMessage)
+                        queue.async {
+                            completion(.failure(gygCustomError))
+                        }
+                        return
+                    }
+                    
+                }
+                
                 GenericParser<T>().parse(data: strongData) { result in
                     switch result {
                     case .success(let decoded):
-                        if data == nil {
-                            print("DATA İS NİL")
-                            //self.errorHandler(rawData: strongData, mainError: error, completion: completion)
-                        }else {
-                            
-                        }
+                        guard let decoded = decoded else {return}
                         queue.async {
-                            completion(.success(decoded!))
+                            completion(.success(decoded))
                         }
                     case .failure(let error):
                         queue.async {
@@ -122,7 +132,7 @@ class NetworkController {
                 switch result {
                 case .success(let model):
                     if let model = model {
-                        if let error = model.errors.first {
+                        if let error = model.errors?.first {
                             let gygCustomError = GYGNetworkError(code:"\(error.errorCode)", message: error.errorMessage)
                             completion(.failure(gygCustomError))
                         }
@@ -134,7 +144,19 @@ class NetworkController {
                 }
             }
         }
-       
+        
+    }
+    
+    
+    private func GYGError(data: Data?) -> GYGErrorParser? {
+        guard let data = data else {return nil}
+        do {
+            let result = try JSONDecoder().decode(GYGErrorParser.self, from: data)
+            return result
+        }catch {
+            ()
+        }
+        return nil
     }
     
     
@@ -193,9 +215,9 @@ extension NetworkController {
     }
     
     /*
-    @discardableResult
-    func bodyParameters<T: >(_ )
-  */
+     @discardableResult
+     func bodyParameters<T: >(_ )
+     */
     
     @discardableResult
     func httpMethod(_ type: HttpMethod) -> Self {
@@ -210,12 +232,12 @@ extension NetworkController {
         return self
     }
     
-  
+    
     
 }
 
 extension NetworkController {
-
+    
     public func encodeData<E: Encodable>(_ model: E) -> Data? {
         do {
             let encoder = JSONEncoder()

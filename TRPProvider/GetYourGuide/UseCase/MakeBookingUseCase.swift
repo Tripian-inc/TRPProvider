@@ -314,7 +314,7 @@ extension TRPMakeBookingUseCases: CheckCardAndBookingUseCase {
                                 switch deleteBookingResult {
                                 case .success(let status):
                                     removedCount += 1
-                                    
+                                    print("[info] Old Booking removed \(removedCount)")
                                     if ( _payments.bookings.count - 1) == removedCount {
                                         completion?(.success(true))
                                     }
@@ -332,6 +332,7 @@ extension TRPMakeBookingUseCases: CheckCardAndBookingUseCase {
                 completion?(.failure(error))
                 print("[Error] GetCard \(error.localizedDescription)")
             }
+            
         }
         
     }

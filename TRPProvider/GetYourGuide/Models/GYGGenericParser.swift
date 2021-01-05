@@ -10,15 +10,15 @@ import Foundation
 internal class GYGGenericDataParser<T: Decodable>: Decodable {
     
     public var data: T?
-    
+
     private enum CodingKeys: String, CodingKey {
         case data
+        
     }
     
     required public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.data = try values.decodeIfPresent(T.self, forKey: .data)
-        
     }
     
 }
