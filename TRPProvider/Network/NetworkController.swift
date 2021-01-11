@@ -63,7 +63,6 @@ class NetworkController {
                 let strongData = data
                 
                 if self.provider == .gyg, let gygError = self.GYGError(data: strongData){
-                    
                     if let firstError = gygError.errors?.first {
                         let gygCustomError = GYGNetworkError(code:"\(firstError.errorCode)", message: firstError.errorMessage)
                         queue.async {
@@ -71,7 +70,6 @@ class NetworkController {
                         }
                         return
                     }
-                    
                 }
                 
                 GenericParser<T>().parse(data: strongData) { result in

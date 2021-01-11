@@ -32,7 +32,7 @@ public struct GYGTraveler: Codable {
     }
     
     public init(billing: GYGBilling) {
-        self.salutationCode = billing.salutationCode
+        self.salutationCode = billing.salutationCode ?? ""
         self.firstName = billing.firstName
         self.lastName = billing.lastName
         self.email = billing.email

@@ -12,11 +12,14 @@ public struct GYGCategory: Codable {
     public let categoryID: Int
     public let numberOfTours: Int?
     public let parentID: Int?
-
+    public let numberOfParticipants: Int?
+    
     enum CodingKeys: String, CodingKey {
         case name
         case categoryID = "category_id"
         case numberOfTours = "number_of_tours"
         case parentID = "parent_id"
+        case numberOfParticipants = "number_of_participants"
+        
     }
 }

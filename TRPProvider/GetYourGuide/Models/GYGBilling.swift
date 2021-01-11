@@ -10,7 +10,8 @@ import Foundation
 
 public struct GYGBilling: Codable {
     
-    public let salutationCode, firstName, lastName, email: String
+    public let salutationCode: String?
+    public let firstName, lastName, email: String
     public let isCompany: Bool
     public let companyName: String
     public let invoice: Bool

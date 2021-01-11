@@ -9,13 +9,14 @@
 import Foundation
 
 public struct GYGPaymentResult: Codable {
+    
     public let status: String
-    public let billing: GYGBilling
+    public let billing: GYGBilling?
     public let shoppingCartHash: String
     public let traveler: GYGTraveler?
     public let bookings: [GYGPaymentBooking]
     public let shoppingCartID: Int
-    public let paymentInfo: GYGPaymentInfo
+    public let paymentInfo: GYGPaymentInfo?
 
     enum CodingKeys: String, CodingKey {
         case status, billing
@@ -24,6 +25,41 @@ public struct GYGPaymentResult: Codable {
         case shoppingCartID = "shopping_cart_id"
         case paymentInfo = "payment_info"
     }
+    
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.status = try values.decode(String.self, forKey: .status)
+        self.shoppingCartHash = try values.decode(String.self, forKey: .shoppingCartHash)
+        self.shoppingCartID = try values.decode(Int.self, forKey: .shoppingCartID)
+        
+        if let billing = try? values.decodeIfPresent(GYGBilling.self, forKey: .billing) {
+            self.billing = billing
+        }else {
+            self.billing = nil
+        }
+        
+        if let traveller = try? values.decodeIfPresent(GYGTraveler.self, forKey: .traveler) {
+            traveler = traveller
+        }else {
+            traveler = nil
+        }
+        
+        if let bookings = try? values.decodeIfPresent([GYGPaymentBooking].self, forKey: .bookings) {
+            self.bookings = bookings
+        }else {
+            self.bookings = []
+        }
+        
+        if let paymentInfo = try? values.decodeIfPresent(GYGPaymentInfo?.self, forKey: .paymentInfo) {
+            self.paymentInfo = paymentInfo
+        }else {
+            self.paymentInfo = nil
+        }
+    }
+    
+ 
+    
+    
 }
 
 public struct GYGPaymentInfo: Codable {
