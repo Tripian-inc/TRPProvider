@@ -19,6 +19,10 @@ enum ProviderType {
 
 class NetworkController {
     
+    enum BodyDataType {
+        case dictionary
+        case json
+    }
     let network: Networking
     private(set) var output: Data?
     private(set) var error: Error?
@@ -29,24 +33,30 @@ class NetworkController {
     private(set) var httpBody = [String: Any]()
     private(set) var httpBodyData: Data?
     public var provider: ProviderType = .yelp
-    
+    public var bodyDataType  = BodyDataType.json
     
     
     private var request: URLRequest? {
-        if let component = urlComponent, let componentUrl = component.url {
-            var request = URLRequest(url: componentUrl)
-            request.allHTTPHeaderFields = allHTTPHeaderFields
-            request.httpMethod = httpMethod.rawValue
-            
-            if let bodyData = httpBodyData {
-                request.httpBody = bodyData
-            }else if httpBody.count != 0 {
-                request.httpBody = dictonaryToHttpData(httpBody)
-            }
-            
-            return request
+        guard let component = urlComponent, let componentUrl = component.url else {
+            return URLRequest(url: url!)
         }
-        return URLRequest(url: url!)
+        
+        var request = URLRequest(url: componentUrl)
+        request.allHTTPHeaderFields = allHTTPHeaderFields
+        request.httpMethod = httpMethod.rawValue
+        
+        if let bodyData = httpBodyData {
+            request.httpBody = bodyData
+        }else if httpBody.count != 0 {
+            switch bodyDataType {
+            case .json:
+                request.httpBody = jsonToHttpData(httpBody)
+            case .dictionary:
+                request.httpBody = dictionaryToHttpBody(httpBody)
+            }
+        }
+        print("Evren \(request.url!)")
+        return request
     }
     
     
@@ -194,6 +204,12 @@ extension NetworkController {
         return self
     }
     
+    @discardableResult
+    func setBodyDataType(_ type: BodyDataType) -> Self {
+        bodyDataType = type
+        return self
+    }
+    
     func parameters(_ parameters: [URLQueryItem]) -> Self {
         urlComponent?.queryItems = parameters
         return self
@@ -248,7 +264,15 @@ extension NetworkController {
         return nil
     }
     
-    func dictonaryToHttpData(_ parameters: [String: Any]) -> Data? {
+    
+    func dictionaryToHttpBody(_ dictionary: [String: Any]) -> Data? {
+        var components = URLComponents()
+        components.queryItems = httpBody.map{ URLQueryItem(name: $0.key, value: $0.value as! String)}
+        return components.query?.data(using: .utf8)
+    }
+    
+    
+    func jsonToHttpData(_ parameters: [String: Any]) -> Data? {
         do {
             let result = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             return result

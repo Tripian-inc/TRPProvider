@@ -33,6 +33,7 @@ public class YelpApi {
         urlComponent.host = "api.yelp.com"
         return NetworkController(network: network)
             .urlComponent(urlComponent)
+            .setBodyDataType(.dictionary)
             .addValue("Authorization", value: "Bearer \(token)")
             
     }
@@ -45,7 +46,9 @@ extension YelpApi {
     //TODO: - TİME VE DATE EKLENECEK
     public func business(id: String, completion: @escaping (Result<YelpBusiness, Error>) -> Void) {
         let path = "/v3/businesses/\(id)"
-        networkController?.urlComponentPath(path).responseDecodable(type: YelpBusiness.self) { (result) in
+        networkController?
+            .urlComponentPath(path)
+            .responseDecodable(type: YelpBusiness.self) { (result) in
             switch result {
             case .success(let model):
                 completion(.success(model))
@@ -64,6 +67,7 @@ extension YelpApi {
     public func openings(businessId id: String, covers: Int = 1, date:String, time: String, completion: @escaping (Result<YelpOpenings, Error>)-> Void ) {
         let path = "/v3/bookings/\(id)/openings"
         let params = ["covers": "\(covers)", "date":date, "time": time]
+        
         networkController?
             .urlComponentPath(path)
             .parameters(params)

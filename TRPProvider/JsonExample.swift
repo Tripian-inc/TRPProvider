@@ -230,3 +230,116 @@ let paymentJsonResult = """
 }
 
 """
+
+
+
+let cardJsonResult = """
+{
+    "_metadata": {
+        "descriptor": "GetYourGuide AG",
+        "method": "getShoppingCartByHashAction",
+        "date": "2021-01-04T10:20:40Z",
+        "status": "OK",
+        "query": "cnt_language=en&currency=usd",
+        "availableLanguages": [],
+        "exchange": {
+            "rate": 0.8169974578299947,
+            "currency": "usd"
+        },
+        "totalCount": 1,
+        "limit": 10,
+        "offset": 0
+    },
+    "data": {
+        "shopping_cart": {
+            "shopping_cart_id": 319446617,
+            "shopping_cart_hash": "DL2S9GJM8MZ4QVUVYQQ5XXRNPVTKMHR6",
+            "billing": {
+                "salutation_code": "m",
+                "first_name": "Mehmet",
+                "last_name": "Keskinoglu",
+                "email": "Mehmet@tripian.com",
+                "is_company": false,
+                "company_name": "",
+                "invoice": false,
+                "address_line_1": "",
+                "address_line_2": "",
+                "city": "",
+                "postal_code": "",
+                "state": "",
+                "country_code": "TR",
+                "phone_number": "5339271371"
+            },
+            "status": "open",
+            "bookings": [
+                {
+                    "booking_id": 162302565,
+                    "booking_hash": "1IMIAIGHHIPDPT29GQZQ4GSHUQMLGZ1F",
+                    "booking_status": "temp",
+                    "shopping_cart_id": 319446617,
+                    "shopping_cart_hash": "DL2S9GJM8MZ4QVUVYQQ5XXRNPVTKMHR6",
+                    "bookable": {
+                        "tour_id": 28602,
+                        "option_id": 33184,
+                        "datetime": "2021-01-05T10:00:00",
+                        "datetime_utc": "2021-01-05T15:00:00Z",
+                        "datetime_type": "datetime",
+                        "price": 41.65,
+                        "categories": [
+                            {
+                                "category_id": 1327802,
+                                "name": "Adult",
+                                "number_of_participants": 1
+                            }
+                        ],
+                        "booking_parameters": [
+                            {
+                                "name": "language",
+                                "value_1": "language_live",
+                                "value_2": "en"
+                            },
+                            {
+                                "name": "hotel",
+                                "value_1": "Ssddsds"
+                            },
+                            {
+                                "name": "supplier_requested_question",
+                                "value_1": "Asdasdad"
+                            }
+                        ],
+                        "valid_until": "2021-01-05T12:00:00",
+                        "cancellation_policy_text": "Cancel before 10:00 AM on January 4th for a full refund."
+                    }
+                }
+            ],
+            "payment_info": {
+                "payment_currency": "USD",
+                "total_price": 41.65,
+                "precoupon_price": 41.65
+            }
+        }
+    }
+}
+
+"""
+
+
+
+
+let errorResponseJson = """
+{
+    "descriptor": "GetYourGuide AG",
+    "apiVersion": "1",
+    "method": "getTourByQueryAction",
+    "date": "2021-01-05T10:42:39Z",
+    "status": "ERROR",
+    "query": "cnt_language=en&currency=usd&limit=90&preformatted=full&q=montreal",
+    "errors": [
+        {
+            "errorCode": 25,
+            "errorMessage": "Unauthorized. The access token is invalid."
+        }
+    ],
+    "helpURL": "https://api.testing1.gygtest.com/doc"
+}
+"""

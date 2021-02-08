@@ -43,6 +43,7 @@
 		B256DB5024ADFD7E00925A0B /* YelpApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB4F24ADFD7E00925A0B /* YelpApiTest.swift */; };
 		B256DB5324AE087C00925A0B /* YelpBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB5224AE087C00925A0B /* YelpBusiness.swift */; };
 		B256DB5624AE220E00925A0B /* YelpOpenings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256DB5524AE220E00925A0B /* YelpOpenings.swift */; };
+		B256F11F25A1AA7300224CBD /* GYGReviewOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256F11E25A1AA7300224CBD /* GYGReviewOrder.swift */; };
 		B25808012598C43F00E3F562 /* JsonExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25808002598C43F00E3F562 /* JsonExample.swift */; };
 		B25808062598DC0700E3F562 /* GYGGetBookingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25808052598DC0700E3F562 /* GYGGetBookingResult.swift */; };
 		B258080A2598DF5800E3F562 /* GYGGetCartResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25808092598DF5800E3F562 /* GYGGetCartResult.swift */; };
@@ -164,6 +165,7 @@
 		B256DB4F24ADFD7E00925A0B /* YelpApiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiTest.swift; sourceTree = "<group>"; };
 		B256DB5224AE087C00925A0B /* YelpBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpBusiness.swift; sourceTree = "<group>"; };
 		B256DB5524AE220E00925A0B /* YelpOpenings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpOpenings.swift; sourceTree = "<group>"; };
+		B256F11E25A1AA7300224CBD /* GYGReviewOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGReviewOrder.swift; sourceTree = "<group>"; };
 		B25808002598C43F00E3F562 /* JsonExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonExample.swift; sourceTree = "<group>"; };
 		B25808052598DC0700E3F562 /* GYGGetBookingResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGGetBookingResult.swift; sourceTree = "<group>"; };
 		B25808092598DF5800E3F562 /* GYGGetCartResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGGetCartResult.swift; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 				B261003D2597801A00466247 /* GYGPaymentResult.swift */,
 				B25808052598DC0700E3F562 /* GYGGetBookingResult.swift */,
 				B25808092598DF5800E3F562 /* GYGGetCartResult.swift */,
+				B256F11E25A1AA7300224CBD /* GYGReviewOrder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				B256DB4D24ADFBD300925A0B /* YelpApi.swift in Sources */,
 				B26AA01124B613A8007A0755 /* ReservationUserInfoViewController.swift in Sources */,
 				B2610019259707F400466247 /* FetchTourOptionsUseCases.swift in Sources */,
+				B256F11F25A1AA7300224CBD /* GYGReviewOrder.swift in Sources */,
 				B261003E2597801A00466247 /* GYGPaymentResult.swift in Sources */,
 				B269E5BD251B82DB001195F0 /* GYGReviews.swift in Sources */,
 				B2580EB124B494FC00A704FB /* ReservationViewController.swift in Sources */,
