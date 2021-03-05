@@ -75,7 +75,6 @@
 		B261003625977ECA00466247 /* GYGBilling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261003525977ECA00466247 /* GYGBilling.swift */; };
 		B261003A25977F2900466247 /* GYGTraveler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261003925977F2900466247 /* GYGTraveler.swift */; };
 		B261003E2597801A00466247 /* GYGPaymentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261003D2597801A00466247 /* GYGPaymentResult.swift */; };
-		B265065925574F6F00E4C1C6 /* TRPUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B265065825574F6F00E4C1C6 /* TRPUIKit.framework */; };
 		B265950E25808E63008BA3C2 /* MakeBookingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B265950D25808E63008BA3C2 /* MakeBookingUseCase.swift */; };
 		B265954925811B5C008BA3C2 /* GYGErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B265954825811B5C008BA3C2 /* GYGErrorParser.swift */; };
 		B26664F425839CBF001D7008 /* GYGShoppingCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26664F325839CBF001D7008 /* GYGShoppingCart.swift */; };
@@ -101,8 +100,6 @@
 		B27EE334258288990018F103 /* PaymentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27EE333258288990018F103 /* PaymentConfiguration.swift */; };
 		B281B51B25946DB1006A0D96 /* AdyenCSE in Resources */ = {isa = PBXBuildFile; fileRef = B281B51A25946DB0006A0D96 /* AdyenCSE */; };
 		B281B55A25947D21006A0D96 /* TRPProvider.h in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE8224ADECCF0056D5E0 /* TRPProvider.h */; };
-		B281B58A25947EC9006A0D96 /* AdyenCSE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B281B58525947EB3006A0D96 /* AdyenCSE.framework */; };
-		B281B58B25947EC9006A0D96 /* AdyenCSE.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B281B58525947EB3006A0D96 /* AdyenCSE.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B297DC5524C5B24D00540788 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B297DC5424C5B24D00540788 /* Assets.xcassets */; };
 		B297DC5B24C5E8DB00540788 /* YelpStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B297DC5A24C5E8DB00540788 /* YelpStatus.swift */; };
 		B2BDAE8924ADECCF0056D5E0 /* TRPProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2BDAE7F24ADECCF0056D5E0 /* TRPProvider.framework */; };
@@ -123,13 +120,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B281B58425947EB3006A0D96 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B281B58025947EB3006A0D96 /* AdyenCSE.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E20AD18F1EFBE0220065B70E;
-			remoteInfo = AdyenCSE;
-		};
 		B2BDAE8A24ADECCF0056D5E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B2BDAE7624ADECCF0056D5E0 /* Project object */;
@@ -140,13 +130,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B281B58C25947EC9006A0D96 /* Embed Frameworks */ = {
+		B296ECC825E664EA007DCAFC /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B281B58B25947EC9006A0D96 /* AdyenCSE.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,7 +206,6 @@
 		B27CC4BD24AFA0E300A3117F /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		B27EE333258288990018F103 /* PaymentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfiguration.swift; sourceTree = "<group>"; };
 		B281B51A25946DB0006A0D96 /* AdyenCSE */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AdyenCSE; sourceTree = "<group>"; };
-		B281B58025947EB3006A0D96 /* AdyenCSE.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AdyenCSE.xcodeproj; path = "adyen-cse-ios-master/AdyenCSE.xcodeproj"; sourceTree = "<group>"; };
 		B297DC5424C5B24D00540788 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B297DC5A24C5E8DB00540788 /* YelpStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpStatus.swift; sourceTree = "<group>"; };
 		B2BDAE7F24ADECCF0056D5E0 /* TRPProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TRPProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,8 +227,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B281B58A25947EC9006A0D96 /* AdyenCSE.framework in Frameworks */,
-				B265065925574F6F00E4C1C6 /* TRPUIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,18 +429,9 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
-		B281B58125947EB3006A0D96 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B281B58525947EB3006A0D96 /* AdyenCSE.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		B2BDAE7524ADECCF0056D5E0 = {
 			isa = PBXGroup;
 			children = (
-				B281B58025947EB3006A0D96 /* AdyenCSE.xcodeproj */,
 				B2BDAE8124ADECCF0056D5E0 /* TRPProvider */,
 				B2BDAE8C24ADECCF0056D5E0 /* TRPProviderTests */,
 				B2BDAE8024ADECCF0056D5E0 /* Products */,
@@ -537,7 +514,7 @@
 				B2BDAE7B24ADECCF0056D5E0 /* Sources */,
 				B2BDAE7C24ADECCF0056D5E0 /* Frameworks */,
 				B2BDAE7D24ADECCF0056D5E0 /* Resources */,
-				B281B58C25947EC9006A0D96 /* Embed Frameworks */,
+				B296ECC825E664EA007DCAFC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -599,12 +576,6 @@
 			mainGroup = B2BDAE7524ADECCF0056D5E0;
 			productRefGroup = B2BDAE8024ADECCF0056D5E0 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = B281B58125947EB3006A0D96 /* Products */;
-					ProjectRef = B281B58025947EB3006A0D96 /* AdyenCSE.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				B2BDAE7E24ADECCF0056D5E0 /* TRPProvider */,
@@ -613,16 +584,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		B281B58525947EB3006A0D96 /* AdyenCSE.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = AdyenCSE.framework;
-			remoteRef = B281B58425947EB3006A0D96 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B2BDAE7D24ADECCF0056D5E0 /* Resources */ = {

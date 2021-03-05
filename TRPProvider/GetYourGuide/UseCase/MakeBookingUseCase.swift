@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AdyenCSE
+
 
 public protocol BookingOptionsUseCase {
     
@@ -229,7 +229,7 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
         }
         
         //Adyen Logic
-        let card = ADYCard()
+        /*let card = ADYCard()
         card.holderName = adyenCard.holderName
         card.cvc = adyenCard.securityCode
         card.expiryYear = adyenCard.expiryYear
@@ -245,7 +245,7 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
             self.adyenToken = adyenToken
             paymentInfo = GYGPayment(data: adyenToken)
             return adyenToken
-        }
+        }*/
         
         return nil
     }
@@ -295,7 +295,6 @@ extension TRPMakeBookingUseCases: CheckCardAndBookingUseCase {
             completion?(.success(false))
             return
         }
-        
         
         GetYourGuideApi().getCart(hash: booking.shoppingCartHash) { result in
             switch result {
