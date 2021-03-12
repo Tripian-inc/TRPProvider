@@ -55,7 +55,6 @@ class NetworkController {
                 request.httpBody = dictionaryToHttpBody(httpBody)
             }
         }
-        print("Evren \(request.url!)")
         return request
     }
     

@@ -10,7 +10,7 @@ import Foundation
 
 public class GetYourGuideApi {
     
-    static let DEVELOPER_MODE = true
+    static let DEVELOPER_MODE = false
     
     //rC5mIHMNF5C1Jtpb2obSkA
     var network: Networking?
