@@ -69,6 +69,7 @@
 		B25B375725274CE600B595AB /* GYGTourOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25B375625274CE600B595AB /* GYGTourOption.swift */; };
 		B25B378925275C6800B595AB /* GYGOptionPricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25B378825275C6800B595AB /* GYGOptionPricing.swift */; };
 		B25C832724B8AC89006167E4 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25C832624B8AC89006167E4 /* Reservation.swift */; };
+		B25E5C3425FDED8A005D741C /* TRPUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B25E5C3325FDED8A005D741C /* TRPUIKit.framework */; };
 		B25F814A257FBF54001503A0 /* GYGBookingsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F8149257FBF54001503A0 /* GYGBookingsParser.swift */; };
 		B26100122596656400466247 /* GYGCardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26100112596656400466247 /* GYGCardType.swift */; };
 		B2610019259707F400466247 /* FetchTourOptionsUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2610018259707F400466247 /* FetchTourOptionsUseCases.swift */; };
@@ -102,7 +103,6 @@
 		B281B55A25947D21006A0D96 /* TRPProvider.h in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE8224ADECCF0056D5E0 /* TRPProvider.h */; };
 		B297DC5524C5B24D00540788 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B297DC5424C5B24D00540788 /* Assets.xcassets */; };
 		B297DC5B24C5E8DB00540788 /* YelpStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B297DC5A24C5E8DB00540788 /* YelpStatus.swift */; };
-		B2B58F8D25F26ED000138FE7 /* TRPUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B58F8C25F26ED000138FE7 /* TRPUIKit.framework */; };
 		B2BDAE8924ADECCF0056D5E0 /* TRPProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2BDAE7F24ADECCF0056D5E0 /* TRPProvider.framework */; };
 		B2BDAE9024ADECCF0056D5E0 /* TRPProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B2BDAE8224ADECCF0056D5E0 /* TRPProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2BDAE9B24ADECF40056D5E0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE9A24ADECF40056D5E0 /* Networking.swift */; };
@@ -163,6 +163,7 @@
 		B25B375625274CE600B595AB /* GYGTourOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGTourOption.swift; sourceTree = "<group>"; };
 		B25B378825275C6800B595AB /* GYGOptionPricing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGOptionPricing.swift; sourceTree = "<group>"; };
 		B25C832624B8AC89006167E4 /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
+		B25E5C3325FDED8A005D741C /* TRPUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TRPUIKit.framework; path = Carthage/Build/iOS/TRPUIKit.framework; sourceTree = "<group>"; };
 		B25F8149257FBF54001503A0 /* GYGBookingsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGBookingsParser.swift; sourceTree = "<group>"; };
 		B26100112596656400466247 /* GYGCardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGCardType.swift; sourceTree = "<group>"; };
 		B2610018259707F400466247 /* FetchTourOptionsUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTourOptionsUseCases.swift; sourceTree = "<group>"; };
@@ -216,7 +217,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2B58F8D25F26ED000138FE7 /* TRPUIKit.framework in Frameworks */,
+				B25E5C3425FDED8A005D741C /* TRPUIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +235,7 @@
 		B24B823824B7452A0059A4B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B25E5C3325FDED8A005D741C /* TRPUIKit.framework */,
 				B2B58F8C25F26ED000138FE7 /* TRPUIKit.framework */,
 				B265065825574F6F00E4C1C6 /* TRPUIKit.framework */,
 				B24B823924B7452A0059A4B9 /* TRPUIKit.framework */,
@@ -884,10 +886,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(SRCROOT)/../TripianFrameworks/",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = TRPProvider/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -918,10 +922,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(SRCROOT)/../TripianFrameworks/",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = TRPProvider/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
