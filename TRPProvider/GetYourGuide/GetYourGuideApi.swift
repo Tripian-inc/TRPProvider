@@ -43,8 +43,8 @@ public class GetYourGuideApi {
     }
  
     public func jsonParser() {
-        let bookingHash = "PXYB4N00PRSRD0ANFHY09HA30Q7DO9WD"
-        let cardHash = "58YAF7I7OJSKFUKFHK0IUNQLJ1FB3L3L"
+//        let bookingHash = "PXYB4N00PRSRD0ANFHY09HA30Q7DO9WD"
+//        let cardHash = "58YAF7I7OJSKFUKFHK0IUNQLJ1FB3L3L"
         
         /*getBooking(hash: "PXYB4N00PRSRD0ANFHY09HA30Q7DO9WD") { (result) in
             print("Result")
@@ -490,7 +490,7 @@ extension GetYourGuideApi {
         let baseData = BaseData(language, currency)
         let mainData = MainData(baseData, data)
     
-        let result = networkController!.encodeData(mainData)
+        _ = networkController!.encodeData(mainData)
         networkController?
             .urlComponentPath(path)
             .bodyData(mainData)

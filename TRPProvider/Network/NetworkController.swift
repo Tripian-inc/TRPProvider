@@ -111,7 +111,7 @@ class NetworkController {
     
     private func readableJson(_ data: Data) {
         let result = String(data: data, encoding: .utf8)
-        print("[Error] JsonDecoder \(result)")
+        print("[Error] JsonDecoder \(result ?? "")")
     }
     
     
@@ -266,7 +266,7 @@ extension NetworkController {
     
     func dictionaryToHttpBody(_ dictionary: [String: Any]) -> Data? {
         var components = URLComponents()
-        components.queryItems = httpBody.map{ URLQueryItem(name: $0.key, value: $0.value as! String)}
+        components.queryItems = httpBody.map{ URLQueryItem(name: $0.key, value: $0.value as? String)}
         return components.query?.data(using: .utf8)
     }
     

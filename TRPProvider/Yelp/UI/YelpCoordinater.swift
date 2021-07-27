@@ -9,7 +9,7 @@
 import Foundation
 
 import UIKit
-public protocol YelpCoordinaterDelegate: class {
+public protocol YelpCoordinaterDelegate: AnyObject {
     func yelpCoordinaterReservationCompleted(_ viewController: UIViewController, reservation: Reservation, business: YelpBusiness?, result: YelpReservation)
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 import TRPUIKit
-public protocol ReservationViewControllerDelegate: class {
+public protocol ReservationViewControllerDelegate: AnyObject {
     func reservationViewController(reservation: Reservation, hold: YelpHolds, business: YelpBusiness?)
 }
 

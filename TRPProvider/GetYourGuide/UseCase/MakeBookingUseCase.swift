@@ -290,7 +290,7 @@ extension TRPMakeBookingUseCases: CheckCardAndBookingUseCase {
     
     public func removeOldBookingInCardIfNeedeed(completion: ((Result<Bool?, Error>) -> Void)?) {
         
-        guard let booking = bookingInfo else {
+        guard let booking = bookingInfo else {
             print("[Error] bookingInfo is nil")
             completion?(.success(false))
             return
@@ -311,7 +311,7 @@ extension TRPMakeBookingUseCases: CheckCardAndBookingUseCase {
                         if bookingInCard.bookingID != booking.bookingID {
                             GetYourGuideApi().deleteBooking(hash: bookingInCard.bookingHash) { deleteBookingResult in
                                 switch deleteBookingResult {
-                                case .success(let status):
+                                case .success(_):
                                     removedCount += 1
                                     print("[info] Old Booking removed \(removedCount)")
                                     if ( _payments.bookings.count - 1) == removedCount {

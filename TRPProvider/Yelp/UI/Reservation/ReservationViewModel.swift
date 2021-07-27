@@ -13,7 +13,7 @@ public struct ReservationCellModel {
     public var contentType: ReservationViewModel.CellContentType
 }
 
-public protocol ReservationViewModelDelegate: class {
+public protocol ReservationViewModelDelegate: AnyObject {
     func reservationVM(dataLoaded: Bool)
     func reservationVM(showLoader: Bool)
     func reservationVM(error: Error)

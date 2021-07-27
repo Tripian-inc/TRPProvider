@@ -46,11 +46,11 @@ class ReservationAlternativeHour: ReservationBaseCell {
     
     
     func setSelectedCellCenter() {
-        for (row, chid) in hours.enumerated() {
+        for (row, _) in hours.enumerated() {
             let time = hours[row]
             if let selectedHour = selectedHour, time == selectedHour {
                 let indexPath = IndexPath(row: row, section: 0)
-                let cell = collectionView.cellForItem(at: indexPath)
+                _ = collectionView.cellForItem(at: indexPath)
                 //cell.isSelected = true
                 collectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
             }

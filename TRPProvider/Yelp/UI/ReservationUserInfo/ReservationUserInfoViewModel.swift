@@ -13,7 +13,7 @@ struct ReservationUserInfoCellModel {
     var contentType: ReservationUserInfoViewModel.CellContentType
 }
 
-public protocol ReservationUserInfoViewModelDelegate:class {
+public protocol ReservationUserInfoViewModelDelegate:AnyObject {
     func reservationUserInfoViewModel(showLoader: Bool)
     func reservationUserInfoViewModel(error: Error)
     func reservationUserInfoViewModel(message: String)

@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		6B978B9926967955008DFDFF /* TRPUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B352F85269673C800B7C314 /* TRPUIKit.framework */; };
 		B2145EF924B348D9002F112A /* NetworkControllerWithComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */; };
 		B24B823724B727DF0059A4B9 /* GenericParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BB24AF7CA000A3117F /* GenericParser.swift */; };
 		B252FC3624BD72620014B750 /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2580EB024B494FC00A704FB /* ReservationViewController.swift */; };
@@ -69,7 +70,6 @@
 		B25B375725274CE600B595AB /* GYGTourOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25B375625274CE600B595AB /* GYGTourOption.swift */; };
 		B25B378925275C6800B595AB /* GYGOptionPricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25B378825275C6800B595AB /* GYGOptionPricing.swift */; };
 		B25C832724B8AC89006167E4 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25C832624B8AC89006167E4 /* Reservation.swift */; };
-		B25E5C3425FDED8A005D741C /* TRPUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B25E5C3325FDED8A005D741C /* TRPUIKit.framework */; };
 		B25F814A257FBF54001503A0 /* GYGBookingsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F8149257FBF54001503A0 /* GYGBookingsParser.swift */; };
 		B26100122596656400466247 /* GYGCardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26100112596656400466247 /* GYGCardType.swift */; };
 		B2610019259707F400466247 /* FetchTourOptionsUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2610018259707F400466247 /* FetchTourOptionsUseCases.swift */; };
@@ -99,7 +99,6 @@
 		B27CC4BC24AF7CA000A3117F /* GenericParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BB24AF7CA000A3117F /* GenericParser.swift */; };
 		B27CC4BE24AFA0E300A3117F /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27CC4BD24AFA0E300A3117F /* NetworkController.swift */; };
 		B27EE334258288990018F103 /* PaymentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27EE333258288990018F103 /* PaymentConfiguration.swift */; };
-		B281B51B25946DB1006A0D96 /* AdyenCSE in Resources */ = {isa = PBXBuildFile; fileRef = B281B51A25946DB0006A0D96 /* AdyenCSE */; };
 		B281B55A25947D21006A0D96 /* TRPProvider.h in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE8224ADECCF0056D5E0 /* TRPProvider.h */; };
 		B297DC5524C5B24D00540788 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B297DC5424C5B24D00540788 /* Assets.xcassets */; };
 		B297DC5B24C5E8DB00540788 /* YelpStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B297DC5A24C5E8DB00540788 /* YelpStatus.swift */; };
@@ -131,8 +130,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6B352F85269673C800B7C314 /* TRPUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TRPUIKit.framework; path = ../TripianFrameworks/TRPUIKit.framework; sourceTree = "<group>"; };
 		B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkControllerWithComponentTest.swift; sourceTree = "<group>"; };
-		B24B823924B7452A0059A4B9 /* TRPUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TRPUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B252FC4124BDC1450014B750 /* YelpReservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpReservation.swift; sourceTree = "<group>"; };
 		B252FC4424BDE1020014B750 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		B25580662525DD4D00E2F42F /* GYGToursParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGToursParser.swift; sourceTree = "<group>"; };
@@ -163,14 +162,12 @@
 		B25B375625274CE600B595AB /* GYGTourOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGTourOption.swift; sourceTree = "<group>"; };
 		B25B378825275C6800B595AB /* GYGOptionPricing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGOptionPricing.swift; sourceTree = "<group>"; };
 		B25C832624B8AC89006167E4 /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
-		B25E5C3325FDED8A005D741C /* TRPUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TRPUIKit.framework; path = Carthage/Build/iOS/TRPUIKit.framework; sourceTree = "<group>"; };
 		B25F8149257FBF54001503A0 /* GYGBookingsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGBookingsParser.swift; sourceTree = "<group>"; };
 		B26100112596656400466247 /* GYGCardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGCardType.swift; sourceTree = "<group>"; };
 		B2610018259707F400466247 /* FetchTourOptionsUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTourOptionsUseCases.swift; sourceTree = "<group>"; };
 		B261003525977ECA00466247 /* GYGBilling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGBilling.swift; sourceTree = "<group>"; };
 		B261003925977F2900466247 /* GYGTraveler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGTraveler.swift; sourceTree = "<group>"; };
 		B261003D2597801A00466247 /* GYGPaymentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGPaymentResult.swift; sourceTree = "<group>"; };
-		B265065825574F6F00E4C1C6 /* TRPUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TRPUIKit.framework; sourceTree = "<group>"; };
 		B265950D25808E63008BA3C2 /* MakeBookingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeBookingUseCase.swift; sourceTree = "<group>"; };
 		B265954825811B5C008BA3C2 /* GYGErrorParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGErrorParser.swift; sourceTree = "<group>"; };
 		B26664F325839CBF001D7008 /* GYGShoppingCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGShoppingCart.swift; sourceTree = "<group>"; };
@@ -194,10 +191,8 @@
 		B27CC4BB24AF7CA000A3117F /* GenericParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericParser.swift; sourceTree = "<group>"; };
 		B27CC4BD24AFA0E300A3117F /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		B27EE333258288990018F103 /* PaymentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfiguration.swift; sourceTree = "<group>"; };
-		B281B51A25946DB0006A0D96 /* AdyenCSE */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AdyenCSE; sourceTree = "<group>"; };
 		B297DC5424C5B24D00540788 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B297DC5A24C5E8DB00540788 /* YelpStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpStatus.swift; sourceTree = "<group>"; };
-		B2B58F8C25F26ED000138FE7 /* TRPUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TRPUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2BDAE7F24ADECCF0056D5E0 /* TRPProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TRPProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2BDAE8224ADECCF0056D5E0 /* TRPProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TRPProvider.h; sourceTree = "<group>"; };
 		B2BDAE8324ADECCF0056D5E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -217,7 +212,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B25E5C3425FDED8A005D741C /* TRPUIKit.framework in Frameworks */,
+				6B978B9926967955008DFDFF /* TRPUIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,10 +230,7 @@
 		B24B823824B7452A0059A4B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B25E5C3325FDED8A005D741C /* TRPUIKit.framework */,
-				B2B58F8C25F26ED000138FE7 /* TRPUIKit.framework */,
-				B265065825574F6F00E4C1C6 /* TRPUIKit.framework */,
-				B24B823924B7452A0059A4B9 /* TRPUIKit.framework */,
+				6B352F85269673C800B7C314 /* TRPUIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -354,7 +346,6 @@
 			isa = PBXGroup;
 			children = (
 				B26100172597070400466247 /* UseCase */,
-				B281B51A25946DB0006A0D96 /* AdyenCSE */,
 				B25A7843250B6C2000F9395C /* Models */,
 				B25A7841250B6C1500F9395C /* GetYourGuideApi.swift */,
 			);
@@ -542,7 +533,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Tripian Inc";
 				TargetAttributes = {
 					B265064725574F0400E4C1C6 = {
@@ -582,7 +573,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B281B51B25946DB1006A0D96 /* AdyenCSE in Resources */,
 				B297DC5524C5B24D00540788 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

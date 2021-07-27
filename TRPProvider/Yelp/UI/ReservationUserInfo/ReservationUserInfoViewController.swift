@@ -9,7 +9,7 @@
 import UIKit
 import TRPUIKit
 
-public protocol ReservationUserInfoViewControllerDelegate: class {
+public protocol ReservationUserInfoViewControllerDelegate: AnyObject {
     func reservationUserInfoCompleted(_ viewController: UIViewController, reservation: Reservation, result: YelpReservation)
 }
 
