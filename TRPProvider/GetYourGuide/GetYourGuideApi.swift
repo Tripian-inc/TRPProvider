@@ -358,7 +358,7 @@ extension GetYourGuideApi {
     
     public func booking(optionId: Int,
                         dateTime: String,
-                        price: String,
+                        price: Double,
                         categories: [GYGBookingCategoryPropety],
                         bookingParameters: [GYGBookingParameterProperty],
                         language: String = "en",
@@ -496,6 +496,7 @@ extension GetYourGuideApi {
             .bodyData(mainData)
             .httpMethod(.post)
             .addValue("Content-Type", value: "application/json")
+            .addValue("Accept", value: "application/json")
             .responseDecodable(type: GYGGenericDataParser<GYGPaymentResult>.self) { (result) in
             switch result {
             case .success(let model):
