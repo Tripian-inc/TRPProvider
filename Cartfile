@@ -1,2 +1,3 @@
 github "adyen/adyen-cse-ios"
 github "SDWebImage/SDWebImage"
+git "https://github.com/Tripian-inc/TRPUIKit"

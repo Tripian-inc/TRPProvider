@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 import TRPUIKit
-import TRPProvider
-import TRPFoundationKit
 
 protocol ExperienceAvailabilityViewControllerDelegate: AnyObject {
     func experienceAvailabilityOpenBilling(_ navigationController: UINavigationController?, viewController: UIViewController)

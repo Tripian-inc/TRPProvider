@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 import TRPUIKit
-import TRPProvider
-import TRPFoundationKit
 
 public class ReviewsViewController: UIViewController {
     

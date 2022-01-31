@@ -1,2 +1,3 @@
 github "SDWebImage/SDWebImage" "5.12.3"
+github "Tripian-inc/TRPUIKit" "1.5.0"
 github "adyen/adyen-cse-ios" "1.1.1"

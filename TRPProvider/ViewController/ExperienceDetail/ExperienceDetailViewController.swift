@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import TRPUIKit
-import TRPFoundationKit
 
 public protocol ExperienceDetailViewControllerDelegate: AnyObject {
     func experienceDetailVCOpenReviews(_ navigationController: UINavigationController?, viewController: UIViewController, tourId: Int)
