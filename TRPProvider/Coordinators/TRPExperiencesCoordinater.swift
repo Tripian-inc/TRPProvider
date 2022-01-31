@@ -7,9 +7,8 @@
 //
 
 import Foundation
-//TODO: - TASIMA
-//import TRPDataLayer
 import TRPUIKit
+
 final public class TRPExperiencesCoordinater {
     
     enum ViewState {
@@ -33,7 +32,7 @@ final public class TRPExperiencesCoordinater {
     //public var reservationUseCases: TRPReservationUseCases?
     
     private lazy var tourOptionsUseCases: TRPTourOptionsUseCases = {
-       return TRPTourOptionsUseCases()
+        return TRPTourOptionsUseCases()
     }()
     
     private lazy var bookingUseCases: TRPMakeBookingUseCases = {
@@ -48,7 +47,7 @@ final public class TRPExperiencesCoordinater {
         self.tourId = tourId
     }
     
-    func start() {
+    public func start() {
         if let tourId = tourId {
             currentViewState = .experienceDetail(tourId: tourId, isFromTripDetail: true)
         }else {
@@ -76,7 +75,6 @@ final public class TRPExperiencesCoordinater {
         }
         
         if let vc = viewController {
-//            setupNavigationBar(navigationController.navigationBar)
             navigationController.pushViewController(vc, animated: true)
         }
     }
@@ -140,28 +138,14 @@ extension TRPExperiencesCoordinater: ExperienceDetailViewControllerDelegate {
 extension TRPExperiencesCoordinater: ExperienceAvailabilityViewControllerDelegate {
     
     private func makeAvailability(tourId id: Int) -> UIViewController {
-        //TODO: - TRPPROVİDER İÇİN KAPATILDI
-        //EVREN DÜZELT BURAYI
-        /*
-        guard let tripModeUseCases = tripModeUseCases else {return UIViewController()}
-        
-        var dailyPlanDate: String?
-        
-        if let date = tripModeUseCases.dailyPlan.value?.date,
-           let converted = date.toDate(format: "yyyy-MM-dd") {
-            dailyPlanDate = converted.toString(format: "d MMM yyyy", dateStyle:nil, timeStyle: nil)
-        }
-
-        let viewModel = ExperienceAvailabilityViewModel(tourId: id, date: dailyPlanDate)
+        let currentDate = Date().toString(format: "d MMM yyyy", dateStyle:nil, timeStyle: nil)
+        let viewModel = ExperienceAvailabilityViewModel(tourId: id, date: currentDate)
         viewModel.fetchTourOption = tourOptionsUseCases
         viewModel.bookingOptionUseCase = bookingUseCases
         let viewController = ExperienceAvailabilityViewController(viewModel: viewModel)
         viewModel.delegate = viewController
         viewController.delegate = self
         return viewController
-         */
-        
-        UIViewController()
     }
     
     
@@ -202,7 +186,7 @@ extension TRPExperiencesCoordinater: ExperienceBillingDelegate{
 extension TRPExperiencesCoordinater: ExperienceRequirementFieldVCDelegate {
     
     
-   
+    
     func makeRequirementField(bookingParameters: [GYGBookingParameter],
                               language: GYGCondLanguage?,
                               pickUp: String?) -> UIViewController {
@@ -223,7 +207,7 @@ extension TRPExperiencesCoordinater: ExperienceRequirementFieldVCDelegate {
 }
 
 //MARK: - PAYMENT
-extension TRPExperiencesCoordinater {
+extension TRPExperiencesCoordinater: PaymentViewControllerProtocol {
     
     private func makePaymentViewController() -> UIViewController {
         //TODO: - TRPPROVİDER İÇİN KAPATILDI
@@ -235,15 +219,22 @@ extension TRPExperiencesCoordinater {
         //viewModel.reservationUseCases = reservationUseCases
         
         let viewController = PaymentViewController(viewModel: viewModel)
+        viewController.delegate = self
         viewModel.delegate = viewController
+        
         return viewController
     }
     
     func setupNavigationBar(_ navigationBar: UINavigationBar, barTintColor: UIColor = UIColor.white) {
-       navigationBar.barTintColor = barTintColor
-       navigationBar.isTranslucent = false
-       navigationBar.setBackgroundImage(UIImage(), for:.default)
-       navigationBar.shadowImage = UIImage()
-       navigationBar.layoutIfNeeded()
-   }
+        navigationBar.barTintColor = barTintColor
+        navigationBar.isTranslucent = false
+        navigationBar.setBackgroundImage(UIImage(), for:.default)
+        navigationBar.shadowImage = UIImage()
+        navigationBar.layoutIfNeeded()
+    }
+    
+    public func paymentViewControllerPaymentResult(_ vc: PaymentViewController, _ response: GYGPaymentResult?) {
+        NotificationCenter.default.post(name: .GYGBookPaymentResult, object: ["BookPayment": response])
+    }
+    
 }

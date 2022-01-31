@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import TRPUIKit
-import TRPProvider
 import TRPFoundationKit
 
 public protocol ExperienceDetailViewControllerDelegate: AnyObject {
@@ -50,28 +49,17 @@ public class ExperienceDetailViewController: TRPBaseUIViewController {
         } else {
             addBackButton(position: .left)
         }
-//        loader = TRPLoaderView(superView: view)
-        //setupView()
         viewModel.start()
     }
     
-    public override func viewDidAppear(_ animated: Bool) {
-//        navigationController?.setNavigationBarHidden(false, animated: false)
-//        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-//    private func setupViews() {
-//        super.setupViews()
-//    }
-    
     @objc func reservationPressed() {
-        //useCases?.tour = viewModel.tour
-        //delegate?.experienceDetailVCOpenAvailability(navigationController, viewController: self, tourId: viewModel.tourId)
-        if let gygURL = viewModel.tour?.url, let url = URL(string: gygURL) {
+        useCases?.tour = viewModel.tour
+        delegate?.experienceDetailVCOpenAvailability(navigationController, viewController: self, tourId: viewModel.tourId)
+        /*if let gygURL = viewModel.tour?.url, let url = URL(string: gygURL) {
             openURL(url)
         }else {
             print("[Error] GYG URL NOT FOUND")
-        }
+        } */
     }
     
     func readAllReviewPressed() {

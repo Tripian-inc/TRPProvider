@@ -1,1 +1,2 @@
+github "SDWebImage/SDWebImage" "5.12.3"
 github "adyen/adyen-cse-ios" "1.1.1"

@@ -193,7 +193,6 @@ class PaymentViewModel: TableViewViewModelProtocol {
                 }else {
                     print("[Error] Card is nil")
                 }
-                
                 self?.delegate?.paymentViewModelPaymentSuccessfull(cardResult)
             case .failure(let error):
                 self?.delegate?.viewModel(error: error)

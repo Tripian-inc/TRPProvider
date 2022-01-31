@@ -173,6 +173,9 @@
 		B2BDAE9B24ADECF40056D5E0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE9A24ADECF40056D5E0 /* Networking.swift */; };
 		B2BDAE9C24ADED3B0056D5E0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BDAE9A24ADECF40056D5E0 /* Networking.swift */; };
 		B2CD2E1224B31E2E00AFB8E2 /* NetworkControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CD2E1124B31E2E00AFB8E2 /* NetworkControllerTest.swift */; };
+		B2CDEF2C27A8098F0060ECD3 /* SDWebImage.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2CDEF2B27A8098F0060ECD3 /* SDWebImage.xcframework */; };
+		B2CDEF2D27A8098F0060ECD3 /* SDWebImage.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2CDEF2B27A8098F0060ECD3 /* SDWebImage.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B2CDEF3027A80F9E0060ECD3 /* Notification+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CDEF2F27A80F9E0060ECD3 /* Notification+extensions.swift */; };
 		B2D10DAB24BC32DF005394C3 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D10DAA24BC32DF005394C3 /* HttpMethod.swift */; };
 		B2D10DAD24BC4128005394C3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D10DAC24BC4128005394C3 /* NetworkError.swift */; };
 		B2D10DAF24BC4295005394C3 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D10DAE24BC4295005394C3 /* NetworkResponse.swift */; };
@@ -194,6 +197,20 @@
 			remoteInfo = TRPProvider;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B2CDEF2E27A8098F0060ECD3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B2CDEF2D27A8098F0060ECD3 /* SDWebImage.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6B352F85269673C800B7C314 /* TRPUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TRPUIKit.framework; path = ../TripianFrameworks/TRPUIKit.framework; sourceTree = "<group>"; };
@@ -332,6 +349,8 @@
 		B2BDAE8F24ADECCF0056D5E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2BDAE9A24ADECF40056D5E0 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		B2CD2E1124B31E2E00AFB8E2 /* NetworkControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkControllerTest.swift; sourceTree = "<group>"; };
+		B2CDEF2B27A8098F0060ECD3 /* SDWebImage.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SDWebImage.xcframework; path = Carthage/Build/SDWebImage.xcframework; sourceTree = "<group>"; };
+		B2CDEF2F27A80F9E0060ECD3 /* Notification+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+extensions.swift"; sourceTree = "<group>"; };
 		B2D10DAA24BC32DF005394C3 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		B2D10DAC24BC4128005394C3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		B2D10DAE24BC4295005394C3 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
@@ -345,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B57B504279EE2E200DFD8C7 /* TRPUIKit.framework in Frameworks */,
+				B2CDEF2C27A8098F0060ECD3 /* SDWebImage.xcframework in Frameworks */,
 				6B57B4DE279EB42E00DFD8C7 /* AdyenCSE.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -541,6 +561,7 @@
 				B28250D927A6A1AC001BBFE9 /* TRPBaseTableViewCell.swift */,
 				B28250DF27A6A282001BBFE9 /* UIView+extensions.swift */,
 				B28250E127A6A2DB001BBFE9 /* Float+extensions.swift */,
+				B2CDEF2F27A80F9E0060ECD3 /* Notification+extensions.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -548,6 +569,7 @@
 		B24B823824B7452A0059A4B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2CDEF2B27A8098F0060ECD3 /* SDWebImage.xcframework */,
 				6B57B4DD279EB42E00DFD8C7 /* AdyenCSE.xcframework */,
 				6B352F85269673C800B7C314 /* TRPUIKit.framework */,
 			);
@@ -833,6 +855,7 @@
 				B2BDAE7B24ADECCF0056D5E0 /* Sources */,
 				B2BDAE7C24ADECCF0056D5E0 /* Frameworks */,
 				B2BDAE7D24ADECCF0056D5E0 /* Resources */,
+				B2CDEF2E27A8098F0060ECD3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1061,6 +1084,7 @@
 				B25580672525DD4D00E2F42F /* GYGToursParser.swift in Sources */,
 				B27CC4BE24AFA0E300A3117F /* NetworkController.swift in Sources */,
 				B22AABB2279D563B0056A1F4 /* ExperienceRequirementFieldViewModel.swift in Sources */,
+				B2CDEF3027A80F9E0060ECD3 /* Notification+extensions.swift in Sources */,
 				B22AAB9D279D563A0056A1F4 /* ReviewsCell.swift in Sources */,
 				B26AA01624B61582007A0755 /* ReservationUserInfoCell.swift in Sources */,
 				B28250CA27A69F2D001BBFE9 /* UIFont+extensions.swift in Sources */,

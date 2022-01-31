@@ -7,14 +7,18 @@
 //
 
 import Foundation
-import TRPProvider
 import UIKit
+
+public protocol PaymentViewControllerProtocol: AnyObject {
+    func paymentViewControllerPaymentResult(_ vc: PaymentViewController, _ response: GYGPaymentResult?)
+}
 
 public class PaymentViewController: TRPBaseUIViewController {
     
     private var tableView: EvrTableView = EvrTableView()
     private var viewModel: PaymentViewModel
     private var tableViewKeyboard: TableViewKeyboardController?
+    public weak var delegate: PaymentViewControllerProtocol?
     
     init(viewModel: PaymentViewModel) {
         self.viewModel = viewModel
@@ -188,7 +192,7 @@ extension PaymentViewController {
 extension PaymentViewController: PaymentViewModelDelegate {
     
     func paymentViewModelPaymentSuccessfull(_ card: GYGPaymentResult?) {
-        
+        delegate?.paymentViewControllerPaymentResult(self, card)
     }
     
     public override func viewModel(dataLoaded: Bool) {

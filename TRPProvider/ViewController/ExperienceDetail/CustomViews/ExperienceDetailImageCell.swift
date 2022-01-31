@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import TRPUIKit
 final class ExperienceDetailImageCell: UICollectionViewCell{
     

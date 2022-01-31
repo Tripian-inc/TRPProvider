@@ -8,7 +8,7 @@
 
 import Foundation
 import TRPUIKit
-//import SDWebImage
+import SDWebImage
 import TRPProvider
 
 class ExperiencesCell: UITableViewCell {
@@ -107,8 +107,7 @@ extension ExperiencesCell: UICollectionViewDelegate, UICollectionViewDataSource,
         }
         
         if let first = model.pictures.first,  let url = URL(string: first.url.replacingOccurrences(of: "[format_id]", with: "21")) {
-            //TODO: - TASIMA
-            //cell.imageView.sd_setImage(with: url, completed: nil)
+            cell.imageView.sd_setImage(with: url, completed: nil)
         }
         
         cell.bestSeller.isHidden = !model.bestseller

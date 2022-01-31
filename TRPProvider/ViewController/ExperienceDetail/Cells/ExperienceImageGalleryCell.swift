@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 final class ExperienceImageGalleryCell: UITableViewCell {
     
     private let imageWidth: CGFloat = UIScreen.main.bounds.size.width
@@ -101,8 +102,7 @@ extension ExperienceImageGalleryCell: UICollectionViewDelegate, UICollectionView
         let cellImage = cellImages[indexPath.row]
         
         if let url = URL(string: cellImage) {
-            //TODO: - TRPPROVİDER İÇİN KAPATILDI
-            //cell.topImageView.sd_setImage(with: url, completed: nil)
+            cell.topImageView.sd_setImage(with: url, completed: nil)
         }
         
         return cell
