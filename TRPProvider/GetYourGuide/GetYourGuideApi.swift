@@ -12,10 +12,7 @@ public class GetYourGuideApi {
     
     static let DEVELOPER_MODE = true
     
-    //rC5mIHMNF5C1Jtpb2obSkA
     var network: Networking?
-    //TODO: TAŞINACAK
-    internal let apiKey = "Yb8XauGtHKbBUEj4PGWRfrvzvmwKijdghHwWkjBVYTKmTFeR"
     
     var testApiKey = "api.testing1.gygtest.com"
     var productApiKey = "api.getyourguide.com"
@@ -23,8 +20,9 @@ public class GetYourGuideApi {
     private var networkController: NetworkController?
     
     
-    public init(network: Networking = Networking()) {
+    public init(network: Networking = Networking(), apiKey: String) {
         self.network = network
+        self.apiKey = apiKey
         networkController = createNetworkController(network: network)
     }
     
@@ -37,7 +35,7 @@ public class GetYourGuideApi {
         }else {
             urlComponent.host = productApiKey
         }
-        let network =  NetworkController(network: network).urlComponent(urlComponent).addValue("X-ACCESS-TOKEN", value: apiKey)
+        let network =  NetworkController(network: network).urlComponent(urlComponent).addValue("X-ACCESS-TOKEN", value: gygApiKey)
         network.provider = .gyg
         return network
     }

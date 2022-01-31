@@ -8,7 +8,7 @@
 
 import Foundation
 import TRPUIKit
-
+private var gygApiKey = ""
 final public class TRPExperiencesCoordinater {
     
     enum ViewState {
@@ -41,10 +41,11 @@ final public class TRPExperiencesCoordinater {
         return useCases
     }()
     
-    public init(navigationController: UINavigationController, cityName: String, tourId: Int?) {
+    public init(navigationController: UINavigationController, cityName: String, tourId: Int?, apiKey: String) {
         self.navigationController = navigationController
         self.cityName = cityName
         self.tourId = tourId
+        gygApiKey = apiKey
     }
     
     public func start() {
