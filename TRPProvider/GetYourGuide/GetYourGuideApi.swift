@@ -10,7 +10,7 @@ import Foundation
 
 public class GetYourGuideApi {
     
-    static let DEVELOPER_MODE = false
+    static let DEVELOPER_MODE = true
     
     //rC5mIHMNF5C1Jtpb2obSkA
     var network: Networking?
@@ -358,7 +358,7 @@ extension GetYourGuideApi {
     
     public func booking(optionId: Int,
                         dateTime: String,
-                        price: String,
+                        price: Double,
                         categories: [GYGBookingCategoryPropety],
                         bookingParameters: [GYGBookingParameterProperty],
                         language: String = "en",
@@ -477,7 +477,7 @@ extension GetYourGuideApi {
                      traveler: GYGTraveler? = nil,
                      payment: GYGPayment,
                      language: String = "en",
-                     currency: String = "usd",
+                     currency: String = "USD",
                      completion: @escaping (Result<GYGPaymentResult?, Error>) -> Void) {
         
         let path = "/1/carts"
@@ -496,6 +496,7 @@ extension GetYourGuideApi {
             .bodyData(mainData)
             .httpMethod(.post)
             .addValue("Content-Type", value: "application/json")
+            .addValue("accept", value: "application/json")
             .responseDecodable(type: GYGGenericDataParser<GYGPaymentResult>.self) { (result) in
             switch result {
             case .success(let model):
