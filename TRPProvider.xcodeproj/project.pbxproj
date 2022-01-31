@@ -21,8 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		6B57B49A279C2AEA00DFD8C7 /* AdyenEncryption in Frameworks */ = {isa = PBXBuildFile; productRef = 6B57B499279C2AEA00DFD8C7 /* AdyenEncryption */; };
-		6B978B9926967955008DFDFF /* TRPUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B352F85269673C800B7C314 /* TRPUIKit.framework */; };
+		6B57B4DE279EB42E00DFD8C7 /* AdyenCSE.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B57B4DD279EB42E00DFD8C7 /* AdyenCSE.xcframework */; };
+		6B57B504279EE2E200DFD8C7 /* TRPUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B352F85269673C800B7C314 /* TRPUIKit.framework */; };
 		B2145EF924B348D9002F112A /* NetworkControllerWithComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */; };
 		B22AAB54279D55BF0056A1F4 /* TRPExperiencesCoordinater.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22AAB53279D55BF0056A1F4 /* TRPExperiencesCoordinater.swift */; };
 		B22AAB9B279D563A0056A1F4 /* ExperienceDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22AAB6A279D56390056A1F4 /* ExperienceDetailCell.swift */; };
@@ -197,6 +197,7 @@
 
 /* Begin PBXFileReference section */
 		6B352F85269673C800B7C314 /* TRPUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TRPUIKit.framework; path = ../TripianFrameworks/TRPUIKit.framework; sourceTree = "<group>"; };
+		6B57B4DD279EB42E00DFD8C7 /* AdyenCSE.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AdyenCSE.xcframework; path = Carthage/Build/AdyenCSE.xcframework; sourceTree = "<group>"; };
 		B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkControllerWithComponentTest.swift; sourceTree = "<group>"; };
 		B22AAB53279D55BF0056A1F4 /* TRPExperiencesCoordinater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRPExperiencesCoordinater.swift; sourceTree = "<group>"; };
 		B22AAB6A279D56390056A1F4 /* ExperienceDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceDetailCell.swift; sourceTree = "<group>"; };
@@ -343,8 +344,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B57B49A279C2AEA00DFD8C7 /* AdyenEncryption in Frameworks */,
-				6B978B9926967955008DFDFF /* TRPUIKit.framework in Frameworks */,
+				6B57B504279EE2E200DFD8C7 /* TRPUIKit.framework in Frameworks */,
+				6B57B4DE279EB42E00DFD8C7 /* AdyenCSE.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +548,7 @@
 		B24B823824B7452A0059A4B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6B57B4DD279EB42E00DFD8C7 /* AdyenCSE.xcframework */,
 				6B352F85269673C800B7C314 /* TRPUIKit.framework */,
 			);
 			name = Frameworks;
@@ -838,7 +840,6 @@
 			);
 			name = TRPProvider;
 			packageProductDependencies = (
-				6B57B499279C2AEA00DFD8C7 /* AdyenEncryption */,
 			);
 			productName = TRPProvider;
 			productReference = B2BDAE7F24ADECCF0056D5E0 /* TRPProvider.framework */;
@@ -894,7 +895,6 @@
 			);
 			mainGroup = B2BDAE7524ADECCF0056D5E0;
 			packageReferences = (
-				6B57B48E279C2AEA00DFD8C7 /* XCRemoteSwiftPackageReference "adyen-ios" */,
 			);
 			productRefGroup = B2BDAE8024ADECCF0056D5E0 /* Products */;
 			projectDirPath = "";
@@ -1420,25 +1420,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		6B57B48E279C2AEA00DFD8C7 /* XCRemoteSwiftPackageReference "adyen-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Adyen/adyen-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		6B57B499279C2AEA00DFD8C7 /* AdyenEncryption */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6B57B48E279C2AEA00DFD8C7 /* XCRemoteSwiftPackageReference "adyen-ios" */;
-			productName = AdyenEncryption;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B2BDAE7624ADECCF0056D5E0 /* Project object */;
 }

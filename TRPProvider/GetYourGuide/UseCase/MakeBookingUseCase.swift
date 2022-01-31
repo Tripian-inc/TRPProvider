@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AdyenEncryption
+import AdyenCSE
 
 public protocol BookingOptionsUseCase {
     
@@ -227,22 +227,22 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
             print("[Error] PublicKey is nil. You must call getConfiguration() function")
             return nil
         }
-        let card = Card(number: adyenCard.number, securityCode: adyenCard.securityCode, expiryMonth: adyenCard.expiryMonth, expiryYear: adyenCard.expiryYear, holder: adyenCard.holderName)
-        do {
-            let encrypted = try AdyenEncryption.CardEncryptor.encryptToken(from: card, with: publicKey)
-            if encrypted.isEmpty {
-                print("[Error] Adyen token is empty")
-                return nil
-            }
-            self.adyenToken = encrypted
-            paymentInfo = GYGPayment(data: encrypted)
-            return adyenToken
-        } catch {
-            return nil
-        }
+//        let card = Card(number: adyenCard.number, securityCode: adyenCard.securityCode, expiryMonth: adyenCard.expiryMonth, expiryYear: adyenCard.expiryYear, holder: adyenCard.holderName)
+//        do {
+//            let encrypted = try AdyenEncryption.CardEncryptor.encryptToken(from: card, with: publicKey)
+//            if encrypted.isEmpty {
+//                print("[Error] Adyen token is empty")
+//                return nil
+//            }
+//            self.adyenToken = encrypted
+//            paymentInfo = GYGPayment(data: encrypted)
+//            return adyenToken
+//        } catch {
+//            return nil
+//        }
         
         //Adyen Logic
-        /*let card = ADYCard()
+        let card = ADYCard()
         card.holderName = adyenCard.holderName
         card.cvc = adyenCard.securityCode
         card.expiryYear = adyenCard.expiryYear
@@ -258,9 +258,9 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
             self.adyenToken = adyenToken
             paymentInfo = GYGPayment(data: adyenToken)
             return adyenToken
-        }*/
+        }
         
-//        return nil
+        return nil
     }
     
     public func postCart(completion: ((Result<GYGPaymentResult?, Error>) -> Void)?) {
