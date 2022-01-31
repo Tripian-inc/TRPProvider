@@ -10,7 +10,7 @@ import Foundation
 //TODO: - TASIMA
 //import TRPDataLayer
 import TRPUIKit
-final class TRPExperiencesCoordinater {
+final public class TRPExperiencesCoordinater {
     
     enum ViewState {
         case experince, experienceDetail(tourId: Int, isFromTripDetail: Bool? = false), review(tourId: Int), availability(tourId: Int), billing, payment
@@ -42,7 +42,7 @@ final class TRPExperiencesCoordinater {
         return useCases
     }()
     
-    init(navigationController: UINavigationController, cityName: String, tourId: Int?) {
+    public init(navigationController: UINavigationController, cityName: String, tourId: Int?) {
         self.navigationController = navigationController
         self.cityName = cityName
         self.tourId = tourId
@@ -96,7 +96,7 @@ extension TRPExperiencesCoordinater: ExperiencesViewControllerDelegate {
         return viewController
     }
     
-    func experiencesVCOpenTour(_ navigationController: UINavigationController?, viewController: UIViewController, tourId: Int) {
+    public func experiencesVCOpenTour(_ navigationController: UINavigationController?, viewController: UIViewController, tourId: Int) {
         currentViewState = .experienceDetail(tourId: tourId)
     }
 }
@@ -112,15 +112,15 @@ extension TRPExperiencesCoordinater: ExperienceDetailViewControllerDelegate {
         return viewController
     }
     
-    func experienceDetailVCOpenReviews(_ navigationController: UINavigationController?, viewController: UIViewController, tourId: Int) {
+    public func experienceDetailVCOpenReviews(_ navigationController: UINavigationController?, viewController: UIViewController, tourId: Int) {
         currentViewState = .review(tourId: tourId)
     }
     
-    func experienceDetailVCOpenAvailability(_ navigationController: UINavigationController?, viewController: UIViewController, tourId: Int) {
+    public func experienceDetailVCOpenAvailability(_ navigationController: UINavigationController?, viewController: UIViewController, tourId: Int) {
         currentViewState = .availability(tourId: tourId)
     }
     
-    func experienceDetailVCOpenMoreInfo(_ navigationController: UINavigationController?, viewController: UIViewController, tour: GYGTour) {
+    public func experienceDetailVCOpenMoreInfo(_ navigationController: UINavigationController?, viewController: UIViewController, tour: GYGTour) {
         let viewModel = ExperienceMoreInfoViewModel(tour: tour)
         let viewController = ExperienceMoreInfoViewController(viewModel: viewModel)
         viewModel.delegate = viewController
@@ -193,7 +193,7 @@ extension TRPExperiencesCoordinater: ExperienceBillingDelegate{
         return viewController
     }
     
-    func experienceBillingOpenPaymentVC(_ navigationController: UINavigationController?, viewController: UIViewController) {
+    public func experienceBillingOpenPaymentVC(_ navigationController: UINavigationController?, viewController: UIViewController) {
         currentViewState = .payment
     }
 }
