@@ -38,17 +38,20 @@ public class TRPTourOptionsUseCases: TourOptionDataHolder {
     public var tourOptions: [GYGTourOption] = []
     public var optionsPricing: [GYGOptionPricing] = []
   
+    private var gygApi: GetYourGuideApi
     
     public init(language: String = "en",
-                currency: String = "usd") {
+                currency: String = "usd",
+                gygApi: GetYourGuideApi) {
         self.language = language
         self.currency = currency
+        self.gygApi = gygApi
     }
 }
 
 extension TRPTourOptionsUseCases: FetchTourOptionsUseCase {
     public func tourAvailabilities(id: Int, fromDate from: String, toDate to: String, completion: @escaping (Result<[GYGAvailability], Error>) -> Void) {
-        GetYourGuideApi().tourAvailabilities(id: id, language: language, currency: currency, fromDate: from, toDate: to) {[weak self] result in
+        gygApi.tourAvailabilities(id: id, language: language, currency: currency, fromDate: from, toDate: to) {[weak self] result in
             switch result{
             case .success(let availabilities):
                 self?.availabilities = availabilities
@@ -61,7 +64,7 @@ extension TRPTourOptionsUseCases: FetchTourOptionsUseCase {
     
     public func tourOptions(tourId id: Int, fromDate from: String?, toDate to: String?, completion: @escaping (Result<[GYGTourOption], Error>) -> Void) {
         
-        GetYourGuideApi().tourOptions(tourId: id, language: language, currency: currency, fromDate: from, toDate: to) { [weak self] result in
+        gygApi.tourOptions(tourId: id, language: language, currency: currency, fromDate: from, toDate: to) { [weak self] result in
             switch result{
             case .success(let options):
                 self?.tourOptions = options
@@ -73,7 +76,7 @@ extension TRPTourOptionsUseCases: FetchTourOptionsUseCase {
     }
     
     public func optionPricings(optionId id: Int, completion: @escaping (Result<[GYGOptionPricing], Error>) -> Void) {
-        GetYourGuideApi().optionPricings(optionId: id, language: language, currency: currency) { [weak self] result in
+        gygApi.optionPricings(optionId: id, language: language, currency: currency) { [weak self] result in
             switch result{
             case .success(let pricing):
                 self?.optionsPricing = pricing

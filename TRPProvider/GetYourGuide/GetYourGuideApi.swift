@@ -16,6 +16,7 @@ public class GetYourGuideApi {
     
     var testApiKey = "api.testing1.gygtest.com"
     var productApiKey = "api.getyourguide.com"
+    var apiKey: String = ""
     
     private var networkController: NetworkController?
     
@@ -35,7 +36,7 @@ public class GetYourGuideApi {
         }else {
             urlComponent.host = productApiKey
         }
-        let network =  NetworkController(network: network).urlComponent(urlComponent).addValue("X-ACCESS-TOKEN", value: gygApiKey)
+        let network =  NetworkController(network: network).urlComponent(urlComponent).addValue("X-ACCESS-TOKEN", value: apiKey)
         network.provider = .gyg
         return network
     }

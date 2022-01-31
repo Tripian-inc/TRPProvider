@@ -8,7 +8,6 @@
 
 import Foundation
 import TRPUIKit
-private var gygApiKey = ""
 final public class TRPExperiencesCoordinater {
     
     enum ViewState {
@@ -22,6 +21,8 @@ final public class TRPExperiencesCoordinater {
     private let cityName: String
     private var tourId: Int?
     
+    private var gygApi: GetYourGuideApi
+    
     private(set) var currentViewState: ViewState = .experince {
         didSet {
             self.applyViewState(self.currentViewState)
@@ -32,11 +33,11 @@ final public class TRPExperiencesCoordinater {
     //public var reservationUseCases: TRPReservationUseCases?
     
     private lazy var tourOptionsUseCases: TRPTourOptionsUseCases = {
-        return TRPTourOptionsUseCases()
+        return TRPTourOptionsUseCases(gygApi: self.gygApi)
     }()
     
     private lazy var bookingUseCases: TRPMakeBookingUseCases = {
-        let useCases = TRPMakeBookingUseCases()
+        let useCases = TRPMakeBookingUseCases(gygApi: self.gygApi)
         useCases.optionDataHolder = tourOptionsUseCases
         return useCases
     }()
@@ -45,7 +46,7 @@ final public class TRPExperiencesCoordinater {
         self.navigationController = navigationController
         self.cityName = cityName
         self.tourId = tourId
-        gygApiKey = apiKey
+        self.gygApi = GetYourGuideApi(apiKey: apiKey)
     }
     
     public func start() {
@@ -86,7 +87,7 @@ final public class TRPExperiencesCoordinater {
 extension TRPExperiencesCoordinater: ExperiencesViewControllerDelegate {
     
     private func makeExperience() -> UIViewController? {
-        let viewModel = ExperiencesViewModel(cityName: cityName)
+        let viewModel = ExperiencesViewModel(cityName: cityName, gygApi: gygApi)
         //TODO: - TRPPROVİDER İÇİN KAPATILDI
         //viewModel.tripModeUseCase = tripModeUseCases
         let viewController = ExperiencesViewController(viewModel: viewModel)
@@ -103,7 +104,7 @@ extension TRPExperiencesCoordinater: ExperiencesViewControllerDelegate {
 extension TRPExperiencesCoordinater: ExperienceDetailViewControllerDelegate {
     
     private func makeExperienceDetail(tourId: Int, isFromTripDetail: Bool) -> UIViewController {
-        let viewModel = ExperienceDetailViewModel(tourId: tourId, isFromTripDetail: isFromTripDetail)
+        let viewModel = ExperienceDetailViewModel(tourId: tourId, isFromTripDetail: isFromTripDetail, gygApi: gygApi)
         let viewController = ExperienceDetailViewController(viewModel: viewModel)
         viewController.useCases = bookingUseCases
         viewModel.delegate = viewController
@@ -128,7 +129,7 @@ extension TRPExperiencesCoordinater: ExperienceDetailViewControllerDelegate {
     }
     
     private func makeReviewsView(tourId id: Int) -> UIViewController {
-        let viewModel = ReviewsViewModel(tourId: id)
+        let viewModel = ReviewsViewModel(tourId: id, gygApi: gygApi)
         let viewController = ReviewsViewController(viewModel: viewModel)
         viewModel.delegate = viewController
         return viewController

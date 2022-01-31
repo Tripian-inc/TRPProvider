@@ -74,7 +74,11 @@ public class TRPMakeBookingUseCases {
     
     public var optionDataHolder: TourOptionDataHolder?
     public var tour: GYGTour?
-    public init() {}
+    public var gygApi: GetYourGuideApi
+    
+    public init(gygApi: GetYourGuideApi) {
+        self.gygApi = gygApi
+    }
 }
 
 extension TRPMakeBookingUseCases: BookingOptionsUseCase {
@@ -114,7 +118,7 @@ extension TRPMakeBookingUseCases: PostBookingUseCase {
             return
         }
         
-        GetYourGuideApi().booking(optionId: id,
+        gygApi.booking(optionId: id,
                                   dateTime: date,
                                   price: price,
                                   categories: bookingCategry ?? [], bookingParameters: bookingParameters ?? []) { [weak self] result in
@@ -151,7 +155,7 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
             print("[Error] Card hash is nil")
             return
         }
-        GetYourGuideApi().getCart(hash: cardHash) { result in
+        gygApi.getCart(hash: cardHash) { result in
             switch result {
             case .success(let card):
                 
@@ -159,7 +163,7 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
                 
                 if let bookings = card?.bookings {
                     bookings.forEach { booking in
-                        GetYourGuideApi().options(optionId: booking.bookable.optionID) { result in
+                        self.gygApi.options(optionId: booking.bookable.optionID) { result in
                             switch result {
                             case .success(let option):
                                 
@@ -198,7 +202,7 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
     }
     
     public func getConfiguration(completion: ((Result<[GYGPaymentMethod], Error>) -> Void)?) {
-        GetYourGuideApi().paymentConfiguration { [weak self] result in
+        gygApi.paymentConfiguration { [weak self] result in
             switch result {
             case .success(let methods):
                 
@@ -280,7 +284,7 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
             return
         }
         
-        GetYourGuideApi().cart(shoppingCartId: booking.shoppingCartID,
+        gygApi.cart(shoppingCartId: booking.shoppingCartID,
                                shoppingCartHash: booking.bookingHash,
                                billing: billing,
                                traveler: travellerInfo,
@@ -310,7 +314,7 @@ extension TRPMakeBookingUseCases: CheckCardAndBookingUseCase {
             return
         }
         
-        GetYourGuideApi().getCart(hash: booking.shoppingCartHash) { result in
+        gygApi.getCart(hash: booking.shoppingCartHash) { result in
             switch result {
             case .success(let payments):
                 
@@ -323,7 +327,7 @@ extension TRPMakeBookingUseCases: CheckCardAndBookingUseCase {
                     
                     _payments.bookings.forEach({ bookingInCard in
                         if bookingInCard.bookingID != booking.bookingID {
-                            GetYourGuideApi().deleteBooking(hash: bookingInCard.bookingHash) { deleteBookingResult in
+                            self.gygApi.deleteBooking(hash: bookingInCard.bookingHash) { deleteBookingResult in
                                 switch deleteBookingResult {
                                 case .success(_):
                                     removedCount += 1

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import TRPProvider
+
 enum ExperienceDetailCellType: String {
     case titleAndReview = "Title"
     case price = "Price"
@@ -75,10 +75,12 @@ public class ExperienceDetailViewModel: TableViewViewModelProtocol {
     private let reviewsLimit = 3
     public var numberOfCells: Int { return cellViewModels.count }
     private var isFromTripDetail = false
+    private var gygApi: GetYourGuideApi
     
-    public init(tourId: Int, isFromTripDetail: Bool) {
+    public init(tourId: Int, isFromTripDetail: Bool, gygApi: GetYourGuideApi) {
         self.tourId = tourId
         self.isFromTripDetail = isFromTripDetail
+        self.gygApi = gygApi
     }
     
     func start() {
@@ -106,7 +108,7 @@ public class ExperienceDetailViewModel: TableViewViewModelProtocol {
 extension ExperienceDetailViewModel {
     
     private func fetchTourData() {
-        GetYourGuideApi().tour(id: tourId) { [weak self] result in
+        gygApi.tour(id: tourId) { [weak self] result in
             guard let strongSelf = self else {return}
             switch result {
             case .success(let tour):
@@ -187,7 +189,7 @@ extension ExperienceDetailViewModel {
 extension ExperienceDetailViewModel {
     
     private func fetchReviews() {
-        GetYourGuideApi().reviews(tourId: tourId) { [weak self] result in
+        gygApi.reviews(tourId: tourId) { [weak self] result in
             guard let strongSelf = self else {return}
             switch result {
             case .success(let reviews):

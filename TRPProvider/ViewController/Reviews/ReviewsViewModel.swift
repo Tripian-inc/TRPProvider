@@ -23,10 +23,11 @@ public class ReviewsViewModel: TableViewViewModelProtocol {
     
     public var numberOfCells: Int { return cellViewModels.count }
     private var tourId: Int
+    private var gygApi: GetYourGuideApi
     
-    
-    public init(tourId: Int) {
+    public init(tourId: Int, gygApi: GetYourGuideApi) {
         self.tourId = tourId
+        self.gygApi = gygApi
     }
     
     public func start() {
@@ -57,7 +58,7 @@ extension ReviewsViewModel {
         delegate?.viewModel(showPreloader: true)
         let sortField: GYGSortField? = sort != nil ? GYGSortField.rating : nil
         let sortDirection: GYGSortDirection? = sort
-        GetYourGuideApi().reviews(tourId: tourId, sortfield: sortField, sortDirection: sortDirection, limit: 50) { [weak self] result in
+        gygApi.reviews(tourId: tourId, sortfield: sortField, sortDirection: sortDirection, limit: 50) { [weak self] result in
             guard let strongSelf = self else {return}
             strongSelf.delegate?.viewModel(showPreloader: false)
             switch result {

@@ -33,6 +33,7 @@ final class ExperiencesViewModel: TableViewViewModelProtocol {
         }
     }
     var cityName: String
+    private var gygApi: GetYourGuideApi
     
     var numberOfCells: Int {
         return cellViewModels.count
@@ -50,8 +51,9 @@ final class ExperiencesViewModel: TableViewViewModelProtocol {
     private let addStarDayToEnd = 7
     
     
-    public init(cityName: String) {
+    public init(cityName: String, gygApi: GetYourGuideApi) {
         self.cityName = cityName
+        self.gygApi = gygApi
     }
     
     public func start() {
@@ -88,7 +90,7 @@ extension ExperiencesViewModel {
     
     private func fetchTours(startDate: String? = nil, endDate: String? = nil) {
         delegate?.viewModel(showPreloader: true)
-        GetYourGuideApi().tours(cityName: cityName, fromDate: startDate, toDate: endDate, limit: 90) { [weak self] result in
+        gygApi.tours(cityName: cityName, fromDate: startDate, toDate: endDate, limit: 90) { [weak self] result in
             self?.delegate?.viewModel(showPreloader: false)
             switch result {
             case .success(let tours):
