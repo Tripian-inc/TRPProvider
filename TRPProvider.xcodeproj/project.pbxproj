@@ -217,9 +217,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6B352F85269673C800B7C314 /* TRPUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TRPUIKit.framework; path = ../TripianFrameworks/TRPUIKit.framework; sourceTree = "<group>"; };
 		6B57B4DD279EB42E00DFD8C7 /* AdyenCSE.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AdyenCSE.xcframework; path = Carthage/Build/AdyenCSE.xcframework; sourceTree = "<group>"; };
-		6B8056B227A8479900B482B9 /* TRPUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TRPUIKit.framework; path = "Carthage/Build/TRPUIKit.xcframework/ios-arm64/TRPUIKit.framework"; sourceTree = "<group>"; };
 		6B8056B527A847B800B482B9 /* TRPUIKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TRPUIKit.xcframework; path = Carthage/Build/TRPUIKit.xcframework; sourceTree = "<group>"; };
 		6B8056B827A8486C00B482B9 /* TRPTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRPTime.swift; sourceTree = "<group>"; };
 		6B8056BA27A848C600B482B9 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -580,10 +578,8 @@
 			isa = PBXGroup;
 			children = (
 				6B8056B527A847B800B482B9 /* TRPUIKit.xcframework */,
-				6B8056B227A8479900B482B9 /* TRPUIKit.framework */,
 				B2CDEF2B27A8098F0060ECD3 /* SDWebImage.xcframework */,
 				6B57B4DD279EB42E00DFD8C7 /* AdyenCSE.xcframework */,
-				6B352F85269673C800B7C314 /* TRPUIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
