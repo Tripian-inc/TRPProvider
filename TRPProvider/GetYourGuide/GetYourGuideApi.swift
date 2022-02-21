@@ -533,6 +533,29 @@ extension GetYourGuideApi {
     }
     
     
+
+    public func delete(language: String = "en",
+                           currency: String = "usd",
+                           bookingHash: String,
+                           completion: @escaping (Result<Bool, Error>) -> Void) {
+        
+        let path = "/1/bookings/\(bookingHash)"
+        var params = [String: String]()
+        params["cnt_language"] = "\(language)"
+        params["currency"] = "\(currency)"
+        params["currency"] = "\(currency)"
+        
+        
+        networkController?.urlComponentPath(path).parameters(params).httpMethod(.delete).responseDecodable(type: GYGGenericDataParser<GYGDeleteResponse>.self) { (result) in
+            switch result {
+            case .success(let model):
+                completion(.success(true))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
 }
 
 
@@ -637,5 +660,9 @@ public struct GYGBookingParameterProperty: CustomDecodable {
         }
         return params
     }
+    
+}
+
+public struct GYGDeleteResponse: Codable {
     
 }
