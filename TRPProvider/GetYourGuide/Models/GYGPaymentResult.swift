@@ -12,10 +12,10 @@ public struct GYGPaymentResult: Codable {
     
     public let status: String
     public let billing: GYGBilling?
-    public let shoppingCartHash: String
+    public let shoppingCartHash: String?
     public let traveler: GYGTraveler?
-    public let bookings: [GYGPaymentBooking]
-    public let shoppingCartID: Int
+    public let bookings: [GYGPaymentBooking]?
+    public let shoppingCartID: Int?
     public let paymentInfo: GYGPaymentInfo?
 
     enum CodingKeys: String, CodingKey {
@@ -59,7 +59,6 @@ public struct GYGPaymentResult: Codable {
     
  
     
-    
 }
 
 public struct GYGPaymentInfo: Codable {
@@ -78,12 +77,12 @@ public struct GYGPaymentInfo: Codable {
 
 
 public struct GYGPaymentBooking: Codable {
-    public let bookable: GYGBookable
-    public let bookingID: Int
-    public let shoppingCartHash: String
+    public let bookable: GYGBookable?
+    public let bookingID: Int?
+    public let shoppingCartHash: String?
     public let ticket: GYGTicket?
-    public let bookingStatus, bookingHash: String
-    public let shoppingCartID: Int
+    public let bookingStatus, bookingHash: String?
+    public let shoppingCartID: Int?
 
     enum CodingKeys: String, CodingKey {
         case bookable
@@ -98,15 +97,15 @@ public struct GYGPaymentBooking: Codable {
 
 // MARK: - Bookable
 public struct GYGBookable: Codable {
-    public let datetimeType: String
-    public let tourID: Int
-    public let datetime: String
-    public let price: Double
-    public let categories: [GYGCategory]
-    public let cancellationPolicyText, validUntil: String
-    public let datetimeUTC: String
+    public let datetimeType: String?
+    public let tourID: Int?
+    public let datetime: String?
+    public let price: Double?
+    public let categories: [GYGCategory]?
+    public let cancellationPolicyText, validUntil: String?
+    public let datetimeUTC: String?
     public let bookingParameters: [GYGBookingParameter]?
-    public let optionID: Int
+    public let optionID: Int?
 
     enum CodingKeys: String, CodingKey {
         case datetimeType = "datetime_type"
@@ -121,10 +120,10 @@ public struct GYGBookable: Codable {
 }
 
 public struct GYGTicket: Codable {
-    public let bookingReference, voucherInformation, emergencyPhoneNumber, ticketHash: String
-    public let emergencyEmail: String
-    public let supplierBookingCodes: [GYGSupplierBookingCode]
-    public let ticketURL: String
+    public let bookingReference, voucherInformation, emergencyPhoneNumber, ticketHash: String?
+    public let emergencyEmail: String?
+    public let supplierBookingCodes: [GYGSupplierBookingCode]?
+    public let ticketURL: String?
 
     enum CodingKeys: String, CodingKey {
         case bookingReference = "booking_reference"
@@ -139,7 +138,7 @@ public struct GYGTicket: Codable {
 
 // MARK: - SupplierBookingCode
 public struct GYGSupplierBookingCode: Codable {
-    public let code, ticketHash, label, type: String
+    public let code, ticketHash, label, type: String?
 
     enum CodingKeys: String, CodingKey {
         case code

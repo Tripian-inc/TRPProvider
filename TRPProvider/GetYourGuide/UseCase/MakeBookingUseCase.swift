@@ -159,17 +159,16 @@ extension TRPMakeBookingUseCases: PaymentUseCase {
                 
                 if let bookings = card?.bookings {
                     bookings.forEach { booking in
-                        GetYourGuideApi().options(optionId: booking.bookable.optionID) { result in
+                        GetYourGuideApi().options(optionId: booking.bookable?.optionID ?? 0) { result in
                             switch result {
                             case .success(let option):
-                                
                                 let reviewOrder = GYGReviewOrder(title: option?.title,
                                                                  optionTitle: option?.title,
                                                                  bookable: booking.bookable,
-                                                                 price: booking.bookable.price,
-                                                                 people: booking.bookable.categories,
+                                                                 price: booking.bookable?.price,
+                                                                 people: booking.bookable?.categories,
                                                                  status: booking.bookingStatus,
-                                                                 dateTime: booking.bookable.datetime)
+                                                                 dateTime: booking.bookable?.datetime)
                                 reviewOrders.append(reviewOrder)
                                 if reviewOrders.count == bookings.count {
                                     completion?(.success(reviewOrders))
@@ -315,31 +314,8 @@ extension TRPMakeBookingUseCases: CheckCardAndBookingUseCase {
             case .success(let payments):
                 
                 guard let _payments = payments else {return}
-                if _payments.bookings.count < 2 {
-                    completion?(.success(true))
-                }else {
-                    var removedCount = 0
-                    
-                    
-                    _payments.bookings.forEach({ bookingInCard in
-                        if bookingInCard.bookingID != booking.bookingID {
-                            GetYourGuideApi().deleteBooking(hash: bookingInCard.bookingHash) { deleteBookingResult in
-                                switch deleteBookingResult {
-                                case .success(_):
-                                    removedCount += 1
-                                    print("[info] Old Booking removed \(removedCount)")
-                                    if ( _payments.bookings.count - 1) == removedCount {
-                                        completion?(.success(true))
-                                    }
-                                    
-                                case .failure(let error):
-                                    print("[Error] Delete Booking \(error)")
-                                }
-                            }
-                        }
-                    })
-                }
                 
+                completion?(.success(true))
                 
             case .failure(let error):
                 completion?(.failure(error))
