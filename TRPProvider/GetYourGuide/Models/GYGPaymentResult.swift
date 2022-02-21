@@ -17,13 +17,19 @@ public struct GYGPaymentResult: Codable {
     public let bookings: [GYGPaymentBooking]?
     public let shoppingCartID: Int?
     public let paymentInfo: GYGPaymentInfo?
-
+    public var tourName: String?
+    public var tourImage: String?
+    public var cityName: String?
+    
     enum CodingKeys: String, CodingKey {
         case status, billing
         case shoppingCartHash = "shopping_cart_hash"
         case traveler, bookings
         case shoppingCartID = "shopping_cart_id"
         case paymentInfo = "payment_info"
+        case tourName = "tour_name"
+        case tourImage = "tour_image"
+        case cityName = "city_name"
     }
     
     public init(from decoder: Decoder) throws {
@@ -55,6 +61,7 @@ public struct GYGPaymentResult: Codable {
         }else {
             self.paymentInfo = nil
         }
+        tourName = try values.decodeIfPresent(String.self, forKey: .tourName)
     }
     
  
