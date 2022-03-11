@@ -10,7 +10,7 @@ import Foundation
 
 public class GetYourGuideApi {
     
-    static let DEVELOPER_MODE = true
+    static let DEVELOPER_MODE = false
     
     //rC5mIHMNF5C1Jtpb2obSkA
     var network: Networking?
@@ -83,9 +83,12 @@ extension GetYourGuideApi {
         params.append(URLQueryItem(name: "q", value: "\(cityName)"))
         params.append(URLQueryItem(name: "preformatted", value: "\(preformatted)"))
         params.append(URLQueryItem(name: "limit", value: "\(limit)"))
-        if let category = categoryIds, category.count > 0 {
-            let converted = category.map{"\($0)"}
-            params.append(URLQueryItem(name: "categories", value: converted.joined(separator: ",")))
+        if let categories = categoryIds, categories.count > 0 {
+            let converted = categories.map{"\($0)"}
+            for category in converted {
+                params.append(URLQueryItem(name: "categories[]", value: category))
+            }
+//            params.append(URLQueryItem(name: "categories", value: converted.joined(separator: ",")))
             
         }
         if let from = from {
