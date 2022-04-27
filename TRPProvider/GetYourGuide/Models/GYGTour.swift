@@ -14,8 +14,8 @@ public struct GYGTour: Codable {
     public let condLanguage: [String]
     public let title, abstract: String
     public let bestseller, certified: Bool
-    public let overallRating: Double
-    public let numberOfRatings: Int
+    public let overallRating: Double?
+    public let numberOfRatings: Int?
     public let pictures: [GYGPicture]
     public let coordinates: GYGCoordinates?
     public let price: GYGPrice?
@@ -64,7 +64,7 @@ public struct GYGLocation: Codable {
     public let type: String
     public let name, englishName: String
     public let city: String?
-    public let country: String
+    public let country: String?
     public let coordinates: GYGCoordinates
     public let viewport: GYGViewport?
 

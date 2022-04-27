@@ -24,14 +24,17 @@ public struct GYGShoppingCart: Codable {
 // MARK: - Payment
 public struct GYGPayment: Codable {
     public let encryptedCreditCard: GYGEncryptedCreditCard
+//    public let returnUrl: String
     
     enum CodingKeys: String, CodingKey {
         case encryptedCreditCard = "encrypted_credit_card"
+//        case returnUrl = "return_url"
     }
     
     
     init(format: String = "adyen", data token: String) {
         self.encryptedCreditCard = GYGEncryptedCreditCard(format: format, data: token)
+//        self.returnUrl = "http://cruisegenie.return"
     }
     
 }
