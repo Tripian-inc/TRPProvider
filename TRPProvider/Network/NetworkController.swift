@@ -15,6 +15,7 @@ public typealias NetworkControllerResult<Success> = Result<Success, Error>
 enum ProviderType {
     case yelp
     case gyg
+    case travelTime
 }
 
 class NetworkController {
@@ -143,6 +144,20 @@ class NetworkController {
                             let gygCustomError = GYGNetworkError(code:"\(error.errorCode)", message: error.errorMessage)
                             completion(.failure(gygCustomError))
                         }
+                    }else {
+                        completion(.failure(mainError))
+                    }
+                case .failure(_):
+                    completion(.failure(mainError))
+                }
+            }
+        } else if provider == .travelTime {
+            GenericParser<TravelTimeError>().parse(data: data) { result in
+                switch result {
+                case .success(let model):
+                    if let model = model {
+                        let travelTimeError = TravelTimeNetworkError(code: "\(model.errorCode)", message: model.description ?? "")
+                        completion(.failure(travelTimeError))
                     }else {
                         completion(.failure(mainError))
                     }

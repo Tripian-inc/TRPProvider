@@ -86,3 +86,29 @@ extension YelpNetworkError : LocalizedError{
     }
     
 }
+
+public enum TravelTimeNetworkError: Error {
+    case customError(code:String, message:String)
+    
+    init(code: String, message: String) {
+        switch code {
+        default: self = .customError(code: code, message: message)
+        }
+    }
+    
+}
+extension TravelTimeNetworkError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .customError(_, let message):
+            return message
+        }
+    }
+    
+    public var localizedDescription: String? {
+        switch self {
+        case .customError(_, let message):
+            return message
+        }
+    }
+}

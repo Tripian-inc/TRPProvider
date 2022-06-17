@@ -21,6 +21,13 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		6B421128285B59200029C645 /* TravelTimeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B421127285B59200029C645 /* TravelTimeError.swift */; };
+		6B42112B285C7E110029C645 /* TravelTimeRouteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B42112A285C7E110029C645 /* TravelTimeRouteRequest.swift */; };
+		6B42112D285CB2EE0029C645 /* TravelTimeRouteResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B42112C285CB2EE0029C645 /* TravelTimeRouteResult.swift */; };
+		6B42112F285CC4290029C645 /* TravelTimeApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B42112E285CC4290029C645 /* TravelTimeApi.swift */; };
+		6B421131285CC6100029C645 /* TravelTimeTransportationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B421130285CC6100029C645 /* TravelTimeTransportationTypes.swift */; };
+		6B421133285CCAEF0029C645 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B421132285CCAEF0029C645 /* Date+Extensions.swift */; };
+		6B421135285CCC1D0029C645 /* TravelTimeGenericDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B421134285CCC1D0029C645 /* TravelTimeGenericDataParser.swift */; };
 		6B57B4DE279EB42E00DFD8C7 /* AdyenCSE.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B57B4DD279EB42E00DFD8C7 /* AdyenCSE.xcframework */; };
 		6B57B504279EE2E200DFD8C7 /* TRPUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B352F85269673C800B7C314 /* TRPUIKit.framework */; };
 		B2145EF924B348D9002F112A /* NetworkControllerWithComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */; };
@@ -132,6 +139,13 @@
 
 /* Begin PBXFileReference section */
 		6B352F85269673C800B7C314 /* TRPUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TRPUIKit.framework; path = ../TripianFrameworks/TRPUIKit.framework; sourceTree = "<group>"; };
+		6B421127285B59200029C645 /* TravelTimeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTimeError.swift; sourceTree = "<group>"; };
+		6B42112A285C7E110029C645 /* TravelTimeRouteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTimeRouteRequest.swift; sourceTree = "<group>"; };
+		6B42112C285CB2EE0029C645 /* TravelTimeRouteResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTimeRouteResult.swift; sourceTree = "<group>"; };
+		6B42112E285CC4290029C645 /* TravelTimeApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTimeApi.swift; sourceTree = "<group>"; };
+		6B421130285CC6100029C645 /* TravelTimeTransportationTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTimeTransportationTypes.swift; sourceTree = "<group>"; };
+		6B421132285CCAEF0029C645 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		6B421134285CCC1D0029C645 /* TravelTimeGenericDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTimeGenericDataParser.swift; sourceTree = "<group>"; };
 		6B57B4DD279EB42E00DFD8C7 /* AdyenCSE.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AdyenCSE.xcframework; path = Carthage/Build/AdyenCSE.xcframework; sourceTree = "<group>"; };
 		B2145EF824B348D9002F112A /* NetworkControllerWithComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkControllerWithComponentTest.swift; sourceTree = "<group>"; };
 		B252FC4124BDC1450014B750 /* YelpReservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpReservation.swift; sourceTree = "<group>"; };
@@ -230,6 +244,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B421125285B59020029C645 /* TravelTime */ = {
+			isa = PBXGroup;
+			children = (
+				6B421126285B59090029C645 /* Models */,
+				6B42112E285CC4290029C645 /* TravelTimeApi.swift */,
+			);
+			path = TravelTime;
+			sourceTree = "<group>";
+		};
+		6B421126285B59090029C645 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6B421127285B59200029C645 /* TravelTimeError.swift */,
+				6B42112A285C7E110029C645 /* TravelTimeRouteRequest.swift */,
+				6B42112C285CB2EE0029C645 /* TravelTimeRouteResult.swift */,
+				6B421130285CC6100029C645 /* TravelTimeTransportationTypes.swift */,
+				6B421134285CCC1D0029C645 /* TravelTimeGenericDataParser.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B24B823824B7452A0059A4B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				B252FC4424BDE1020014B750 /* String+Extensions.swift */,
+				6B421132285CCAEF0029C645 /* Date+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -439,6 +475,7 @@
 		B2BDAE8124ADECCF0056D5E0 /* TRPProvider */ = {
 			isa = PBXGroup;
 			children = (
+				6B421125285B59020029C645 /* TravelTime */,
 				B252FC4324BDE0F30014B750 /* Extensions */,
 				B256DB4E24ADFCF000925A0B /* Provider */,
 				B25A7840250B6BF900F9395C /* GetYourGuide */,
@@ -622,6 +659,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B281B55A25947D21006A0D96 /* TRPProvider.h in Sources */,
+				6B42112D285CB2EE0029C645 /* TravelTimeRouteResult.swift in Sources */,
+				6B421131285CC6100029C645 /* TravelTimeTransportationTypes.swift in Sources */,
 				B2580EC324B49F0800A704FB /* ReservationDatePickerCell.swift in Sources */,
 				B2BDAE9B24ADECF40056D5E0 /* Networking.swift in Sources */,
 				B25C832724B8AC89006167E4 /* Reservation.swift in Sources */,
@@ -634,6 +673,7 @@
 				B261003E2597801A00466247 /* GYGPaymentResult.swift in Sources */,
 				B269E5BD251B82DB001195F0 /* GYGReviews.swift in Sources */,
 				B2580EB124B494FC00A704FB /* ReservationViewController.swift in Sources */,
+				6B421135285CCC1D0029C645 /* TravelTimeGenericDataParser.swift in Sources */,
 				B2D10DB424BC494F005394C3 /* YelpError.swift in Sources */,
 				B2580EB324B4956C00A704FB /* ReservationViewModel.swift in Sources */,
 				B25808062598DC0700E3F562 /* GYGGetBookingResult.swift in Sources */,
@@ -656,6 +696,7 @@
 				B25B378925275C6800B595AB /* GYGOptionPricing.swift in Sources */,
 				B2D10DAD24BC4128005394C3 /* NetworkError.swift in Sources */,
 				B265950E25808E63008BA3C2 /* MakeBookingUseCase.swift in Sources */,
+				6B421128285B59200029C645 /* TravelTimeError.swift in Sources */,
 				B2D10DAF24BC4295005394C3 /* NetworkResponse.swift in Sources */,
 				B26664F425839CBF001D7008 /* GYGShoppingCart.swift in Sources */,
 				B25A7847250B977200F9395C /* GYGGenericParser.swift in Sources */,
@@ -669,7 +710,9 @@
 				B269E5B5251B82AC001195F0 /* GYGReview.swift in Sources */,
 				B26AA00D24B5E3ED007A0755 /* ReservationAlternatviceHourCollectionCell.swift in Sources */,
 				B2723DF82525BA540022E4D4 /* GYGSortField.swift in Sources */,
+				6B42112F285CC4290029C645 /* TravelTimeApi.swift in Sources */,
 				B26AA01324B613CA007A0755 /* ReservationUserInfoViewModel.swift in Sources */,
+				6B42112B285C7E110029C645 /* TravelTimeRouteRequest.swift in Sources */,
 				B265954925811B5C008BA3C2 /* GYGErrorParser.swift in Sources */,
 				B256DB5324AE087C00925A0B /* YelpBusiness.swift in Sources */,
 				B25580672525DD4D00E2F42F /* GYGToursParser.swift in Sources */,
@@ -679,6 +722,7 @@
 				B276F1AF250FB66F00AC2360 /* GYGCategory.swift in Sources */,
 				B2580EC124B49EA300A704FB /* ReservationBaseCell.swift in Sources */,
 				B2580EC724B4A82900A704FB /* ReservationAlternativeHour.swift in Sources */,
+				6B421133285CCAEF0029C645 /* Date+Extensions.swift in Sources */,
 				B256DB5624AE220E00925A0B /* YelpOpenings.swift in Sources */,
 				B2D10DBC24BC4AFE005394C3 /* YelpCoordinater.swift in Sources */,
 				B26AA00B24B5DCE8007A0755 /* ReservationExplainCell.swift in Sources */,
