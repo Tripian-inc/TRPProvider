@@ -10,16 +10,27 @@ import Foundation
 
 public struct TravelTimeRouteResult: Codable {
     public let results: [TravelTimeRoute]
+    
 }
 
 public struct TravelTimeRoute: Codable {
-    public let searchId: String
+    public let search_id: String
     public let locations: [TravelTimeRouteLocation]
     public let unreachable: [String]
     
     enum CodinKeys: String, CodingKey {
-        case searchId = "search_id"
+        case search_id = "search_id"
         case locations, unreachable
+    }
+}
+
+extension TravelTimeRoute {
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        search_id = try values.decode(String.self, forKey: .search_id)
+        locations = try values.decode([TravelTimeRouteLocation].self, forKey: .locations)
+        unreachable = try values.decode([String].self, forKey: .unreachable)
+
     }
 }
 
@@ -29,7 +40,7 @@ public struct TravelTimeRouteLocation: Codable {
 }
 
 public struct TravleTimeRouteLocationProperties: Codable {
-    public let travelTime: Int?
+    public let travel_time: Int?
     public let distance: Int?
     public let route: TravleTimeRouteLocationPropertiesRoute
     
@@ -40,9 +51,9 @@ public struct TravleTimeRouteLocationProperties: Codable {
 }
 
 public struct TravleTimeRouteLocationPropertiesRoute: Codable {
-    public let departureTime: Date?
-    public let arrivalTime: Date?
-    public let parts: [TravleTimeRouteLocationPropertiesRouteParts]
+    public let departure_time: String?
+    public let arrival_time: String?
+    public let parts: [TravleTimeRouteLocationPropertiesRouteParts]?
     
     enum CodinKeys: String, CodingKey {
         case departureTime = "departure_time"
@@ -57,17 +68,17 @@ public struct TravleTimeRouteLocationPropertiesRouteParts: Codable {
     public let mode: String
     public let directions: String
     public let distance: Int
-    public let travelTime: Int
+    public let travel_time: Int
     public let coords: [TravelTimeCoord]
     public let direction: String?
     public let road: String?
     public let turn: String?
     public let line: String?
-    public let departureStation: String?
-    public let arrivalStation: String?
-    public let departsAt: String?
-    public let arrivesAt: String?
-    public let numStops: Int?
+    public let departure_station: String?
+    public let arrival_station: String?
+    public let departs_at: String?
+    public let arrives_at: String?
+    public let num_stops: Int?
     
     enum CodinKeys: String, CodingKey {
         case id, type, mode, directions, distance

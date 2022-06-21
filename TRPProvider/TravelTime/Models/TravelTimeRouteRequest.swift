@@ -12,6 +12,12 @@ public struct TravelTimeRouteRequest: Codable {
     let locations: [RouteRequestLocation]
     let departureSearches : [RouteRequestDepartureSearch]?
     let arrivalSearches : [RouteRequestArrivalSearch]?
+    
+    enum CodingKeys: String, CodingKey {
+        case locations
+        case departureSearches = "departure_searches"
+        case arrivalSearches = "arrival_searches"
+    }
 }
 
 public struct RouteRequestLocation: Codable {
@@ -30,8 +36,8 @@ public struct RouteRequestLocation: Codable {
 }
 
 public struct TravelTimeCoord: Codable {
-    let lat: Float
-    let lng: Float
+    public let lat: Float
+    public let lng: Float
     
     public init(lat: Float, lng: Float) {
         self.lat = lat
@@ -93,4 +99,10 @@ public struct RouteRequestSearchRange: Codable {
     let enabled: Bool
     let maxResults: Int
     let width: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case enabled
+        case maxResults = "max_results"
+        case width
+    }
 }
