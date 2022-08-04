@@ -36,10 +36,10 @@ extension TravelTimeRoute {
 
 public struct TravelTimeRouteLocation: Codable {
     public let id: String
-    public let properties: [TravleTimeRouteLocationProperties]
+    public let properties: [TravelTimeRouteLocationProperties]
 }
 
-public struct TravleTimeRouteLocationProperties: Codable {
+public struct TravelTimeRouteLocationProperties: Codable {
     public let travel_time: Int?
     public let distance: Int?
     public let route: TravleTimeRouteLocationPropertiesRoute
