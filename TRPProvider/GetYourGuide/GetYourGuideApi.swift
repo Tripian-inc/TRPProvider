@@ -15,8 +15,8 @@ public class GetYourGuideApi {
     //rC5mIHMNF5C1Jtpb2obSkA
     var network: Networking?
     //TODO: TAŞINACAK
-//    internal let apiKey = "Yb8XauGtHKbBUEj4PGWRfrvzvmwKijdghHwWkjBVYTKmTFeR"
-    internal let apiKey = "fe7rEIA50VrT6Oxg0TWub1CxtOL4caBxdUkUuAa1tD7wjzZ7"
+//    internal let apiKey = "Yb8XauGtHKbBUEj4PGWRfrvzvmwKijdghHwWkjBVYTKmTFeR" //Tripian
+    internal let apiKey = "fe7rEIA50VrT6Oxg0TWub1CxtOL4caBxdUkUuAa1tD7wjzZ7" //CruiseGenie
     
     var testApiKey = "api.testing1.gygtest.com"
     var productApiKey = "api.getyourguide.com"
