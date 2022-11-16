@@ -24,7 +24,6 @@ public class ReservationUserInfoViewController: UIViewController {
         btn.setTitle("Apply", for: .normal)
         btn.backgroundColor = TRPColor.pink
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.addTarget(self, action: #selector(applyPressed), for: UIControl.Event.touchUpInside)
         btn.heightAnchor.constraint(equalToConstant: 40).isActive = true
         btn.layer.cornerRadius = 6
         return btn
@@ -60,6 +59,7 @@ public class ReservationUserInfoViewController: UIViewController {
         }else {
             continueButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
         }
+        continueButton.addTarget(self, action: #selector(applyPressed), for: UIControl.Event.touchUpInside)
     }
     
     @objc func applyPressed() {
