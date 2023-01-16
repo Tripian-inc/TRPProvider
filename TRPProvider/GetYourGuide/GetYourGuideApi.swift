@@ -72,7 +72,8 @@ extension GetYourGuideApi {
                       currency: String = "usd",
                       fromDate from: String? = nil,
                       toDate to:String? = nil,
-                      limit: Int = 100,
+                      limit: Int = 500,
+                      duration: Int = 1440,
                       completion: @escaping (Result<[GYGTour], Error>) -> Void) {
         
         
@@ -84,6 +85,7 @@ extension GetYourGuideApi {
         params.append(URLQueryItem(name: "q", value: "\(cityName)"))
         params.append(URLQueryItem(name: "preformatted", value: "\(preformatted)"))
         params.append(URLQueryItem(name: "limit", value: "\(limit)"))
+//        params.append(URLQueryItem(name: "duration[]", value: "\(duration)"))
         if let categories = categoryIds, categories.count > 0 {
             let converted = categories.map{"\($0)"}
             for category in converted {
